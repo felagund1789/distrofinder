@@ -1,9 +1,9 @@
+import "./SearchBar.css";
+
 interface Props {
   query: string;
   setQuery: (q: string) => void;
 }
-
-import './SearchBar.css'
 
 export default function SearchBar({ query, setQuery }: Props) {
   return (

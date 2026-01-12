@@ -1,18 +1,25 @@
 .search {
   padding: 1rem 0;
 }
-.search .container { display:block; }
+.search .container {
+  display: block;
+}
 .search-input {
   width: 100%;
   max-width: 640px;
   padding: 0.6rem 0.9rem;
   border-radius: 10px;
-  border: 1px solid rgba(16,24,40,0.06);
+  border: 1px solid rgba(16, 24, 40, 0.06);
   background: #ffffff;
   color: var(--text);
   font-size: 0.95rem;
   outline: none;
   transition: box-shadow 160ms, border-color 160ms;
 }
-.search-input::placeholder { color: rgba(107,114,128,0.5); }
-.search-input:focus { box-shadow: 0 6px 20px rgba(16,24,40,0.06); border-color: rgba(16,24,40,0.12); }
+.search-input::placeholder {
+  color: rgba(107, 114, 128, 0.5);
+}
+.search-input:focus {
+  box-shadow: 0 6px 20px rgba(16, 24, 40, 0.06);
+  border-color: rgba(16, 24, 40, 0.12);
+}

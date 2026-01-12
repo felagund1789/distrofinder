@@ -1,21 +1,21 @@
-import type { Distro } from '../types'
-import DistroCard from './DistroCard'
-import './DistroList.css'
+import type { Distro } from "../types";
+import DistroCard from "./DistroCard";
+import "./DistroList.css";
 
 interface Props {
-  distros: Distro[]
-  query: string
+  distros: Distro[];
+  query: string;
 }
 
 export default function DistroList({ distros, query }: Props) {
-  const q = query.trim().toLowerCase()
+  const q = query.trim().toLowerCase();
   const filtered = q
     ? distros.filter((d) =>
         [d.name, d.origin, d.desktop, d.slug]
           .filter(Boolean)
-          .some((s) => s!.toLowerCase().includes(q)),
+          .some((s) => s!.toLowerCase().includes(q))
       )
-    : distros
+    : distros;
 
   return (
     <main className="list">
@@ -28,5 +28,5 @@ export default function DistroList({ distros, query }: Props) {
         </div>
       </div>
     </main>
-  )
+  );
 }
