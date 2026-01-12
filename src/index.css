@@ -1,4 +1,31 @@
 :root {
+  --bg: #0b1020;
+  --card: #0f1724;
+  --muted: #94a3b8;
+  --text: #e6eef8;
+  --accent: #646cff;
+}
+
+html, body, #root { height: 100%; }
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(180deg, var(--bg), #071024);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+main { padding: 1.25rem; }
+
+.container { max-width: 1280px; margin: 0 auto; padding: 0 1rem; }
+
+.visually-hidden { position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px); white-space: nowrap; }
+
+:root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;

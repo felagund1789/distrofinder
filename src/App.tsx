@@ -15,7 +15,7 @@ function App() {
   );
 
   return (
-    <div className="min-h-screen">
+    <div className="app-root">
       <Header />
       <SearchBar query={query} setQuery={setQuery} />
       <DistroList distros={distros} query={query} />

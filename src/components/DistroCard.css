@@ -1,0 +1,13 @@
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 12px;
+  padding: 1rem;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  border: 1px solid rgba(255,255,255,0.03);
+}
+.card:hover { transform: translateY(-6px); box-shadow: 0 10px 30px rgba(2,6,23,0.6); }
+.card-row { display:flex; gap:0.75rem; align-items:center; }
+.thumb { width:64px; height:64px; flex:0 0 64px; border-radius:8px; background: rgba(255,255,255,0.03); display:inline-block; padding:6px; object-fit:contain; }
+.card-title { margin:0; font-size:1.05rem; color:var(--text); font-weight:600; }
+.card-meta { margin:0.15rem 0 0; color:var(--muted); font-size:0.85rem; }
+.card-desc { margin-top:0.75rem; color: rgba(230,238,248,0.78); font-size:0.92rem; max-height:3.2rem; overflow:hidden; }

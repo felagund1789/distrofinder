@@ -5,6 +5,8 @@
   text-align: center;
 }
 
+.app-root { min-height: 100vh; }
+
 .logo {
   height: 6em;
   padding: 1.5em;
