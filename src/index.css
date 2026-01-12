@@ -2,49 +2,132 @@
   --bg-1: #fffaf6; /* light warm */
   --bg-2: #f7fbff; /* airy blue */
   --bg-3: #fffdf8; /* soft cream */
+  --radial-1: rgba(255, 143, 163, 0.24);
+  --radial-2: rgba(109, 211, 194, 0.26);
   --accent-1: #ff8fa3; /* coral */
   --accent-2: #6dd3c2; /* mint */
   --card-bg: #ffffff;
   --muted: #6b7280;
   --text: #0f1724;
-  --glass: rgba(16,24,40,0.04);
+  --glass: rgba(16, 24, 40, 0.04);
   --max-width: 1280px;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial;
   color-scheme: light;
 }
 
-html, body, #root { height: 100%; }
-* { box-sizing: border-box; }
+html,
+body,
+#root {
+  height: 100%;
+}
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-image: radial-gradient(600px 300px at 10% 10%, rgba(255,143,163,0.24), transparent),
-                    radial-gradient(500px 250px at 90% 85%, rgba(109,211,194,0.26), transparent),
-                    linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 50%, var(--bg-3) 100%);
+  background-image: radial-gradient(
+      600px 300px at 10% 10%,
+      var(--radial-1),
+      transparent
+    ),
+    radial-gradient(500px 250px at 90% 85%, var(--radial-2), transparent),
+    linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 50%, var(--bg-3) 100%);
   background-attachment: fixed;
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-main { padding: 1.25rem 0 3rem; }
-.container { max-width: var(--max-width); margin: 0 auto; padding: 0 1rem; }
-
-.visually-hidden { position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px); white-space: nowrap; }
-
-
-a { font-weight: 600; color: var(--accent-2); text-decoration: none; }
-a:hover { color: var(--accent-1); }
-
-h1 { font-size: 32px; line-height: 1.05; margin: 0; color: var(--text); }
-
-button { border-radius: 8px; border: 1px solid rgba(16,24,40,0.06); padding: 0.6em 1.2em; font-size: 1em; font-weight: 600; font-family: inherit; background-color: var(--card-bg); color: var(--text); cursor: pointer; }
-button:hover { border-color: rgba(16,24,40,0.12); box-shadow: 0 6px 18px rgba(16,24,40,0.06); }
-button:focus, button:focus-visible { outline: 4px auto -webkit-focus-ring-color; }
-
-@media (prefers-color-scheme: light) {
-  :root { color-scheme: light; }
+main {
+  padding: 1.25rem 0 3rem;
+}
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
+.visually-hidden {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+a {
+  font-weight: 600;
+  color: var(--accent-2);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--accent-1);
+}
+
+h1 {
+  font-size: 32px;
+  line-height: 1.05;
+  margin: 0;
+  color: var(--text);
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid rgba(16, 24, 40, 0.06);
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 600;
+  font-family: inherit;
+  background-color: var(--card-bg);
+  color: var(--text);
+  cursor: pointer;
+}
+button:hover {
+  border-color: rgba(16, 24, 40, 0.12);
+  box-shadow: 0 6px 18px rgba(16, 24, 40, 0.06);
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+  }
+}
+/* Dark theme: system preference + manual class toggle (html.dark) */
+/*
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-1: #071126;
+    --bg-2: #0a1a2b;
+    --bg-3: #041017;
+    --card-bg: #0f264d;
+    --muted: #9ab0c8;
+    --text: #e6eef8;
+    --accent-1: #7c6bff;
+    --accent-2: #66d0ff;
+    --radial-1: rgba(124,107,255,0.06);
+    --radial-2: rgba(100,200,255,0.03);
+  }
+}
+
+html.dark {
+  --bg-1: #071126;
+  --bg-2: #0a1a2b;
+  --bg-3: #041017;
+  --card-bg: #071122;
+  --muted: #9ab0c8;
+  --text: #e6eef8;
+  --accent-1: #7c6bff;
+  --accent-2: #66d0ff;
+  --radial-1: rgba(124,107,255,0.06);
+  --radial-2: rgba(100,200,255,0.03);
+}
+*/

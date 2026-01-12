@@ -1,10 +1,12 @@
 .header {
   padding: 1.5rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
 }
-.header .container { display: block; }
+.header .container {
+  display: block;
+}
 .site-title {
-  font-size: 1.5rem;
+  font-size: 3.5rem;
   font-weight: 700;
   margin: 0;
   color: var(--text);
@@ -12,5 +14,5 @@
 .subtitle {
   margin-top: 0.25rem;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 1.25rem;
 }
