@@ -8,7 +8,7 @@
   flex-direction: column;
   align-items: stretch;
   box-shadow: 0 6px 18px rgba(16, 24, 40, 0.04);
-  max-width: 200px;
+  height: 15rem;
 }
 .card:hover {
   transform: translateY(-4px);
@@ -34,6 +34,7 @@
 }
 .card-body {
   padding-top: 0.5rem;
+  overflow: hidden;
 }
 .card-title {
   margin: 0;

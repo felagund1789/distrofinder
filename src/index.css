@@ -102,7 +102,6 @@ button:focus-visible {
   }
 }
 /* Dark theme: system preference + manual class toggle (html.dark) */
-/*
 @media (prefers-color-scheme: dark) {
   :root {
     --bg-1: #071126;
@@ -130,4 +129,3 @@ html.dark {
   --radial-1: rgba(124,107,255,0.06);
   --radial-2: rgba(100,200,255,0.03);
 }
-*/
