@@ -148,3 +148,21 @@ body {
   background: rgba(220, 38, 38, 0.1);
   color: var(--color-status-discontinued);
 }
+
+[data-theme="dark"] {
+  --color-bg: #0f1115;
+  --color-surface: #161a20;
+  --color-border: #2a2f3a;
+  --color-text-primary: #e5e7eb;
+  --color-text-secondary: #9ca3af;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0f1115;
+    --color-surface: #161a20;
+    --color-border: #2a2f3a;
+    --color-text-primary: #e5e7eb;
+    --color-text-secondary: #9ca3af;
+  }
+}
