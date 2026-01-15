@@ -1,0 +1,46 @@
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: #f8f9fa;
+  color: #111;
+}
+
+.layout {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.topnav {
+  padding: 1rem;
+  font-weight: 600;
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+.card-logo {
+  height: 48px;
+}
+
+.muted {
+  color: #666;
+}
+
+.clamp {
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
