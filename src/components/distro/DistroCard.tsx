@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import type { Distro } from "../../types/distro";
 import StatusBadge from "../ui/StatusBadge";
 import Tag from "../ui/Tag";
@@ -7,8 +8,10 @@ interface Props {
 }
 
 export default function DistroCard({ distro }: Props) {
+  const navigate = useNavigate();
+
   return (
-    <article className="card">
+    <article className="card" onClick={() => navigate(`/d/${distro.slug}`)}>
       <img
         src={distro.localPaths.thumbnail}
         alt={`${distro.name} logo`}

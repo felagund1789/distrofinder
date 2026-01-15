@@ -1,13 +1,11 @@
+import { useParams } from "react-router-dom";
 import DefinitionRow from "../components/ui/DefinitionRow";
 import StatusBadge from "../components/ui/StatusBadge";
 import Tag from "../components/ui/Tag";
 import { useDistros } from "../context/DistroContext";
 
-interface Props {
-  slug: string;
-}
-
-export default function DistroDetail({ slug }: Props) {
+export default function DistroDetail() {
+  const { slug } = useParams();
   const { distros } = useDistros();
   const distro = distros.find((d) => d.slug === slug);
 

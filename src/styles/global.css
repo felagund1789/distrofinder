@@ -81,6 +81,7 @@ body {
   padding: var(--space-4);
   box-shadow: var(--shadow-sm);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
 }
 
 .card:hover {
@@ -189,6 +190,7 @@ body {
   border-top: 1px solid var(--color-border);
 }
 
+/* Dark theme */
 [data-theme="dark"] {
   --color-bg: #0f1115;
   --color-surface: #161a20;
