@@ -13,11 +13,27 @@ export default function DistroDetail() {
     return <p>Distro not found.</p>;
   }
 
+  const logo = (() => {
+    if (distro.localPaths?.logo) {
+      const normalized = distro.localPaths?.logo.replace(/\\\\|\\/g, "/");
+      return normalized.startsWith("/") ? normalized : `/${normalized}`;
+    }
+    return distro.logo || "";
+  })();
+
+  const screenshot = (() => {
+    if (distro.localPaths?.screenshot) {
+      const normalized = distro.localPaths?.screenshot.replace(/\\\\|\\/g, "/");
+      return normalized.startsWith("/") ? normalized : `/${normalized}`;
+    }
+    return distro.screenshot || "";
+  })();
+
   return (
     <article className="detail">
       <header className="detail-hero">
         <img
-          src={distro.localPaths.logo}
+          src={logo}
           alt={`${distro.name} logo`}
           className="detail-logo"
         />
@@ -34,7 +50,7 @@ export default function DistroDetail() {
 
       <section className="detail-section">
         <img
-          src={distro.localPaths.screenshot}
+          src={screenshot}
           alt={`${distro.name} screenshot`}
           className="detail-screenshot"
         />
