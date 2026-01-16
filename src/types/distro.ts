@@ -1,7 +1,7 @@
 export interface LocalPaths {
-  logo: string;
-  thumbnail: string;
-  screenshot: string;
+  logo: string | null;
+  thumbnail: string | null;
+  screenshot: string | null;
 }
 
 export interface Distro {
@@ -13,14 +13,14 @@ export interface Distro {
   basedOn: string;
   origin: string;
   architecture: string;
-  desktop: string;
+  desktop: string | null;
   category: string;
   status: "Active" | "Discontinued" | "Dormant" | string;
   popularity: number | null;
   rating: number | null;
   reviewCount: number | null;
-  logo: string;
-  thumbnail: string;
-  screenshot: string;
+  logo: string | null;
+  thumbnail: string | null;
+  screenshot: string | null;
   localPaths: LocalPaths;
 }
