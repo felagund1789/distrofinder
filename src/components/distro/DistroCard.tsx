@@ -13,9 +13,9 @@ export default function DistroCard({ distro }: Props) {
   return (
     <article className="card" onClick={() => navigate(`/d/${distro.slug}`)}>
       <img
-        src={distro.localPaths.thumbnail}
-        alt={`${distro.name} logo`}
-        className="card-logo"
+        src={distro.localPaths?.thumbnail || ""}
+        alt={`${distro.name} thumbnail`}
+        className="card-thumbnail"
       />
 
       <h2>{distro.name}</h2>

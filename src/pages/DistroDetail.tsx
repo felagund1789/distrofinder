@@ -69,7 +69,7 @@ export default function DistroDetail() {
           ))}
         </DefinitionRow>
         <DefinitionRow label="Desktop">
-          {distro.desktop.split(",").map((d) => (
+          {distro.desktop?.split(",").map((d) => (
             <Tag key={d} label={d.trim()} />
           ))}
         </DefinitionRow>

@@ -94,6 +94,11 @@ body {
   margin-bottom: var(--space-3);
 }
 
+.card-thumbnail {
+  width: 100%;
+  margin-bottom: var(--space-3);
+}
+
 .card h2 {
   margin: 0;
   font-size: var(--text-lg);
