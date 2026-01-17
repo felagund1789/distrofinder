@@ -1,12 +1,11 @@
-import { DistroContext } from "./context/DistroContext";
-import distros from "../data/distros.json";
+import { DistroProvider } from "./context/DistroContext";
 import Home from "./pages/Home";
 
 function App() {
   return (
-    <DistroContext.Provider value={{ distros }}>
+    <DistroProvider>
       <Home />
-    </DistroContext.Provider>
+    </DistroProvider>
   );
 }
 

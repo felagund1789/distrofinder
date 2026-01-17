@@ -1,11 +1,9 @@
-import type { Distro } from "../../types/distro";
+import { useDistros } from "../../context/DistroContext";
 import DistroCard from "./DistroCard";
 
-interface Props {
-  distros: Distro[];
-}
+export default function DistroGrid() {
+  const { distros } = useDistros();
 
-export default function DistroGrid({ distros }: Props) {
   return (
     <div className="grid">
       {distros.map((distro) => (

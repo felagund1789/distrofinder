@@ -6,8 +6,8 @@ import { useDistros } from "../context/DistroContext";
 
 export default function DistroDetail() {
   const { slug } = useParams();
-  const { distros } = useDistros();
-  const distro = distros.find((d) => d.slug === slug);
+  const { getBySlug } = useDistros();
+  const distro = slug ? getBySlug(slug) : undefined;
 
   if (!distro) {
     return <p>Distro not found.</p>;
