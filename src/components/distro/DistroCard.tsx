@@ -31,7 +31,9 @@ export default function DistroCard({ distro }: Props) {
         ))}
       </div>
 
-      <StatusBadge status={distro.status} />
+      <div className="meta">
+        <StatusBadge status={distro.status} />
+      </div>
     </article>
   );
 }

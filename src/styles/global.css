@@ -129,11 +129,28 @@ body {
   color: var(--color-text-secondary);
 }
 
+/* Tag */
+
+.tag {
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+}
+
+.tag.default {
+  background: var(--color-accent);
+  color: #ffffff;
+}
+
+.tag.subtle {
+  background: var(--color-border);
+  color: var(--color-text-primary);
+}
+
 /* Status badge */
 
 .status {
   display: inline-block;
-  margin-top: var(--space-3);
   padding: var(--space-1) var(--space-2);
   font-size: var(--text-xs);
   font-weight: 600;
@@ -141,18 +158,26 @@ body {
 }
 
 .status.active {
-  background: rgba(22, 163, 74, 0.1);
+  background: rgba(22, 163, 74, 0.25);
   color: var(--color-status-active);
 }
 
 .status.dormant {
-  background: rgba(217, 119, 6, 0.1);
+  background: rgba(217, 119, 6, 0.25);
   color: var(--color-status-dormant);
 }
 
 .status.discontinued {
-  background: rgba(220, 38, 38, 0.1);
+  background: rgba(220, 38, 38, 0.25);
   color: var(--color-status-discontinued);
+}
+
+/* Detail page */
+.detail-hero-meta {
+  display: flex;
+  align-items: start;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
 }
 
 .detail-section h2 {
