@@ -225,6 +225,63 @@ body {
   color: var(--color-status-discontinued);
 }
 
+/* Facet tag */
+.facet-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  line-height: 1;
+
+  background-color: var(--color-surface);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+
+  cursor: pointer;
+  user-select: none;
+
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.facet-tag:hover:not([data-active]):not(:disabled) {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  border-color: var(--color-accent);
+}
+
+.facet-tag[data-active] {
+  background-color: rgba(37, 99, 235, 0.08);
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.facet-tag:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.facet-tag:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.facet-tag__label {
+  font-weight: 500;
+}
+
+.facet-tag__count {
+  font-size: var(--text-xs);
+  opacity: 0.7;
+}
+
 /* Detail page */
 .detail-hero-meta {
   display: flex;
