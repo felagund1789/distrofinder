@@ -1,0 +1,23 @@
+import type { DistroFilters } from "../data/distroService";
+
+export function filtersFromSearchParams(
+  params: URLSearchParams
+): DistroFilters {
+  return {
+    search: params.get("q") || "",
+    status: (params.get("status") as DistroFilters["status"]) || undefined,
+    desktop: params.get("desktop") || undefined,
+    category: params.get("category") || undefined,
+  };
+}
+
+export function filtersToSearchParams(filters: DistroFilters) {
+  const params = new URLSearchParams();
+
+  if (filters.search) params.set("q", filters.search);
+  if (filters.status) params.set("status", filters.status);
+  if (filters.desktop) params.set("desktop", filters.desktop);
+  if (filters.category) params.set("category", filters.category);
+
+  return params;
+}

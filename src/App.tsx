@@ -1,25 +1,11 @@
-import { useMemo, useState } from "react";
-import "./App.css";
-import Header from "./components/Header";
-import SearchBar from "./components/SearchBar";
-import DistroList from "./components/DistroList";
-import type { Distro } from "./types";
-import distrosData from "../data/distros.json";
+import { DistroProvider } from "./context/DistroContext";
+import Home from "./pages/Home";
 
 function App() {
-  const [query, setQuery] = useState("");
-
-  const distros: Distro[] = useMemo(
-    () => distrosData as unknown as Distro[],
-    []
-  );
-
   return (
-    <div className="app-root">
-      <Header />
-      <SearchBar query={query} setQuery={setQuery} />
-      <DistroList distros={distros} query={query} />
-    </div>
+    <DistroProvider>
+      <Home />
+    </DistroProvider>
   );
 }
 
