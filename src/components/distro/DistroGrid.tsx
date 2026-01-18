@@ -17,7 +17,7 @@ const DEFAULT_FILTERS: DistroFilters = {
 };
 
 export default function DistroGrid() {
-  const { search, desktops, categories } = useDistros();
+  const { search, desktopFacets, categoryFacets } = useDistros();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [filters, setFilters] = useState<DistroFilters>(() =>
@@ -41,6 +41,16 @@ export default function DistroGrid() {
   const distros = search({
     ...filters,
     search: debouncedSearch.trim() || undefined,
+  });
+
+  const desktopOptions = desktopFacets({
+    ...filters,
+    search: debouncedSearch,
+  });
+
+  const categoryOptions = categoryFacets({
+    ...filters,
+    search: debouncedSearch,
   });
 
   const hasActiveFilters =
@@ -86,9 +96,9 @@ export default function DistroGrid() {
           }
         >
           <option value="">All desktops</option>
-          {desktops.map((d) => (
-            <option key={d} value={d}>
-              {d}
+          {desktopOptions.map(({ value, count }) => (
+            <option key={value} value={value}>
+              {value} ({count})
             </option>
           ))}
         </select>
@@ -103,9 +113,9 @@ export default function DistroGrid() {
           }
         >
           <option value="">All categories</option>
-          {categories.map((c) => (
-            <option key={c} value={c}>
-              {c}
+          {categoryOptions.map(({ value, count }) => (
+            <option key={value} value={value}>
+              {value} ({count})
             </option>
           ))}
         </select>

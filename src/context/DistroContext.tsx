@@ -2,11 +2,12 @@
 import { createContext, useContext } from "react";
 import {
   filterDistros,
-  getAllCategories,
-  getAllDesktops,
   getAllDistros,
+  getCategoryFacets,
+  getDesktopFacets,
   getDistroBySlug,
   type DistroFilters,
+  type Facet,
 } from "../data/distroService";
 import type { Distro } from "../types/distro";
 
@@ -14,8 +15,8 @@ interface DistroContextValue {
   distros: readonly Distro[];
   getBySlug: (slug: string) => Distro | undefined;
   search: (filters?: DistroFilters) => readonly Distro[];
-  desktops: readonly string[];
-  categories: readonly string[];
+  desktopFacets: (filters: DistroFilters) => readonly Facet[];
+  categoryFacets: (filters: DistroFilters) => readonly Facet[];
 }
 
 const DistroContext = createContext<DistroContextValue | null>(null);
@@ -25,8 +26,8 @@ export function DistroProvider({ children }: { children: React.ReactNode }) {
     distros: getAllDistros(),
     getBySlug: getDistroBySlug,
     search: filterDistros,
-    desktops: getAllDesktops(),
-    categories: getAllCategories(),
+    desktopFacets: getDesktopFacets,
+    categoryFacets: getCategoryFacets,
   };
 
   return (

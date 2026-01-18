@@ -52,8 +52,8 @@ export function filterDistros(filters: DistroFilters = {}): readonly Distro[] {
 
   return distros.filter((d) => {
     if (status && d.status !== status) return false;
-    if (desktop && !d.desktop?.includes(desktop)) return false;
-    if (category && !d.category.includes(category)) return false;
+    if (desktop && !d.desktop?.split(",").map((v) => v.trim()).includes(desktop)) return false;
+    if (category && !d.category.split(",").map((v) => v.trim()).includes(category)) return false;
     if (basedOn && !d.basedOn.includes(basedOn)) return false;
 
     if (search) {
@@ -69,6 +69,54 @@ export function filterDistros(filters: DistroFilters = {}): readonly Distro[] {
     return true;
   });
 }
+
+/* ---------- facets ---------- */
+
+export interface Facet {
+  value: string;
+  count: number;
+}
+
+export function getDesktopFacets(
+  activeFilters: DistroFilters
+): readonly Facet[] {
+  const baseFilters = { ...activeFilters, desktop: undefined };
+
+  const filtered = filterDistros(baseFilters);
+  const counts = new Map<string, number>();
+
+  filtered.forEach((distro) => {
+    if (!distro.desktop) return;
+    splitAndNormalize(distro.desktop).forEach((desktop) => {
+      counts.set(desktop, (counts.get(desktop) ?? 0) + 1);
+    });
+  });
+
+  return Array.from(counts.entries())
+    .map(([value, count]) => ({ value, count }))
+    .sort((a, b) => b.count - a.count);
+}
+
+export function getCategoryFacets(
+  activeFilters: DistroFilters
+): readonly Facet[] {
+  const baseFilters = { ...activeFilters, category: undefined };
+
+  const filtered = filterDistros(baseFilters);
+  const counts = new Map<string, number>();
+
+  filtered.forEach((distro) => {
+    splitAndNormalize(distro.category).forEach((category) => {
+      counts.set(category, (counts.get(category) ?? 0) + 1);
+    });
+  });
+
+  return Array.from(counts.entries())
+    .map(([value, count]) => ({ value, count }))
+    .sort((a, b) => b.count - a.count);
+}
+
+/* ---------- helpers ---------- */
 
 // utility function to split comma-separated values and normalize them
 function splitAndNormalize(value: string): string[] {
