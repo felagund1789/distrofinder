@@ -24,3 +24,11 @@ export interface Distro {
   screenshot: string | null;
   localPaths: LocalPaths;
 }
+
+export interface DistroFilters {
+  search?: string;
+  status?: Distro["status"];
+  desktop?: string;
+  category?: string;
+  basedOn?: string;
+}
