@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useDistros } from "../../context/DistroContext";
 import type { DistroFilters } from "../../data/distroService";
+import { useDebouncedValue } from "../../hooks/useDebouncedSearch";
 import {
   filtersFromSearchParams,
   filtersToSearchParams,
@@ -16,14 +17,23 @@ export default function DistroGrid() {
     filtersFromSearchParams(searchParams)
   );
 
+  /* debounce only the search text */
+  const debouncedSearch = useDebouncedValue(filters.search ?? "", 300);
+
   /* Keep URL in sync when filters change */
   useEffect(() => {
-    setSearchParams(filtersToSearchParams(filters), { replace: true });
-  }, [filters, setSearchParams]);
+    setSearchParams(
+      filtersToSearchParams({
+        ...filters,
+        search: debouncedSearch || undefined,
+      }),
+      { replace: true }
+    );
+  }, [filters, debouncedSearch, setSearchParams]);
 
   const distros = search({
     ...filters,
-    search: filters.search?.trim() || undefined,
+    search: debouncedSearch.trim() || undefined,
   });
 
   return (
