@@ -9,6 +9,11 @@ import {
 } from "../../utils/filters";
 import DistroCard from "./DistroCard";
 
+const DEFAULT_FILTERS: DistroFilters = {
+  search: "",
+  status: undefined,
+};
+
 export default function DistroGrid() {
   const { search } = useDistros();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -36,6 +41,8 @@ export default function DistroGrid() {
     search: debouncedSearch.trim() || undefined,
   });
 
+  const hasActiveFilters = Boolean(filters.search) || Boolean(filters.status);
+
   return (
     <>
       <section className="filters">
@@ -62,6 +69,16 @@ export default function DistroGrid() {
           <option value="Dormant">Dormant</option>
           <option value="Discontinued">Discontinued</option>
         </select>
+
+        {hasActiveFilters && (
+          <button
+            type="button"
+            className="filter-clear"
+            onClick={() => setFilters(DEFAULT_FILTERS)}
+          >
+            Clear filters
+          </button>
+        )}
       </section>
 
       <section className="grid">
