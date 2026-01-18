@@ -12,7 +12,29 @@ import DistroCard from "./DistroCard";
 const DEFAULT_FILTERS: DistroFilters = {
   search: "",
   status: undefined,
+  desktop: undefined,
+  category: undefined,
 };
+
+const DESKTOP_OPTIONS = [
+  'Cinnamon',
+  'GNOME',
+  'KDE',
+  'Xfce',
+  'MATE',
+  'LXQt',
+  'LXDE'
+];
+
+const CATEGORY_OPTIONS = [
+  'Beginners',
+  'Desktop',
+  'Server',
+  'Live Medium',
+  'Minimal',
+  'Security'
+];
+
 
 export default function DistroGrid() {
   const { search } = useDistros();
@@ -41,7 +63,11 @@ export default function DistroGrid() {
     search: debouncedSearch.trim() || undefined,
   });
 
-  const hasActiveFilters = Boolean(filters.search) || Boolean(filters.status);
+  const hasActiveFilters =
+    Boolean(filters.search) ||
+    Boolean(filters.status) ||
+    Boolean(filters.desktop) ||
+    Boolean(filters.category);
 
   return (
     <>
@@ -68,6 +94,40 @@ export default function DistroGrid() {
           <option value="Active">Active</option>
           <option value="Dormant">Dormant</option>
           <option value="Discontinued">Discontinued</option>
+        </select>
+
+        <select
+          value={filters.desktop ?? ""}
+          onChange={(e) =>
+            setFilters((f) => ({
+              ...f,
+              desktop: e.target.value || undefined,
+            }))
+          }
+        >
+          <option value="">All desktops</option>
+          {DESKTOP_OPTIONS.map((d) => (
+            <option key={d} value={d}>
+              {d}
+            </option>
+          ))}
+        </select>
+
+        <select
+          value={filters.category ?? ""}
+          onChange={(e) =>
+            setFilters((f) => ({
+              ...f,
+              category: e.target.value || undefined,
+            }))
+          }
+        >
+          <option value="">All categories</option>
+          {CATEGORY_OPTIONS.map((c) => (
+            <option key={c} value={c}>
+              {c}
+            </option>
+          ))}
         </select>
 
         {hasActiveFilters && (
