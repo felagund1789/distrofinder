@@ -10,8 +10,8 @@
   --color-status-discontinued: #dc2626;
 
   /* Typography */
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  --font-sans:
+    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -74,8 +74,18 @@ body {
 
 .filters {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-3);
   margin-bottom: var(--space-6);
+}
+@media screen and (max-width: 600px) {
+  .filters {
+    flex-direction: column;
+  }
+  .filters input,
+  .filters select {
+    width: 100%;
+  }
 }
 
 .filters input,
@@ -121,7 +131,9 @@ body {
   border-radius: var(--radius-md);
   padding: var(--space-4);
   box-shadow: var(--shadow-sm);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
   cursor: pointer;
 }
 
@@ -216,6 +228,7 @@ body {
 /* Detail page */
 .detail-hero-meta {
   display: flex;
+  flex-wrap: wrap;
   align-items: start;
   gap: var(--space-2);
   margin-bottom: var(--space-3);
