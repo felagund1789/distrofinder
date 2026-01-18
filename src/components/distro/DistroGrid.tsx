@@ -8,6 +8,7 @@ import {
   filtersToSearchParams,
 } from "../../utils/filters";
 import DistroCard from "./DistroCard";
+import { FacetGroup } from "../ui/FacetGroup";
 
 const DEFAULT_FILTERS: DistroFilters = {
   search: "",
@@ -60,8 +61,8 @@ export default function DistroGrid() {
     Boolean(filters.category);
 
   return (
-    <>
-      <section className="filters">
+    <div className="page-layout">
+      <aside className="filters">
         <input
           type="search"
           placeholder="Search distributions…"
@@ -70,6 +71,16 @@ export default function DistroGrid() {
             setFilters((f) => ({ ...f, search: e.target.value }))
           }
         />
+
+        {hasActiveFilters && (
+          <button
+            type="button"
+            className="filter-clear"
+            onClick={() => setFilters(DEFAULT_FILTERS)}
+          >
+            Clear filters
+          </button>
+        )}
 
         <select
           value={filters.status ?? ""}
@@ -86,56 +97,26 @@ export default function DistroGrid() {
           <option value="Discontinued">Discontinued</option>
         </select>
 
-        <select
-          value={filters.desktop ?? ""}
-          onChange={(e) =>
-            setFilters((f) => ({
-              ...f,
-              desktop: e.target.value || undefined,
-            }))
-          }
-        >
-          <option value="">All desktops</option>
-          {desktopOptions.map(({ value, count }) => (
-            <option key={value} value={value}>
-              {value} ({count})
-            </option>
-          ))}
-        </select>
+        <FacetGroup
+          facets={desktopOptions}
+          label="Desktop Environment"
+          activeValue={filters.desktop}
+          onChange={(value) => setFilters((f) => ({ ...f, desktop: value }))}
+        />
 
-        <select
-          value={filters.category ?? ""}
-          onChange={(e) =>
-            setFilters((f) => ({
-              ...f,
-              category: e.target.value || undefined,
-            }))
-          }
-        >
-          <option value="">All categories</option>
-          {categoryOptions.map(({ value, count }) => (
-            <option key={value} value={value}>
-              {value} ({count})
-            </option>
-          ))}
-        </select>
+        <FacetGroup
+          facets={categoryOptions}
+          label="Category"
+          activeValue={filters.category}
+          onChange={(value) => setFilters((f) => ({ ...f, category: value }))}
+        />
+      </aside>
 
-        {hasActiveFilters && (
-          <button
-            type="button"
-            className="filter-clear"
-            onClick={() => setFilters(DEFAULT_FILTERS)}
-          >
-            Clear filters
-          </button>
-        )}
-      </section>
-
-      <section className="grid">
+      <main className="results">
         {distros.map((distro) => (
           <DistroCard key={distro.slug} distro={distro} />
         ))}
-      </section>
-    </>
+      </main>
+    </div>
   );
 }
