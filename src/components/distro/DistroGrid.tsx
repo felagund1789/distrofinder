@@ -1,19 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { useDistros } from "../../context/DistroContext";
 import type { DistroFilters } from "../../data/distroService";
+import {
+  filtersFromSearchParams,
+  filtersToSearchParams,
+} from "../../utils/filters";
 import DistroCard from "./DistroCard";
 
 export default function DistroGrid() {
   const { search } = useDistros();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const [filters, setFilters] = useState<DistroFilters>({
-    search: '',
-    status: undefined
-  });
+  const [filters, setFilters] = useState<DistroFilters>(() =>
+    filtersFromSearchParams(searchParams)
+  );
+
+  /* Keep URL in sync when filters change */
+  useEffect(() => {
+    setSearchParams(filtersToSearchParams(filters), { replace: true });
+  }, [filters, setSearchParams]);
 
   const distros = search({
     ...filters,
-    search: filters.search?.trim() || undefined
+    search: filters.search?.trim() || undefined,
   });
 
   return (
@@ -22,18 +32,18 @@ export default function DistroGrid() {
         <input
           type="search"
           placeholder="Search distributions…"
-          value={filters.search ?? ''}
-          onChange={e =>
-            setFilters(f => ({ ...f, search: e.target.value }))
+          value={filters.search ?? ""}
+          onChange={(e) =>
+            setFilters((f) => ({ ...f, search: e.target.value }))
           }
         />
 
         <select
-          value={filters.status ?? ''}
-          onChange={e =>
-            setFilters(f => ({
+          value={filters.status ?? ""}
+          onChange={(e) =>
+            setFilters((f) => ({
               ...f,
-              status: e.target.value || undefined
+              status: e.target.value || undefined,
             }))
           }
         >
@@ -45,7 +55,7 @@ export default function DistroGrid() {
       </section>
 
       <section className="grid">
-        {distros.map(distro => (
+        {distros.map((distro) => (
           <DistroCard key={distro.slug} distro={distro} />
         ))}
       </section>
