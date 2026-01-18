@@ -12,6 +12,31 @@ export function getDistroBySlug(slug: string): Distro | undefined {
   return distros.find((d) => d.slug === slug);
 }
 
+export function getAllDesktops(): readonly string[] {
+  const set = new Set<string>();
+
+  distros.forEach((d) => {
+    if (!d.desktop) return;
+    splitAndNormalize(d.desktop).forEach((desktop) => set.add(desktop));
+  });
+
+  return Array.from(set).sort();
+}
+
+export function getAllCategories(): readonly string[] {
+  const set = new Set<string>();
+
+  distros.forEach((d) => {
+    splitAndNormalize(d.category).forEach((category) => set.add(category));
+  });
+
+  return Array.from(set).sort();
+}
+
+export function getAllStatuses(): readonly Distro["status"][] {
+  return Array.from(new Set(distros.map((d) => d.status)));
+}
+
 /* ---------- selectors ---------- */
 
 export interface DistroFilters {
@@ -43,4 +68,12 @@ export function filterDistros(filters: DistroFilters = {}): readonly Distro[] {
 
     return true;
   });
+}
+
+// utility function to split comma-separated values and normalize them
+function splitAndNormalize(value: string): string[] {
+  return value
+    .split(",")
+    .map((v) => v.trim())
+    .filter(Boolean);
 }

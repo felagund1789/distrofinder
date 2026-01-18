@@ -16,28 +16,8 @@ const DEFAULT_FILTERS: DistroFilters = {
   category: undefined,
 };
 
-const DESKTOP_OPTIONS = [
-  'Cinnamon',
-  'GNOME',
-  'KDE',
-  'Xfce',
-  'MATE',
-  'LXQt',
-  'LXDE'
-];
-
-const CATEGORY_OPTIONS = [
-  'Beginners',
-  'Desktop',
-  'Server',
-  'Live Medium',
-  'Minimal',
-  'Security'
-];
-
-
 export default function DistroGrid() {
-  const { search } = useDistros();
+  const { search, desktops, categories } = useDistros();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [filters, setFilters] = useState<DistroFilters>(() =>
@@ -106,7 +86,7 @@ export default function DistroGrid() {
           }
         >
           <option value="">All desktops</option>
-          {DESKTOP_OPTIONS.map((d) => (
+          {desktops.map((d) => (
             <option key={d} value={d}>
               {d}
             </option>
@@ -123,7 +103,7 @@ export default function DistroGrid() {
           }
         >
           <option value="">All categories</option>
-          {CATEGORY_OPTIONS.map((c) => (
+          {categories.map((c) => (
             <option key={c} value={c}>
               {c}
             </option>
