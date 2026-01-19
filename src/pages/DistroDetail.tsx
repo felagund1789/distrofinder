@@ -2,6 +2,16 @@ import { useParams } from "react-router-dom";
 import DefinitionRow from "../components/ui/DefinitionRow";
 import StatusBadge from "../components/ui/StatusBadge";
 import { useDistros } from "../context/DistroContext";
+import { DesktopTag } from "../components/tags/DesktopTag";
+import { CategoryTag } from "../components/tags/CategoryTag";
+
+const splitValues = (value?: string | null) =>
+  value
+    ? value
+        .split(",")
+        .map((v) => v.trim())
+        .filter(Boolean)
+    : [];
 
 export default function DistroDetail() {
   const { slug } = useParams();
@@ -93,8 +103,21 @@ export default function DistroDetail() {
         </div>
 
         <div className="distro-tech__group">
-          <DefinitionRow label="Desktop">{distro.desktop}</DefinitionRow>
-          <DefinitionRow label="Category">{distro.category}</DefinitionRow>
+          <DefinitionRow label="Desktop">
+            <div className="definition-tags">
+              {splitValues(distro.desktop).map((desktop) => (
+                <DesktopTag key={desktop} desktop={desktop} />
+              ))}
+            </div>
+          </DefinitionRow>
+
+          <DefinitionRow label="Category">
+            <div className="definition-tags">
+              {splitValues(distro.category).map((category) => (
+                <CategoryTag key={category} category={category} />
+              ))}
+            </div>
+          </DefinitionRow>
         </div>
 
         <div className="distro-tech__group">
