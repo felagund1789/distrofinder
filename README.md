@@ -4,6 +4,7 @@
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
 ![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=flat-square&logo=react-router&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)
 
 ## 📚 Overview
@@ -14,6 +15,9 @@ The app focuses on **discoverability, clarity, and editorial-style presentation*
 > **Note**: DistroFinder is intentionally frontend-only. All data is loaded from static JSON files and images served as static assets.
 
 ---
+![Home page on desktop](screens/DistroFinder-1.png)
+| ![Home page on mobile](screens/DistroFinder-2.png) | ![Distro detail page on mobile](screens/DistroFinder-3.png) | ![Distro detail page on mobile](screens/DistroFinder-4.png) |
+|---|---|---|
 
 ## ✨ Features
 
@@ -21,7 +25,7 @@ The app focuses on **discoverability, clarity, and editorial-style presentation*
 
 * Displays a grid of Linux distributions
 * Each distro is represented by a card with:
-  * Logo
+  * Thumbnail image
   * Name
   * Short description
   * Status indicator
@@ -206,16 +210,16 @@ The following features are good candidates for future iterations:
 
 ---
 
-## 🧠 Design Philosophy
+## 🛠️ Technologies Used
+* [React](https://reactjs.org/) - UI library
+* [TypeScript](https://www.typescriptlang.org/) - Static typing
+* [Vite](https://vitejs.dev/) - Build tool
+* [React Router](https://reactrouter.com/) - Client-side routing
 
-DistroFinder aims to:
+---
 
-* Treat Linux distributions as **products**, not raw data
-* Favor clarity over density
-* Use composition over configuration
-* Avoid premature complexity
-
-The goal is to build a catalog that feels **approachable, informative, and calm**.
+## 🤝 Contributing
+Contributions are welcome! Feel free to open issues or submit pull requests on GitHub.
 
 ---
 
