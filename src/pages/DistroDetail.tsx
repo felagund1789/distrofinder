@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import DefinitionRow from "../components/ui/DefinitionRow";
 import StatusBadge from "../components/ui/StatusBadge";
 import { useDistros } from "../context/DistroContext";
@@ -15,6 +15,7 @@ const splitValues = (value?: string | null) =>
 
 export default function DistroDetail() {
   const { slug } = useParams();
+  const navigate = useNavigate();
   const { getBySlug } = useDistros();
   const distro = slug ? getBySlug(slug) : undefined;
 
@@ -40,6 +41,16 @@ export default function DistroDetail() {
 
   return (
     <article className="detail">
+      <nav className="breadcrumbs" aria-label="Breadcrumb">
+        <button
+          className="breadcrumbs__link"
+          onClick={() => navigate('/')}
+        >
+          Home
+        </button>
+        <span className="breadcrumbs__separator">/</span>
+        <span className="breadcrumbs__current">{distro.name}</span>
+      </nav>
       <header className="distro-hero">
         <div className="distro-hero__identity">
           <div className="distro-hero__logo-wrap">
