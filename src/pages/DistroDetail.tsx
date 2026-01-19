@@ -42,10 +42,7 @@ export default function DistroDetail() {
   return (
     <article className="detail">
       <nav className="breadcrumbs" aria-label="Breadcrumb">
-        <button
-          className="breadcrumbs__link"
-          onClick={() => navigate('/')}
-        >
+        <button className="breadcrumbs__link" onClick={() => navigate("/")}>
           Home
         </button>
         <span className="breadcrumbs__separator">/</span>
@@ -94,11 +91,13 @@ export default function DistroDetail() {
         </div>
 
         <div className="distro-about__media">
-          <img
-            src={screenshot}
-            alt={`${distro.name} screenshot`}
-            loading="lazy"
-          />
+          {screenshot && (
+            <img
+              src={screenshot}
+              alt={`${distro.name} screenshot`}
+              loading="lazy"
+            />
+          )}
         </div>
       </section>
 
