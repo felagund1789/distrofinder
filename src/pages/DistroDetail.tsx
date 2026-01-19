@@ -67,17 +67,19 @@ export default function DistroDetail() {
         </div>
       </header>
 
-      <section className="detail-section">
-        <img
-          src={screenshot}
-          alt={`${distro.name} screenshot`}
-          className="detail-screenshot"
-        />
-      </section>
+      <section className="distro-about">
+        <div className="distro-about__content">
+          <h2>About</h2>
+          <p>{distro.description}</p>
+        </div>
 
-      <section className="detail-section">
-        <h2>About</h2>
-        <p className="detail-description">{distro.description}</p>
+        <div className="distro-about__media">
+          <img
+            src={screenshot}
+            alt={`${distro.name} screenshot`}
+            loading="lazy"
+          />
+        </div>
       </section>
 
       <section className="detail-section">
