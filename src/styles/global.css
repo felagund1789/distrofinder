@@ -242,11 +242,26 @@ body {
   gap: var(--space-4);
 }
 
+.distro-hero__logo-wrap {
+  width: 96px;
+  height: 96px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #ffffff;
+  color: #333333;
+  border-radius: 50%;
+  box-shadow: var(--shadow-sm);
+
+  flex-shrink: 0;
+}
+
 .distro-hero__logo {
-  width: 72px;
-  height: 72px;
+  width: 70%;
+  height: 70%;
   object-fit: contain;
-  border-radius: var(--radius-sm);
 }
 
 .distro-hero__title {
@@ -292,8 +307,8 @@ body {
   }
 
   .distro-hero__logo {
-    width: 88px;
-    height: 88px;
+    width: 70%;
+    height: 70%;
   }
 
   .distro-hero__title h1 {

@@ -33,11 +33,13 @@ export default function DistroDetail() {
     <article className="detail">
       <header className="distro-hero">
         <div className="distro-hero__identity">
-          <img
-            src={logo}
-            alt={`${distro.name} logo`}
-            className="distro-hero__logo"
-          />
+          <div className="distro-hero__logo-wrap">
+            <img
+              src={logo}
+              alt={`${distro.name} logo`}
+              className="distro-hero__logo"
+            />
+          </div>
 
           <div className="distro-hero__title">
             <h1>{distro.name}</h1>
