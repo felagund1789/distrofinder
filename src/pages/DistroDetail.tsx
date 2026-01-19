@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import DefinitionRow from "../components/ui/DefinitionRow";
 import StatusBadge from "../components/ui/StatusBadge";
-import Tag from "../components/ui/Tag";
 import { useDistros } from "../context/DistroContext";
 
 export default function DistroDetail() {
@@ -82,32 +81,30 @@ export default function DistroDetail() {
         </div>
       </section>
 
-      <section className="detail-section">
+      <section className="distro-tech">
         <h2>Technical Overview</h2>
-        <DefinitionRow label="Architecture">
-          {distro.architecture.split(",").map((a) => (
-            <Tag key={a} label={a.trim()} variant="subtle" />
-          ))}
-        </DefinitionRow>
-        <DefinitionRow label="Desktop">
-          {distro.desktop?.split(",").map((d) => (
-            <Tag key={d} label={d.trim()} />
-          ))}
-        </DefinitionRow>
-        <DefinitionRow label="Category">
-          {distro.category.split(",").map((c) => (
-            <Tag key={c} label={c.trim()} variant="subtle" />
-          ))}
-        </DefinitionRow>
-        <DefinitionRow label="Based On">
-          <span>{distro.basedOn}</span>
-        </DefinitionRow>
+
+        <div className="distro-tech__group">
+          <DefinitionRow label="OS Type">{distro.osType}</DefinitionRow>
+          <DefinitionRow label="Based on">{distro.basedOn}</DefinitionRow>
+          <DefinitionRow label="Architecture">
+            {distro.architecture}
+          </DefinitionRow>
+        </div>
+
+        <div className="distro-tech__group">
+          <DefinitionRow label="Desktop">{distro.desktop}</DefinitionRow>
+          <DefinitionRow label="Category">{distro.category}</DefinitionRow>
+        </div>
+
+        <div className="distro-tech__group">
+          <DefinitionRow label="Status">{distro.status}</DefinitionRow>
+          <DefinitionRow label="Origin">{distro.origin}</DefinitionRow>
+          <DefinitionRow label="Last Update">{distro.lastUpdate}</DefinitionRow>
+        </div>
       </section>
 
       <footer className="detail-footer">
-        <DefinitionRow label="Last Update">
-          <span>{distro.lastUpdate}</span>
-        </DefinitionRow>
         <DefinitionRow label="Slug">
           <code>{distro.slug}</code>
         </DefinitionRow>

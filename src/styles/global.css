@@ -377,6 +377,27 @@ body {
   }
 }
 
+.distro-tech {
+  margin-top: var(--space-8);
+}
+
+.distro-tech h2 {
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-lg);
+  color: var(--color-text-primary);
+}
+
+/* Grouping */
+.distro-tech__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.distro-tech__group + .distro-tech__group {
+  margin-top: var(--space-6);
+}
+
 .definition-row {
   display: grid;
   grid-template-columns: 160px 1fr;
