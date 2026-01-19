@@ -31,19 +31,36 @@ export default function DistroDetail() {
 
   return (
     <article className="detail">
-      <header className="detail-hero">
-        <img src={logo} alt={`${distro.name} logo`} className="detail-logo" />
-        <div>
-          <h1>{distro.name}</h1>
-          <p className="muted">{distro.basedOn}</p>
-          <div className="detail-hero-meta">
+      <header className="distro-hero">
+        <div className="distro-hero__identity">
+          <img
+            src={logo}
+            alt={`${distro.name} logo`}
+            className="distro-hero__logo"
+          />
+
+          <div className="distro-hero__title">
+            <h1>{distro.name}</h1>
             <StatusBadge status={distro.status} />
-            {[
-              ["Origin", distro.origin],
-              ["OS", distro.osType],
-            ].map(([key, value]) => (
-              <Tag key={key} label={`${key}: ${value}`} variant="subtle" />
-            ))}
+          </div>
+        </div>
+
+        <div className="distro-hero__meta">
+          {distro.basedOn && (
+            <div className="distro-hero__meta-item">
+              <span className="label">Based on</span>
+              <span>{distro.basedOn}</span>
+            </div>
+          )}
+
+          <div className="distro-hero__meta-item">
+            <span className="label">Origin</span>
+            <span>{distro.origin}</span>
+          </div>
+
+          <div className="distro-hero__meta-item">
+            <span className="label">OS Type</span>
+            <span>{distro.osType}</span>
           </div>
         </div>
       </header>
