@@ -81,6 +81,23 @@ export default function DistroDetail() {
             <span className="label">OS Type</span>
             <span>{distro.osType}</span>
           </div>
+
+          {distro.popularity != null && (
+            <div className="distro-hero__meta-item">
+              <span className="label">Popularity</span>
+              <span>{distro.popularity}</span>
+            </div>
+          )}
+
+          {(distro.rating != null || distro.reviewCount != null) && (
+            <div className="distro-hero__meta-item">
+              <span className="label">Rating</span>
+              <span>
+                {distro.rating != null ? distro.rating : '—'}
+                {distro.reviewCount != null ? ` (${distro.reviewCount})` : ''}
+              </span>
+            </div>
+          )}
         </div>
       </header>
 
