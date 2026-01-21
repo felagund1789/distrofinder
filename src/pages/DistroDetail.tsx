@@ -98,6 +98,17 @@ export default function DistroDetail() {
               </span>
             </div>
           )}
+
+          {distro.homepage && (
+            <div className="distro-hero__meta-item">
+              <span className="label">Homepage</span>
+              <span>
+                <a href={distro.homepage} target="_blank" rel="noopener noreferrer">
+                  {distro.homepage}
+                </a>
+              </span>
+            </div>
+          )}
         </div>
       </header>
 

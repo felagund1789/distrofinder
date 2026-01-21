@@ -413,6 +413,10 @@ body {
   color: var(--color-text-secondary);
 }
 
+.distro-hero__meta-item a {
+  color: var(--color-accent);
+}
+
 /* Desktop refinement */
 @media (min-width: 768px) {
   .distro-hero {

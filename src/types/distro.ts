@@ -9,6 +9,7 @@ export interface Distro {
   name: string;
   lastUpdate: string;
   description: string;
+  homepage: string;
   osType: string;
   basedOn: string;
   origin: string;
