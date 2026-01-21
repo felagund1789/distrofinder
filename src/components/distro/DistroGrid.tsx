@@ -126,6 +126,8 @@ export default function DistroGrid() {
           ))}
         </select>
 
+        <div className="filter-separator" />
+
         <select
           value={filters.sortBy ?? ""}
           onChange={(e) =>

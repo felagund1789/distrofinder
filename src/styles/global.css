@@ -88,6 +88,20 @@ body {
   }
 }
 
+.filter-separator {
+  width: 1px;
+  height: 2rem;
+  background: var(--color-border);
+  margin: 0 var(--space-2);
+}
+@media screen and (max-width: 600px) {
+  .filter-separator {
+    width: 100%;
+    height: 1px;
+    margin: var(--space-1) 0;
+  }
+}
+
 .filters input,
 .filters select {
   padding: var(--space-2) var(--space-3);
