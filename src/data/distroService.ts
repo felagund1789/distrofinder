@@ -45,12 +45,14 @@ export interface DistroFilters {
   desktop?: string;
   category?: string;
   basedOn?: string;
+  sortBy?: 'name' | 'lastUpdate' | 'popularity';
+  sortDir?: 'asc' | 'desc';
 }
 
 export function filterDistros(filters: DistroFilters = {}): readonly Distro[] {
-  const { search, status, desktop, category, basedOn } = filters;
+  const { search, status, desktop, category, basedOn, sortBy, sortDir } = filters;
 
-  return distros.filter((d) => {
+  const results = distros.filter((d) => {
     if (status && d.status !== status) return false;
     if (desktop && !d.desktop?.split(",").map((v) => v.trim()).includes(desktop)) return false;
     if (category && !d.category.split(",").map((v) => v.trim()).includes(category)) return false;
@@ -68,6 +70,34 @@ export function filterDistros(filters: DistroFilters = {}): readonly Distro[] {
 
     return true;
   });
+
+  // Sorting
+  if (!sortBy) return results;
+
+  const dir = sortDir
+    ? sortDir === 'asc' ? 1 : -1
+    : sortBy === 'name'
+    ? 1
+    : -1; // default: name asc, others desc
+
+  const sorted = results.slice().sort((a, b) => {
+    let cmp = 0;
+    if (sortBy === 'name') {
+      cmp = a.name.localeCompare(b.name, undefined, { sensitivity: 'base' });
+    } else if (sortBy === 'lastUpdate') {
+      const ta = a.lastUpdate ? Date.parse(a.lastUpdate) : 0;
+      const tb = b.lastUpdate ? Date.parse(b.lastUpdate) : 0;
+      cmp = ta === tb ? 0 : ta > tb ? 1 : -1;
+    } else if (sortBy === 'popularity') {
+      const pa = a.popularity ?? Number.NEGATIVE_INFINITY;
+      const pb = b.popularity ?? Number.NEGATIVE_INFINITY;
+      cmp = pa === pb ? 0 : pa > pb ? 1 : -1;
+    }
+
+    return cmp * dir;
+  });
+
+  return sorted;
 }
 
 /* ---------- facets ---------- */
