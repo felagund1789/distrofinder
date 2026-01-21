@@ -37,20 +37,24 @@ export function getAllStatuses(): readonly Distro["status"][] {
   return Array.from(new Set(distros.map((d) => d.status)));
 }
 
+export type SortByType = 'name' | 'lastUpdate' | 'popularity';
+export type SortDirType = 'asc' | 'desc';
+export type DistroStatus = Distro["status"];
+
 /* ---------- selectors ---------- */
 
 export interface DistroFilters {
   search?: string;
-  status?: Distro["status"];
+  status?: DistroStatus;
   desktop?: string;
   category?: string;
   basedOn?: string;
-  sortBy?: 'name' | 'lastUpdate' | 'popularity';
-  sortDir?: 'asc' | 'desc';
+  sortBy?: SortByType;
+  sortDir?: SortDirType;
 }
 
 export function filterDistros(filters: DistroFilters = {}): readonly Distro[] {
-  const { search, status, desktop, category, basedOn, sortBy, sortDir } = filters;
+  const { search, status, desktop, category, basedOn, sortBy = "popularity", sortDir = "asc" } = filters;
 
   const results = distros.filter((d) => {
     if (status && d.status !== status) return false;
@@ -72,8 +76,6 @@ export function filterDistros(filters: DistroFilters = {}): readonly Distro[] {
   });
 
   // Sorting
-  if (!sortBy) return results;
-
   const dir = sortDir
     ? sortDir === 'asc' ? 1 : -1
     : sortBy === 'name'

@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useDistros } from "../../context/DistroContext";
-import type { DistroFilters } from "../../data/distroService";
+import type {
+  DistroFilters,
+  SortByType,
+  SortDirType,
+} from "../../data/distroService";
 import { useDebouncedValue } from "../../hooks/useDebouncedSearch";
 import {
   filtersFromSearchParams,
@@ -14,6 +18,8 @@ const DEFAULT_FILTERS: DistroFilters = {
   status: undefined,
   desktop: undefined,
   category: undefined,
+  sortBy: "popularity" as SortByType,
+  sortDir: "asc" as SortDirType,
 };
 
 export default function DistroGrid() {
@@ -118,6 +124,33 @@ export default function DistroGrid() {
               {value} ({count})
             </option>
           ))}
+        </select>
+
+        <select
+          value={filters.sortBy ?? ""}
+          onChange={(e) =>
+            setFilters((f) => ({
+              ...f,
+              sortBy: (e.target.value as SortByType) || undefined,
+            }))
+          }
+        >
+          <option value="name">Name</option>
+          <option value="lastUpdate">Last updated</option>
+          <option value="popularity">Popularity</option>
+        </select>
+
+        <select
+          value={filters.sortDir ?? ""}
+          onChange={(e) =>
+            setFilters((f) => ({
+              ...f,
+              sortDir: (e.target.value as SortDirType) || undefined,
+            }))
+          }
+        >
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
         </select>
 
         {hasActiveFilters && (
