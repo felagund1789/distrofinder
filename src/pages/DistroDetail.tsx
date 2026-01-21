@@ -130,13 +130,24 @@ export default function DistroDetail() {
         </div>
 
         <div className="distro-tech__group">
-          <DefinitionRow label="Desktop">
-            <div className="definition-tags">
+          <DefinitionRow label="Default Desktop">
+            {distro.defaultDesktop && (<div className="definition-tags">
+              {splitValues(distro.defaultDesktop).map((desktop) => (
+                <DesktopTag key={desktop} desktop={desktop} />
+              ))}
+            </div>) || '—'}
+          </DefinitionRow>
+
+          <DefinitionRow label="Available Desktops">
+            {distro.desktop && (<div className="definition-tags">
               {splitValues(distro.desktop).map((desktop) => (
                 <DesktopTag key={desktop} desktop={desktop} />
               ))}
-            </div>
+            </div>) || '—'}
           </DefinitionRow>
+
+          <DefinitionRow label="Default Browser">{distro.defaultBrowser || '—'}</DefinitionRow>
+          <DefinitionRow label="Installation">{distro.installation || '—'}</DefinitionRow>
 
           <DefinitionRow label="Category">
             <div className="definition-tags">

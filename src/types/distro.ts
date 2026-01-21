@@ -16,6 +16,9 @@ export interface Distro {
   desktop: string | null;
   category: string;
   status: "Active" | "Discontinued" | "Dormant" | string;
+  defaultDesktop: string | null;
+  installation: string | null;
+  defaultBrowser: string | null;
   popularity: number | null;
   rating: number | null;
   reviewCount: number | null;

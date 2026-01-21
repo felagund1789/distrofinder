@@ -25,7 +25,7 @@ export default function DistroCard({ distro }: Props) {
       <p className="clamp">{distro.description}</p>
 
       <div className="meta">
-        {distro.desktop?.split(",").map((d) => (
+        {distro.defaultDesktop?.split(",").map((d) => (
           <Tag key={d} label={d.trim()} />
         ))}
         {distro.architecture?.split(",").map((a) => (
