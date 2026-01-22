@@ -200,19 +200,25 @@ body {
   transition: opacity 0.15s ease;
 }
 
+@media (hover: none) {
+  .distro-card__select {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
 .distro-card:hover .distro-card__select {
   opacity: 1;
   pointer-events: auto;
 }
 
 .distro-card__select-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  padding-bottom: 3px;
-  border: 1px solid var(--color-text-primary);
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid #ffffff;
   background-color: var(--color-accent);
-  color: var(--color-text-primary);
+  color: #ffffff;
   font-size: var(--text-base);
   font-weight: 600;
   cursor: pointer;
@@ -241,10 +247,41 @@ body {
   pointer-events: auto;
 }
 
-@media (hover: none) {
-  .distro-card__select {
-    opacity: 1;
-    pointer-events: auto;
+.compare-fab {
+  position: fixed;
+  right: var(--space-6);
+  bottom: var(--space-6);
+  z-index: 1000;
+  padding: var(--space-3) var(--space-4);
+  border-radius: 999px;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  background-color: var(--color-accent);
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.compare-fab:hover {
+  transform: translateY(-2px);
+  background-color: var(--color-status-active);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.compare-fab:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .compare-fab {
+    right: var(--space-4);
+    bottom: var(--space-4);
   }
 }
 

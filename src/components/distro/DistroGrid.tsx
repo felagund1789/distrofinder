@@ -12,6 +12,7 @@ import {
   filtersToSearchParams,
 } from "../../utils/filters";
 import DistroCard from "./DistroCard";
+import { CompareFAB } from "../compare/CompareFAB";
 
 const DEFAULT_FILTERS: DistroFilters = {
   search: "",
@@ -190,6 +191,8 @@ export default function DistroGrid() {
           />
         ))}
       </section>
+
+      <CompareFAB selected={selected} />
     </>
   );
 }
