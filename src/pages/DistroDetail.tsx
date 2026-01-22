@@ -135,9 +135,6 @@ export default function DistroDetail() {
         <div className="distro-tech__group">
           <DefinitionRow label="OS Type">{distro.osType}</DefinitionRow>
           <DefinitionRow label="Based on">{distro.basedOn}</DefinitionRow>
-          <DefinitionRow label="Architecture">
-            {distro.architecture}
-          </DefinitionRow>
         </div>
 
         <div className="distro-tech__group">
@@ -159,6 +156,11 @@ export default function DistroDetail() {
 
           <DefinitionRow label="Default Browser">{distro.defaultBrowser || '—'}</DefinitionRow>
           <DefinitionRow label="Installation">{distro.installation || '—'}</DefinitionRow>
+          <DefinitionRow label="Package Management">{distro.packageManagement || '—'}</DefinitionRow>
+          <DefinitionRow label="Office Suite">{distro.officeSuite || '—'}</DefinitionRow>
+          <DefinitionRow label="Processor Architecture">{distro.processorArchitecture || '—'}</DefinitionRow>
+          <DefinitionRow label="Init System">{distro.initSystem || '—'}</DefinitionRow>
+          <DefinitionRow label="File Systems">{distro.fileSystems || '—'}</DefinitionRow>
 
           <DefinitionRow label="Category">
             <div className="definition-tags">

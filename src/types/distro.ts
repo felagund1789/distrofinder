@@ -20,6 +20,12 @@ export interface Distro {
   defaultDesktop: string | null;
   installation: string | null;
   defaultBrowser: string | null;
+  packageManagement: string | null;
+  releaseModel: string | null;
+  officeSuite: string | null;
+  processorArchitecture: string | null;
+  initSystem: string | null;
+  fileSystems: string | null;
   popularity: number | null;
   rating: number | null;
   reviewCount: number | null;
