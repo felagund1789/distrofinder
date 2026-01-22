@@ -3,20 +3,47 @@ import type { Distro } from "../../types/distro";
 import StatusBadge from "../ui/StatusBadge";
 import Tag from "../ui/Tag";
 
-interface Props {
+interface DistroCardProps {
   distro: Distro;
+  selected?: boolean;
+  selectionDisabled?: boolean;
+  onToggleSelect?: (slug: string) => void;
 }
 
-export default function DistroCard({ distro }: Props) {
+export default function DistroCard({
+  distro,
+  selected,
+  selectionDisabled,
+  onToggleSelect,
+}: DistroCardProps) {
   const navigate = useNavigate();
 
   return (
-    <article className="card" onClick={() => navigate(`/d/${distro.slug}`)}>
+    <article
+      className="distro-card"
+      data-selected={selected}
+      onClick={() => navigate(`/d/${distro.slug}`)}
+    >
+      <div className="distro-card__select">
+        <button
+          type="button"
+          className="distro-card__select-btn"
+          aria-pressed={selected}
+          disabled={selectionDisabled && !selected}
+          onClick={(e) => {
+            e.stopPropagation();
+            onToggleSelect?.(distro.slug);
+          }}
+        >
+          {selected ? "✓" : "+"}
+        </button>
+      </div>
+
       {distro.localPaths?.thumbnail && (
         <img
           src={distro.localPaths?.thumbnail}
           alt={`${distro.name} thumbnail`}
-          className="card-thumbnail"
+          className="distro-card__thumbnail"
         />
       )}
 

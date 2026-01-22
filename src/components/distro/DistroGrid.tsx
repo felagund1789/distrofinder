@@ -23,12 +23,23 @@ const DEFAULT_FILTERS: DistroFilters = {
 };
 
 export default function DistroGrid() {
+  const [selected, setSelected] = useState<string[]>([]);
   const { search, desktopFacets, categoryFacets } = useDistros();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [filters, setFilters] = useState<DistroFilters>(() =>
     filtersFromSearchParams(searchParams)
   );
+
+  const toggleSelection = (slug: string) => {
+    setSelected((prev) =>
+      prev.includes(slug)
+        ? prev.filter((s) => s !== slug)
+        : prev.length < 3
+        ? [...prev, slug]
+        : prev
+    );
+  };
 
   /* debounce only the search text */
   const debouncedSearch = useDebouncedValue(filters.search ?? "", 300);
@@ -168,7 +179,15 @@ export default function DistroGrid() {
 
       <section className="grid">
         {distros.map((distro) => (
-          <DistroCard key={distro.slug} distro={distro} />
+          <DistroCard
+            key={distro.slug}
+            distro={distro}
+            selected={selected.includes(distro.slug)}
+            selectionDisabled={
+              selected.length >= 3 && !selected.includes(distro.slug)
+            }
+            onToggleSelect={toggleSelection}
+          />
         ))}
       </section>
     </>
