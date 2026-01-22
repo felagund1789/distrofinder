@@ -4,11 +4,12 @@ import Tag from "../ui/Tag";
 
 interface ComparisonTableProps {
   distros: Distro[];
+  onRemove: (slug: string) => void;
 }
 
 function ComparisonRow({
   label,
-  children
+  children,
 }: {
   label: string;
   children: React.ReactNode[];
@@ -30,21 +31,24 @@ function TagList({ value }: { value?: string }) {
 
   return (
     <div className="comparison-tags">
-      {value.split(",").map(v => (
+      {value.split(",").map((v) => (
         <Tag key={v.trim()} label={v.trim()} />
       ))}
     </div>
   );
 }
 
-export default function ComparisonTable({ distros }: ComparisonTableProps) {
+export default function ComparisonTable({
+  distros,
+  onRemove,
+}: ComparisonTableProps) {
   return (
     <div className="comparison-wrapper">
       <table className="comparison-table">
         <thead>
           <tr>
             <th scope="col"></th>
-            {distros.map(distro => (
+            {distros.map((distro) => (
               <th scope="col" key={distro.slug}>
                 <div className="comparison-header">
                   <img
@@ -53,6 +57,14 @@ export default function ComparisonTable({ distros }: ComparisonTableProps) {
                     className="comparison-logo"
                   />
                   <span>{distro.name}</span>
+
+                  <button
+                    className="comparison-remove"
+                    aria-label={`Remove ${distro.name} from comparison`}
+                    onClick={() => onRemove(distro.slug)}
+                  >
+                    ×
+                  </button>
                 </div>
               </th>
             ))}
@@ -61,88 +73,93 @@ export default function ComparisonTable({ distros }: ComparisonTableProps) {
 
         <tbody>
           <ComparisonRow label="">
-            {distros.map(d => (
+            {distros.map((d) => (
               <img
                 key={d.slug}
                 className="comparison-thumbnail"
-                src={d.localPaths?.thumbnail || ""} alt="" />
+                src={d.localPaths?.thumbnail || ""}
+                alt=""
+              />
             ))}
           </ComparisonRow>
 
           <ComparisonRow label="Status">
-            {distros.map(d => (
+            {distros.map((d) => (
               <StatusBadge key={d.slug} status={d.status} />
             ))}
           </ComparisonRow>
 
           <ComparisonRow label="Based on">
-            {distros.map(d => (
+            {distros.map((d) => (
               <span key={d.slug}>{d.basedOn || "—"}</span>
             ))}
           </ComparisonRow>
 
           <ComparisonRow label="Default Desktop">
-            {distros.map(d => (
+            {distros.map((d) => (
               <TagList key={d.slug} value={d.defaultDesktop || undefined} />
             ))}
           </ComparisonRow>
 
           <ComparisonRow label="Available Desktops">
-            {distros.map(d => (
+            {distros.map((d) => (
               <TagList key={d.slug} value={d.desktop || undefined} />
             ))}
           </ComparisonRow>
 
           <ComparisonRow label="Default Browser">
-            {distros.map(d => (
+            {distros.map((d) => (
               <TagList key={d.slug} value={d.defaultBrowser || undefined} />
             ))}
           </ComparisonRow>
 
           <ComparisonRow label="Installation">
-            {distros.map(d => (
+            {distros.map((d) => (
               <TagList key={d.slug} value={d.installation || undefined} />
             ))}
           </ComparisonRow>
 
           <ComparisonRow label="Package Management">
-            {distros.map(d => (
+            {distros.map((d) => (
               <TagList key={d.slug} value={d.packageManagement || undefined} />
             ))}
           </ComparisonRow>
 
           <ComparisonRow label="Office Suite">
-            {distros.map(d => (
+            {distros.map((d) => (
               <TagList key={d.slug} value={d.officeSuite || undefined} />
             ))}
           </ComparisonRow>
 
           <ComparisonRow label="Processor Architecture">
-            {distros.map(d => (
-              <TagList key={d.slug} value={d.processorArchitecture || undefined} />
+            {distros.map((d) => (
+              <TagList
+                key={d.slug}
+                value={d.processorArchitecture || undefined}
+              />
             ))}
           </ComparisonRow>
 
           <ComparisonRow label="Init System">
-            {distros.map(d => (
+            {distros.map((d) => (
               <TagList key={d.slug} value={d.initSystem || undefined} />
             ))}
           </ComparisonRow>
 
           <ComparisonRow label="File Systems">
-            {distros.map(d => (
+            {distros.map((d) => (
               <TagList key={d.slug} value={d.fileSystems || undefined} />
             ))}
           </ComparisonRow>
 
           <ComparisonRow label="Category">
-            {distros.map(d => (
+            {distros.map((d) => (
               <TagList key={d.slug} value={d.category} />
             ))}
           </ComparisonRow>
 
           <ComparisonRow label="Origin">
-            {distros.map(d => (
+            {distros.map((d) => (
               <span key={d.slug}>{d.origin}</span>
             ))}
           </ComparisonRow>

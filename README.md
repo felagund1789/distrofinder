@@ -48,6 +48,13 @@ The app focuses on **discoverability, clarity, and editorial-style presentation*
 * Fully responsive (mobile-first)
 * Dark mode support via CSS variables
 
+### Distro Comparison Page
+
+* Side-by-side comparison of multiple distros
+* Comparison table with key attributes
+* Accessible via URL with query parameters (e.g. `/?compare=ubuntu,mint`)
+* Clickable links to remove distros from comparison
+
 ### 🎨 Design System
 
 * Custom design system based on **CSS variables** (no Tailwind)
@@ -187,7 +194,6 @@ The following features are good candidates for future iterations:
 * Facet-based filtering UI (tags with counts)
 * Collapsible filter sidebar on mobile
 * Active filter summary bar
-* Comparison view for multiple distros
 * Keyboard navigation improvements
 
 ### Data & Content

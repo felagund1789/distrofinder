@@ -4,34 +4,33 @@ import { getDistroBySlug } from "../data/distroService";
 import type { Distro } from "../types/distro";
 
 export default function ComparePage() {
-  const [params] = useSearchParams();
+  const [params, setParams] = useSearchParams();
   const navigate = useNavigate();
 
-  const slugs = params
-    .get("distros")
-    ?.split(",")
-    .map(s => s.trim())
-    .filter(Boolean) ?? [];
+  const slugs =
+    params
+      .get("distros")
+      ?.split(",")
+      .map((s) => s.trim())
+      .filter(Boolean) ?? [];
 
   const distros = slugs
-    .map(slug => getDistroBySlug(slug))
+    .map((slug) => getDistroBySlug(slug))
     .filter(Boolean) as Distro[];
 
-  // Guard: invalid state
-  if (!distros || distros.length < 2) {
-    return (
-      <section className="compare-empty">
-        <h1>Compare Distributions</h1>
-        <p>Select at least two distributions to compare.</p>
-        <button
-          type="button"
-          className="back-btn"
-          onClick={() => navigate("/")}
-        >
-          Back to Distro list
-        </button>
-      </section>
-    );
+  const removeDistro = (slug: string) => {
+    const next = slugs.filter((s) => s !== slug);
+
+    if (next.length < 2) {
+      navigate("/");
+      return;
+    }
+
+    setParams({ distros: next.join(",") });
+  };
+
+  if (distros.length < 2) {
+    return null;
   }
 
   return (
@@ -47,7 +46,7 @@ export default function ComparePage() {
         </button>
       </header>
 
-      <ComparisonTable distros={distros} />
+      <ComparisonTable distros={distros} onRemove={removeDistro} />
     </section>
   );
 }
