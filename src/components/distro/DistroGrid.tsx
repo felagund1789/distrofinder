@@ -141,30 +141,21 @@ export default function DistroGrid() {
         <div className="filter-separator" />
 
         <select
-          value={filters.sortBy ?? ""}
+          value={`${filters.sortBy ?? "popularity"}.${filters.sortDir ?? "asc"}`}
           onChange={(e) =>
             setFilters((f) => ({
               ...f,
-              sortBy: (e.target.value as SortByType) || undefined,
+              sortBy: (e.target.value.split(".")[0] as SortByType) || "popularity",
+              sortDir: (e.target.value.split(".")[1] as SortDirType) || "asc",
             }))
           }
         >
-          <option value="name">Name</option>
-          <option value="lastUpdate">Last updated</option>
-          <option value="popularity">Popularity</option>
-        </select>
-
-        <select
-          value={filters.sortDir ?? ""}
-          onChange={(e) =>
-            setFilters((f) => ({
-              ...f,
-              sortDir: (e.target.value as SortDirType) || undefined,
-            }))
-          }
-        >
-          <option value="asc">Ascending</option>
-          <option value="desc">Descending</option>
+          <option value="name.asc">Sort by Name ↑</option>
+          <option value="name.desc">Sort by Name ↓</option>
+          <option value="lastUpdate.asc">Sort by Last updated ↑</option>
+          <option value="lastUpdate.desc">Sort by Last updated ↓</option>
+          <option value="popularity.asc">Sort by Popularity ↑</option>
+          <option value="popularity.desc">Sort by Popularity ↓</option>
         </select>
 
         {hasActiveFilters && (
