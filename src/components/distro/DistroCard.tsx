@@ -57,10 +57,10 @@ export default function DistroCard({
       <p className="clamp">{distro.description}</p>
 
       <div className="meta">
-        {distro.defaultDesktop?.split(",").map((d) => (
+        {(distro.defaultDesktop || distro.desktop)?.split(",").map((d) => (
           <Tag key={d} label={d.trim()} />
         ))}
-        {distro.architecture?.split(",").map((a) => (
+        {distro.processorArchitecture?.split(",").map((a) => (
           <Tag key={a} label={a.trim()} variant="subtle" />
         ))}
       </div>

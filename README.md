@@ -15,8 +15,11 @@ The app focuses on **discoverability, clarity, and editorial-style presentation*
 > **Note**: DistroFinder is intentionally frontend-only. All data is loaded from static JSON files and images served as static assets.
 
 ---
-![Home page on desktop](screens/DistroFinder-1.png)
-| ![Home page on mobile](screens/DistroFinder-2.png) | ![Distro detail page on mobile](screens/DistroFinder-3.png) | ![Distro detail page on mobile](screens/DistroFinder-4.png) |
+![Home page on desktop](screens/homepage.png)
+![Distro detail page on desktop](screens/distro-detail.png)
+![Distro comparison selection on desktop](screens/compare-select.png)
+![Distro comparison page on desktop](screens/compare-page.png)
+| ![Home page on mobile](screens/homepage-mobile.png) | ![Distro detail page on mobile](screens/distro-detail-mobile-1.png) | ![Distro detail page on mobile](screens/distro-detail-mobile-2.png) |
 |---|---|---|
 
 ## ✨ Features
@@ -48,7 +51,7 @@ The app focuses on **discoverability, clarity, and editorial-style presentation*
 * Fully responsive (mobile-first)
 * Dark mode support via CSS variables
 
-### Distro Comparison Page
+### ↔️ Distro Comparison Page
 
 * Side-by-side comparison of multiple distros
 * Comparison table with key attributes

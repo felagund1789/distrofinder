@@ -32,7 +32,7 @@ function TagList({ value }: { value?: string }) {
   return (
     <div className="comparison-tags">
       {value.split(",").map((v) => (
-        <Tag key={v.trim()} label={v.trim()} />
+        <Tag key={v.trim()} variant="subtle" label={v.trim()} />
       ))}
     </div>
   );
