@@ -60,6 +60,15 @@ export default function ComparisonTable({ distros }: ComparisonTableProps) {
         </thead>
 
         <tbody>
+          <ComparisonRow label="">
+            {distros.map(d => (
+              <img
+                key={d.slug}
+                className="comparison-thumbnail"
+                src={d.localPaths?.thumbnail || ""} alt="" />
+            ))}
+          </ComparisonRow>
+
           <ComparisonRow label="Status">
             {distros.map(d => (
               <StatusBadge key={d.slug} status={d.status} />

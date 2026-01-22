@@ -200,7 +200,7 @@ body {
   transition: opacity 0.15s ease;
 }
 
-@media (any-hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .distro-card__select {
     opacity: 0;
     pointer-events: none;
@@ -578,6 +578,7 @@ body {
 }
 
 .comparison-table {
+  table-layout: fixed;
   width: 100%;
   border-collapse: collapse;
   min-width: 640px;
@@ -611,6 +612,11 @@ body {
   background-color: #ffffff;
   color: #333333;
   border-radius: 50%;
+}
+
+.comparison-thumbnail {
+  width: 100%;
+  object-fit: contain;
 }
 
 .comparison-tags {
