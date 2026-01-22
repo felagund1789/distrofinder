@@ -81,12 +81,6 @@ export default function ComparisonTable({ distros }: ComparisonTableProps) {
             ))}
           </ComparisonRow>
 
-          <ComparisonRow label="Architecture">
-            {distros.map(d => (
-              <span key={d.slug}>{d.architecture}</span>
-            ))}
-          </ComparisonRow>
-
           <ComparisonRow label="Default Desktop">
             {distros.map(d => (
               <TagList key={d.slug} value={d.defaultDesktop || undefined} />
@@ -108,6 +102,36 @@ export default function ComparisonTable({ distros }: ComparisonTableProps) {
           <ComparisonRow label="Installation">
             {distros.map(d => (
               <TagList key={d.slug} value={d.installation || undefined} />
+            ))}
+          </ComparisonRow>
+
+          <ComparisonRow label="Package Management">
+            {distros.map(d => (
+              <TagList key={d.slug} value={d.packageManagement || undefined} />
+            ))}
+          </ComparisonRow>
+
+          <ComparisonRow label="Office Suite">
+            {distros.map(d => (
+              <TagList key={d.slug} value={d.officeSuite || undefined} />
+            ))}
+          </ComparisonRow>
+
+          <ComparisonRow label="Processor Architecture">
+            {distros.map(d => (
+              <TagList key={d.slug} value={d.processorArchitecture || undefined} />
+            ))}
+          </ComparisonRow>
+
+          <ComparisonRow label="Init System">
+            {distros.map(d => (
+              <TagList key={d.slug} value={d.initSystem || undefined} />
+            ))}
+          </ComparisonRow>
+
+          <ComparisonRow label="File Systems">
+            {distros.map(d => (
+              <TagList key={d.slug} value={d.fileSystems || undefined} />
             ))}
           </ComparisonRow>
 
