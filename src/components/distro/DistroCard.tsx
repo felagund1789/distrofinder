@@ -30,6 +30,11 @@ export default function DistroCard({
           className="distro-card__select-btn"
           aria-pressed={selected}
           disabled={selectionDisabled && !selected}
+          title={
+            selected
+              ? "Remove from distros selected for comparison"
+              : "Add to distros selected for comparison"
+          }
           onClick={(e) => {
             e.stopPropagation();
             onToggleSelect?.(distro.slug);

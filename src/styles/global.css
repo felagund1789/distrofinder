@@ -279,6 +279,7 @@ body {
 
 @media (max-width: 640px) {
   .compare-fab {
+    font-size: var(--text-md);
     right: var(--space-4);
     bottom: var(--space-4);
   }
