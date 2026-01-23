@@ -5,6 +5,9 @@ import ExperienceStep from "./ExperienceStep";
 import HardwareStep from "./HardwareStep";
 import PrimaryUseStep from "./PrimaryUseStep";
 import PrioritiesStep from "./PrioritiesStep";
+import WizardProgress from "./WizardProgress";
+
+const WIZARD_STEPS = ["Experience", "Use", "Hardware", "Priorities", "Results"];
 
 export function FindMyDistroWizard() {
   const [step, setStep] = useState(0);
@@ -18,6 +21,8 @@ export function FindMyDistroWizard() {
 
   return (
     <section className="wizard">
+      <WizardProgress currentStep={step} totalSteps={WIZARD_STEPS.length} />
+
       {step === 0 && (
         <ExperienceStep
           value={answers.experienceLevel}

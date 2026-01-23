@@ -62,3 +62,27 @@
   margin-top: var(--space-1);
   color: var(--color-text-secondary);
 }
+
+.wizard-progress {
+  margin-bottom: var(--space-6);
+}
+
+.wizard-progress__track {
+  height: 6px;
+  background-color: var(--color-border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.wizard-progress__bar {
+  height: 100%;
+  background-color: var(--color-accent);
+  transition: width 0.2s ease;
+}
+
+.wizard-progress__label {
+  display: block;
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
