@@ -2,6 +2,7 @@ import { useState } from "react";
 import "../../styles/wizard.css";
 import type { WizardAnswers } from "../../utils/scoring";
 import ExperienceStep from "./ExperienceStep";
+import HardwareStep from "./HardwareStep";
 import PrimaryUseStep from "./PrimaryUseStep";
 
 export function FindMyDistroWizard() {
@@ -33,7 +34,14 @@ export function FindMyDistroWizard() {
         />
       )}
 
-      {/* More steps follow */}
+      {step === 2 && (
+        <HardwareStep
+          value={answers.hardware}
+          onChange={(v) => setAnswers((a) => ({ ...a, hardware: v }))}
+          onNext={() => setStep(3)}
+          onBack={() => setStep(1)}
+        />
+      )}
     </section>
   );
 }
