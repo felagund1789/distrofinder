@@ -1,6 +1,8 @@
 import { useState } from "react";
+import "../../styles/wizard.css";
 import type { WizardAnswers } from "../../utils/scoring";
 import ExperienceStep from "./ExperienceStep";
+import PrimaryUseStep from "./PrimaryUseStep";
 
 export function FindMyDistroWizard() {
   const [step, setStep] = useState(0);
@@ -22,14 +24,14 @@ export function FindMyDistroWizard() {
         />
       )}
 
-      {/* {step === 1 && (
+      {step === 1 && (
         <PrimaryUseStep
           value={answers.primaryUse}
           onChange={(v) => setAnswers((a) => ({ ...a, primaryUse: v }))}
           onNext={() => setStep(2)}
           onBack={() => setStep(0)}
         />
-      )} */}
+      )}
 
       {/* More steps follow */}
     </section>

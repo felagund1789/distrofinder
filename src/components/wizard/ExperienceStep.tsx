@@ -14,17 +14,22 @@ export default function ExperienceStep({
     <>
       <h2>How familiar are you with Linux?</h2>
 
-      <RadioGroup
-        value={value}
-        options={[
-          { value: "beginner", label: "I am new to Linux" },
-          { value: "intermediate", label: "I have used Linux before" },
-          { value: "advanced", label: "I am an experienced user" },
-        ]}
-        onChange={onChange}
-      />
+      <div className="wizard-options">
+        <RadioGroup
+          value={value}
+          options={[
+            { value: "beginner", label: "I am new to Linux" },
+            { value: "intermediate", label: "I have used Linux before" },
+            { value: "advanced", label: "I am an experienced user" },
+          ]}
+          onChange={onChange}
+        />
+      </div>
 
-      <button className="button-next" onClick={onNext}>Next</button>
+      <div className="wizard-actions">
+        <div />
+        <button onClick={onNext}>Next</button>
+      </div>
     </>
   );
 }
