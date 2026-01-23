@@ -1,9 +1,10 @@
 import { Route, Routes } from "react-router-dom";
 import DistroGrid from "../components/distro/DistroGrid";
 import AppLayout from "../components/layout/AppLayout";
+import { ScrollToTop } from "../components/routing/ScrollToTop";
+import { FindMyDistroWizard } from "../components/wizard/FindMyDistroWizard";
 import ComparePage from "./ComparePage";
 import DistroDetail from "./DistroDetail";
-import { ScrollToTop } from "../components/routing/ScrollToTop";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
         <Route path="/" element={<DistroGrid />} />
         <Route path="/d/:slug" element={<DistroDetail />} />
         <Route path="/compare" element={<ComparePage />} />
+        <Route path="/wizard" element={<FindMyDistroWizard />} />
       </Routes>
     </AppLayout>
   );
