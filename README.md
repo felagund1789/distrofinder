@@ -75,18 +75,23 @@ The app focuses on **discoverability, clarity, and editorial-style presentation*
 ```
 src/
 ├── components/
+│   ├── compare/          # Comparison-specific components
+│   │   ├── CompareFAB.tsx
+│   │   └── ComparisonTable.tsx
 │   ├── distro/           # Distro-specific components
 │   │   ├── DistroCard.tsx
 │   │   └── DistroGrid.tsx
 │   ├── layout/           # Layout-level components (if any)
-│   │   ├── DefinitionRow.tsx
-│   │   ├── StatusBadge.tsx
-│   │   ├── Tag.tsx
-│   │   └── ...
+│   │   └── AppLayout.tsx
+│   │── routing/          # Routing-related components (if any)
+│   │   └── ScrollToTop.tsx
 │   ├── tags/             # Domain-aware clickable tags
-│   │   └── CategoryTag.tsx
-│   │   ├── DesktopTag.tsx
+│   │   ├── CategoryTag.tsx
+│   │   └── DesktopTag.tsx
 │   └── ui/               # Reusable UI primitives
+│       ├── DefinitionRow.tsx
+│       ├── StatusBadge.tsx
+│       └── Tag.tsx
 ├── context/
 │   └── DistroContext.tsx # Global state & data access
 ├── data/
@@ -95,6 +100,7 @@ src/
 ├── hooks/
 │   └── useDebouncedSearch.ts
 ├── pages/
+│   ├── ComparePage.tsx   # Comparison page
 │   ├── DistroDetail.tsx  # Detail page
 │   └── Home.tsx          # Home page
 ├── styles/
@@ -118,12 +124,38 @@ Each Linux distribution is defined in JSON and enforced via TypeScript types. Ex
 {
   "slug": "mint",
   "name": "Linux Mint",
+  "lastUpdate": "2026-01-17 13:48",
   "description": "Linux Mint is an Ubuntu-based distribution...",
+  "homepage": "https://linuxmint.com/",
+  "osType": "Linux",
+  "basedOn": "Debian (Stable), Ubuntu (LTS)",
+  "origin": "Ireland",
+  "architecture": "i686, x86_64",
   "desktop": "Cinnamon, MATE, Xfce",
   "category": "Beginners, Desktop, Live Medium",
   "status": "Active",
+  "defaultDesktop": "Cinnamon, MATE, Xfce",
+  "installation": "mintinstall",
+  "defaultBrowser": "Firefox",
+  "packageManagement": "DEB, Flatpak",
+  "releaseModel": "Fixed",
+  "officeSuite": "LibreOffice",
+  "processorArchitecture": "x86_64",
+  "initSystem": "systemd",
+  "fileSystems": "Btrfs, ext4, XFS",
+  "popularity": 2,
+  "rating": 8.8,
+  "reviewCount": 975,
+  "slug": "mint",
+  "name": "Linux Mint",
   "logo": "...",
-  "screenshot": "..."
+  "screenshot": "...",
+  "thumbnail": "...",
+  "localPaths": {
+    "logo": "...",
+    "screenshot": "...",
+    "thumbnail": "..."
+  }
 }
 ```
 
@@ -171,6 +203,7 @@ npm run build
 
 * `/` → Distro grid (home)
 * `/d/:slug` → Distro detail page
+* `/?compare=:slug1,:slug2` → Distro compare page
 
 React Router is used for client-side navigation.
 
@@ -182,7 +215,6 @@ React Router is used for client-side navigation.
 * No authentication
 * No server-side rendering
 * No analytics
-* No facet-based tag UI (currently reverted)
 
 The app is intentionally simple, fast, and easy to reason about.
 
@@ -201,7 +233,6 @@ The following features are good candidates for future iterations:
 
 ### Data & Content
 
-* Popularity / rating visualization
 * Release history timeline
 * External links (official website, docs)
 * Screenshots gallery
