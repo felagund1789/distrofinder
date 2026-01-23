@@ -4,6 +4,7 @@ import type { WizardAnswers } from "../../utils/scoring";
 import ExperienceStep from "./ExperienceStep";
 import HardwareStep from "./HardwareStep";
 import PrimaryUseStep from "./PrimaryUseStep";
+import PrioritiesStep from "./PrioritiesStep";
 
 export function FindMyDistroWizard() {
   const [step, setStep] = useState(0);
@@ -40,6 +41,21 @@ export function FindMyDistroWizard() {
           onChange={(v) => setAnswers((a) => ({ ...a, hardware: v }))}
           onNext={() => setStep(3)}
           onBack={() => setStep(1)}
+        />
+      )}
+
+      {step === 3 && (
+        <PrioritiesStep
+          value={[...answers.priorities, ...answers.philosophy]}
+          onChange={(v) =>
+            setAnswers((a) => ({
+              ...a,
+              priorities: v,
+              philosophy: v,
+            }))
+          }
+          onNext={() => setStep(4)}
+          onBack={() => setStep(2)}
         />
       )}
     </section>
