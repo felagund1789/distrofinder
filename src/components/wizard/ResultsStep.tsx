@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useDistros } from "../../context/DistroContext";
-import { getCategoryLabel } from "../../utils/categories";
 import type { WizardAnswers } from "../../utils/scoring";
 import { scoreDistros } from "../../utils/scoring";
 
@@ -62,11 +61,21 @@ export default function ResultsStep({ answers, onRestart }: ResultsStepProps) {
               </div>
             </div>
 
-            <ul className="wizard-result-reasons">
-              {reasons.slice(0, 3).map((reason) => (
-                <li key={reason}>{getCategoryLabel(reason)}</li>
-              ))}
-            </ul>
+            <div className="wizard-result-why">
+              <h4>Why this matches you</h4>
+
+              <p className="wizard-result-why__intro">
+                This distro was recommended based on your answers:
+              </p>
+
+              <div className="wizard-result-why__tags">
+                {reasons.slice(0, 4).map((reason) => (
+                  <span key={reason} className="wizard-result-why__tag">
+                    {reason}
+                  </span>
+                ))}
+              </div>
+            </div>
 
             <div className="wizard-result-actions">
               <button

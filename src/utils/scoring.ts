@@ -15,7 +15,7 @@ const WEIGHTS = {
   HARDWARE: 3,
   EXPERIENCE_MATCH: 3,
   PHILOSOPHY: 1,
-  EXPERIENCE_MISMATCH: -3,
+  EXPERIENCE_MISMATCH: -5,
 };
 
 const EXPERIENCE_PENALTIES: Record<WizardAnswers["experienceLevel"], string[]> =
