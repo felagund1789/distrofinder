@@ -80,5 +80,7 @@ export function scoreDistros(
 ): ScoredDistro[] {
   return distros
     .map((d) => scoreDistro(d, answers))
+    .filter((s) => Number(s.distro.popularity) > 0)
+    .sort((a, b) => Number(a.distro.popularity) - Number(b.distro.popularity))
     .sort((a, b) => b.score - a.score);
 }
