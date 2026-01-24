@@ -663,6 +663,60 @@ body {
   cursor: pointer;
 }
 
+.wizard-callout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+
+  padding: var(--space-6);
+  margin-bottom: var(--space-6);
+
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.wizard-callout__content h2 {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-lg);
+}
+
+.wizard-callout__content p {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.wizard-callout__action {
+  white-space: nowrap;
+}
+
+.wizard-callout button {
+  background-color: var(--color-accent);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-md);
+  border: 1px solid #ffffff;
+  background-color: var(--color-accent);
+  color: #ffffff;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+@media (max-width: 640px) {
+  .wizard-callout {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .wizard-callout__action {
+    align-self: stretch;
+  }
+}
+
 /* Dark theme */
 [data-theme="dark"] {
   --color-bg: #0f1115;

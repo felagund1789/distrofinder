@@ -11,8 +11,9 @@ import {
   filtersFromSearchParams,
   filtersToSearchParams,
 } from "../../utils/filters";
-import DistroCard from "./DistroCard";
 import { CompareFAB } from "../compare/CompareFAB";
+import DistroWizardCallout from "../wizard/DistroWizardCallout";
+import DistroCard from "./DistroCard";
 
 const DEFAULT_FILTERS: DistroFilters = {
   search: "",
@@ -37,8 +38,8 @@ export default function DistroGrid() {
       prev.includes(slug)
         ? prev.filter((s) => s !== slug)
         : prev.length < 3
-        ? [...prev, slug]
-        : prev
+          ? [...prev, slug]
+          : prev
     );
   };
 
@@ -79,6 +80,8 @@ export default function DistroGrid() {
 
   return (
     <>
+      <DistroWizardCallout />
+
       <section className="filters">
         <input
           type="search"
@@ -145,7 +148,8 @@ export default function DistroGrid() {
           onChange={(e) =>
             setFilters((f) => ({
               ...f,
-              sortBy: (e.target.value.split(".")[0] as SortByType) || "popularity",
+              sortBy:
+                (e.target.value.split(".")[0] as SortByType) || "popularity",
               sortDir: (e.target.value.split(".")[1] as SortDirType) || "asc",
             }))
           }
