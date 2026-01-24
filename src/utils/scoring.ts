@@ -36,7 +36,7 @@ export function scoreDistro(
   answers: WizardAnswers
 ): ScoredDistro {
   let score = 0;
-  const reasons: string[] = [];
+  const reasons: Set<string> = new Set();
 
   const distroCategories = distro.category.split(",").map((c) => c.trim());
 
@@ -44,7 +44,7 @@ export function scoreDistro(
   answers.primaryUse.forEach((cat) => {
     if (distroCategories.includes(cat)) {
       score += WEIGHTS.PRIMARY_USE;
-      reasons.push(getCategoryInfo(cat).explanation ?? getCategoryLabel(cat));
+      reasons.add(getCategoryInfo(cat).explanation ?? getCategoryLabel(cat));
     }
   });
 
@@ -52,7 +52,7 @@ export function scoreDistro(
   answers.hardware.forEach((cat) => {
     if (distroCategories.includes(cat)) {
       score += WEIGHTS.HARDWARE;
-      reasons.push(getCategoryInfo(cat).explanation ?? getCategoryLabel(cat));
+      reasons.add(getCategoryInfo(cat).explanation ?? getCategoryLabel(cat));
     }
   });
 
@@ -60,7 +60,7 @@ export function scoreDistro(
   answers.philosophy.forEach((cat) => {
     if (distroCategories.includes(cat)) {
       score += WEIGHTS.PHILOSOPHY;
-      reasons.push(getCategoryInfo(cat).explanation ?? getCategoryLabel(cat));
+      reasons.add(getCategoryInfo(cat).explanation ?? getCategoryLabel(cat));
     }
   });
 
@@ -71,7 +71,7 @@ export function scoreDistro(
     }
   });
 
-  return { distro, score, reasons };
+  return { distro, score, reasons: Array.from(reasons) };
 }
 
 export function scoreDistros(
