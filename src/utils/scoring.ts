@@ -75,7 +75,7 @@ export function scoreDistro(
 }
 
 export function scoreDistros(
-  distros: Distro[],
+  distros: Readonly<Distro[]>,
   answers: WizardAnswers
 ): ScoredDistro[] {
   return distros

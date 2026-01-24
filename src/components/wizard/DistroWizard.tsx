@@ -6,18 +6,21 @@ import HardwareStep from "./HardwareStep";
 import PrimaryUseStep from "./PrimaryUseStep";
 import PrioritiesStep from "./PrioritiesStep";
 import WizardProgress from "./WizardProgress";
+import ResultsStep from "./ResultsStep";
 
 const WIZARD_STEPS = ["Experience", "Use", "Hardware", "Priorities", "Results"];
 
-export function FindMyDistroWizard() {
+const INITIAL_ANSWERS: WizardAnswers = {
+  experienceLevel: "beginner",
+  primaryUse: [],
+  hardware: [],
+  priorities: [],
+  philosophy: [],
+};
+
+export default function DistroWizard() {
   const [step, setStep] = useState(0);
-  const [answers, setAnswers] = useState<WizardAnswers>({
-    experienceLevel: "beginner",
-    primaryUse: [],
-    hardware: [],
-    priorities: [],
-    philosophy: [],
-  });
+  const [answers, setAnswers] = useState<WizardAnswers>(INITIAL_ANSWERS);
 
   return (
     <section className="wizard">
@@ -61,6 +64,16 @@ export function FindMyDistroWizard() {
           }
           onNext={() => setStep(4)}
           onBack={() => setStep(2)}
+        />
+      )}
+
+      {step === 4 && (
+        <ResultsStep
+          answers={answers}
+          onRestart={() => {
+            setAnswers(INITIAL_ANSWERS);
+            setStep(0);
+          }}
         />
       )}
     </section>
