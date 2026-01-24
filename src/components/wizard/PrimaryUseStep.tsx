@@ -52,7 +52,11 @@ export default function PrimaryUseStep({
         <button onClick={onBack} className="button-secondary">
           Back
         </button>
-        <button onClick={onNext} disabled={value.length === 0}>
+        <button
+          onClick={onNext}
+          className="button-primary"
+          disabled={value.length === 0}
+        >
           Next
         </button>
       </div>

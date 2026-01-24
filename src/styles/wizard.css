@@ -1,3 +1,23 @@
+.wizard button {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.wizard button.button-primary {
+  background-color: var(--color-accent);
+  color: #ffffff;
+}
+
+.wizard button.button-primary:disabled {
+  opacity: 0.5;
+}
+
 .wizard-options {
   display: grid;
   gap: var(--space-3);
@@ -45,17 +65,6 @@
   display: flex;
   justify-content: space-between;
   margin-top: var(--space-6);
-}
-
-.wizard-actions button {
-  padding: var(--space-2) var(--space-4);
-  font-size: var(--text-base);
-  color: var(--color-text-primary);
-  background-color: var(--color-surface);
-  border: none;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: background-color 0.15s ease;
 }
 
 .wizard-subtitle {
@@ -107,9 +116,37 @@
 }
 
 .wizard-result-logo {
-  width: 32px;
-  height: 32px;
+  width: 48px;
+  height: 48px;
+  padding: 6px;
   object-fit: contain;
+  background-color: #ffffff;
+  color: #333333;
+  border-radius: 50%;
+}
+
+.wizard-result-about {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-2);
+}
+
+.wizard-result-about__content {
+  max-width: 640px;
+}
+
+.wizard-result-about__media {
+  width: 100%;
+}
+
+.wizard-result-about__media img {
+  width: 100%;
+  height: auto;
+
+  display: block;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
 }
 
 .wizard-result-reasons {
@@ -119,8 +156,39 @@
   font-size: var(--text-sm);
 }
 
+.wizard-results ul li {
+  list-style: none;
+  margin-left: -0.5rem;
+  margin-bottom: var(--space-1);
+  padding: var(--space-4);
+  width: 100%;
+  background-color: #f5c33c;
+  color: #333333;
+  border-radius: var(--radius-sm);
+}
+
 .wizard-result-actions {
   display: flex;
   gap: var(--space-3);
   margin-top: var(--space-4);
+}
+
+@media (min-width: 1024px) {
+  .wizard-result-about {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .wizard-result-about__content {
+    flex: 1;
+  }
+
+  .wizard-result-about__media {
+    flex: 1;
+    max-width: 520px;
+  }
+  
+  .wizard-results ul li {
+    width: fit-content;
+  }
 }

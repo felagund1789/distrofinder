@@ -53,7 +53,9 @@ export default function PrioritiesStep({
           Back
         </button>
 
-        <button onClick={onNext}>See results</button>
+        <button onClick={onNext} className="button-primary">
+          See results
+        </button>
       </div>
     </>
   );

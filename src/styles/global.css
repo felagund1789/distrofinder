@@ -1,4 +1,8 @@
 :root {
+  /* Colors */
+  --color-bg: #f9fafb;
+  --color-surface: #ffffff;
+  --color-border: #e5e7eb;
   --color-text-primary: #111827;
   --color-text-secondary: #6b7280;
 
@@ -237,12 +241,12 @@ body {
   cursor: not-allowed;
 }
 
-.distro-card[data-selected='true'] {
+.distro-card[data-selected="true"] {
   outline: 2px solid var(--color-accent);
   outline-offset: -2px;
 }
 
-.distro-card[data-selected='true'] .distro-card__select {
+.distro-card[data-selected="true"] .distro-card__select {
   opacity: 1;
   pointer-events: auto;
 }

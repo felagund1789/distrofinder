@@ -26,8 +26,8 @@ export const PRIMARY_USE_OPTIONS: PrimaryUseOption[] = [
     categories: ["Privacy", "Security"],
   },
   {
-    label: "Learning Linux",
-    description: "Exploring and understanding Linux systems",
+    label: "Education & learning",
+    description: "Educational tools and environments",
     categories: ["Education"],
   },
   {

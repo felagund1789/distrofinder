@@ -21,7 +21,7 @@ const WEIGHTS = {
 const EXPERIENCE_PENALTIES: Record<WizardAnswers["experienceLevel"], string[]> =
   {
     beginner: ["Source-based", "Declarative"],
-    intermediate: [],
+    intermediate: ["Source-based", "Declarative", "Beginners"],
     advanced: ["Beginners"],
   };
 

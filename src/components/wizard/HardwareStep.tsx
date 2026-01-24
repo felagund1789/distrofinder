@@ -62,7 +62,9 @@ export default function HardwareStep({
           Back
         </button>
 
-        <button onClick={onNext}>Next</button>
+        <button onClick={onNext} className="button-primary">
+          Next
+        </button>
       </div>
     </>
   );

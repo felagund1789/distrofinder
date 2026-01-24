@@ -44,10 +44,22 @@ export default function ResultsStep({ answers, onRestart }: ResultsStepProps) {
             <div className="wizard-result-header">
               <img
                 src={distro.localPaths?.logo || ""}
-                alt=""
+                alt={`${distro.name} logo`}
                 className="wizard-result-logo"
               />
               <h3>{distro.name}</h3>
+            </div>
+
+            <div className="wizard-result-about">
+              <div className="wizard-result-about__content">
+                <p>{distro.description}</p>
+              </div>
+              <div className="wizard-result-about__media">
+                <img
+                  src={distro.localPaths?.thumbnail || ""}
+                  alt={`${distro.name} screenshot`}
+                />
+              </div>
             </div>
 
             <ul className="wizard-result-reasons">
@@ -57,7 +69,10 @@ export default function ResultsStep({ answers, onRestart }: ResultsStepProps) {
             </ul>
 
             <div className="wizard-result-actions">
-              <button onClick={() => navigate(`/d/${distro.slug}`)}>
+              <button
+                className="button-primary"
+                onClick={() => navigate(`/d/${distro.slug}`)}
+              >
                 View details
               </button>
 

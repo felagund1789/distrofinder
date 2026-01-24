@@ -28,7 +28,9 @@ export default function ExperienceStep({
 
       <div className="wizard-actions">
         <div />
-        <button onClick={onNext}>Next</button>
+        <button onClick={onNext} className="button-primary">
+          Next
+        </button>
       </div>
     </>
   );
