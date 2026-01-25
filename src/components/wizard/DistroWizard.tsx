@@ -7,8 +7,7 @@ import PrimaryUseStep from "./PrimaryUseStep";
 import PrioritiesStep from "./PrioritiesStep";
 import WizardProgress from "./WizardProgress";
 import ResultsStep from "./ResultsStep";
-
-const WIZARD_STEPS = ["Experience", "Use", "Hardware", "Priorities", "Results"];
+import { DesktopStep } from "./DesktopStep";
 
 const INITIAL_ANSWERS: WizardAnswers = {
   experienceLevel: "beginner",
@@ -16,43 +15,62 @@ const INITIAL_ANSWERS: WizardAnswers = {
   hardware: [],
   priorities: [],
   philosophy: [],
+  desktop: null,
 };
 
 export default function DistroWizard() {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<WizardAnswers>(INITIAL_ANSWERS);
 
+  const WIZARD_STEPS = [
+    "Experience",
+    "Use",
+    "Hardware",
+    ...(answers.experienceLevel !== "beginner" ? ["Desktop Environment"] : []),
+    "Priorities",
+    "Results",
+  ];
+
   return (
     <section className="wizard">
       <WizardProgress currentStep={step} totalSteps={WIZARD_STEPS.length} />
 
-      {step === 0 && (
+      {WIZARD_STEPS[step] === "Experience" && (
         <ExperienceStep
           value={answers.experienceLevel}
           onChange={(v) => setAnswers((a) => ({ ...a, experienceLevel: v }))}
-          onNext={() => setStep(1)}
+          onNext={() => setStep(step + 1)}
         />
       )}
 
-      {step === 1 && (
+      {WIZARD_STEPS[step] === "Use" && (
         <PrimaryUseStep
           value={answers.primaryUse}
           onChange={(v) => setAnswers((a) => ({ ...a, primaryUse: v }))}
-          onNext={() => setStep(2)}
-          onBack={() => setStep(0)}
+          onNext={() => setStep(step + 1)}
+          onBack={() => setStep(step - 1)}
         />
       )}
 
-      {step === 2 && (
+      {WIZARD_STEPS[step] === "Hardware" && (
         <HardwareStep
           value={answers.hardware}
           onChange={(v) => setAnswers((a) => ({ ...a, hardware: v }))}
-          onNext={() => setStep(3)}
-          onBack={() => setStep(1)}
+          onNext={() => setStep(step + 1)}
+          onBack={() => setStep(step - 1)}
         />
       )}
 
-      {step === 3 && (
+      {WIZARD_STEPS[step] === "Desktop Environment" && (
+        <DesktopStep
+          value={answers.desktop ?? null}
+          onChange={(v) => setAnswers((a) => ({ ...a, desktop: v }))}
+          onNext={() => setStep(step + 1)}
+          onBack={() => setStep(step - 1)}
+        />
+      )}
+
+      {WIZARD_STEPS[step] === "Priorities" && (
         <PrioritiesStep
           value={[...answers.priorities, ...answers.philosophy]}
           onChange={(v) =>
@@ -62,12 +80,12 @@ export default function DistroWizard() {
               philosophy: v,
             }))
           }
-          onNext={() => setStep(4)}
-          onBack={() => setStep(2)}
+          onNext={() => setStep(step + 1)}
+          onBack={() => setStep(step - 1)}
         />
       )}
 
-      {step === 4 && (
+      {WIZARD_STEPS[step] === "Results" && (
         <ResultsStep
           answers={answers}
           onRestart={() => {

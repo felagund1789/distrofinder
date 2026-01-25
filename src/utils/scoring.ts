@@ -7,23 +7,24 @@ export interface WizardAnswers {
   hardware: string[];
   priorities: string[];
   philosophy: string[];
+  desktop?: string | null;
 }
 
 const WEIGHTS = {
   PRIMARY_USE: 4,
   SECONDARY_USE: 2,
   HARDWARE: 3,
+  DESKTOP_ENVIRONMENT: 20,
   EXPERIENCE_MATCH: 3,
   PHILOSOPHY: 1,
   EXPERIENCE_MISMATCH: -5,
 };
 
-const EXPERIENCE_BONUSES: Record<WizardAnswers["experienceLevel"], string[]> =
-  {
-    beginner: ["Beginners"],
-    intermediate: [],
-    advanced: ["Source-based", "Declarative"],
-  };
+const EXPERIENCE_BONUSES: Record<WizardAnswers["experienceLevel"], string[]> = {
+  beginner: ["Beginners"],
+  intermediate: [],
+  advanced: ["Source-based", "Declarative"],
+};
 
 const EXPERIENCE_PENALTIES: Record<WizardAnswers["experienceLevel"], string[]> =
   {
@@ -70,6 +71,14 @@ export function scoreDistro(
       reasons.add(getCategoryInfo(cat).explanation ?? getCategoryLabel(cat));
     }
   });
+
+  // Desktop environment
+  if (answers.desktop) {
+    if (distro.defaultDesktop?.toLowerCase().includes(answers.desktop.toLowerCase())) {
+      score += WEIGHTS.DESKTOP_ENVIRONMENT;
+      reasons.add(`Comes with ${answers.desktop}`);
+    }
+  }
 
   // Philosophy / priorities
   answers.philosophy.forEach((cat) => {
