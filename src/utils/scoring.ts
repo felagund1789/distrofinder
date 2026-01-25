@@ -9,6 +9,7 @@ export interface WizardAnswers {
   philosophy: string[];
   desktop?: string | null;
   packageManager?: string | null;
+  initSystem: string[];
 }
 
 const WEIGHTS = {
@@ -20,6 +21,7 @@ const WEIGHTS = {
   EXPERIENCE_MATCH: 3,
   PHILOSOPHY: 1,
   EXPERIENCE_MISMATCH: -5,
+  INIT_SYSTEM: 10,
 };
 
 const EXPERIENCE_BONUSES: Record<WizardAnswers["experienceLevel"], string[]> = {
@@ -87,6 +89,19 @@ export function scoreDistro(
     if (distro.packageManagement?.toLowerCase().includes(answers.packageManager.toLowerCase())) {
       score += WEIGHTS.PACKAGE_MANAGEMENT;
       reasons.add(`Uses ${answers.packageManager} package manager`);
+    }
+  }
+
+  // Init system
+  if (answers.initSystem.length > 0) {
+    const usesSystemD = distro.initSystem?.toLowerCase().includes("systemd");
+    const initMatch =
+      (answers.initSystem.includes("systemd") && usesSystemD) ||
+      (answers.initSystem.includes("non-systemd") && !usesSystemD);
+
+    if (initMatch) {
+      score += WEIGHTS.INIT_SYSTEM;
+      reasons.add(`${usesSystemD ? "Uses systemd" : "Is systemd-free"}`);
     }
   }
 

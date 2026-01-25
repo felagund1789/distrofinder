@@ -9,6 +9,7 @@ import PrioritiesStep from "./steps/PrioritiesStep";
 import ResultsStep from "./steps/ResultsStep";
 import WizardProgress from "./WizardProgress";
 import { PackageManagerStep } from "./steps/PackageManagerStep";
+import { InitSystemStep } from "./steps/InitSystemStep";
 
 const INITIAL_ANSWERS: WizardAnswers = {
   experienceLevel: "beginner",
@@ -18,6 +19,7 @@ const INITIAL_ANSWERS: WizardAnswers = {
   philosophy: [],
   desktop: null,
   packageManager: null,
+  initSystem: [],
 };
 
 export default function DistroWizard() {
@@ -30,6 +32,7 @@ export default function DistroWizard() {
     "Hardware",
     ...(answers.experienceLevel !== "beginner" ? ["Desktop Environment"] : []),
     ...(answers.experienceLevel === "advanced" ? ["Package Manager"] : []),
+    ...(answers.experienceLevel === "advanced" ? ["Init System"] : []),
     "Priorities",
     "Results",
   ];
@@ -77,6 +80,15 @@ export default function DistroWizard() {
         <PackageManagerStep
           value={answers.packageManager ?? null}
           onChange={(v) => setAnswers((a) => ({ ...a, packageManager: v }))}
+          onNext={() => setStep(step + 1)}
+          onBack={() => setStep(step - 1)}
+        />
+      )}
+
+      {WIZARD_STEPS[step] === "Init System" && (
+        <InitSystemStep
+          value={answers.initSystem ?? []}
+          onChange={(v) => setAnswers((a) => ({ ...a, initSystem: v }))}
           onNext={() => setStep(step + 1)}
           onBack={() => setStep(step - 1)}
         />

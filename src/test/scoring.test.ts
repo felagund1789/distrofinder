@@ -40,6 +40,7 @@ describe("scoreDistros", () => {
       hardware: [],
       priorities: [],
       philosophy: [],
+      initSystem: [],
     };
 
     const results = scoreDistros(distros as Distro[], answers);
@@ -57,6 +58,7 @@ describe("scoreDistros", () => {
       hardware: [],
       priorities: [],
       philosophy: [],
+      initSystem: [],
     };
 
     const [result] = scoreDistros(distros as Distro[], answers);
@@ -71,6 +73,7 @@ describe("scoreDistros", () => {
       hardware: [],
       priorities: [],
       philosophy: [],
+      initSystem: [],
     };
 
     const results = scoreDistros(distros as Distro[], answers);
@@ -85,6 +88,7 @@ describe("scoreDistros", () => {
       hardware: [],
       priorities: [],
       philosophy: [],
+      initSystem: [],
     };
 
     const results = scoreDistros(distros as Distro[], answers);

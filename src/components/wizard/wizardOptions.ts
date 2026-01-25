@@ -59,6 +59,21 @@ export const PACKAGE_MANAGER_OPTIONS = [
   },
 ];
 
+export const INIT_SYSTEM_OPTIONS = [
+  {
+    label: "I don't care",
+    initSystems: [],
+  },
+  {
+    label: "I want my distro to use systemd",
+    initSystems: ["systemd"],
+  },
+  {
+    label: "I want my distro to be systemd-free (SysVinit, OpenRC, runit, etc.)",
+    initSystems: ["non-systemd"],
+  },
+];
+
 export interface HardwareOption {
   label: string;
   description: string;
