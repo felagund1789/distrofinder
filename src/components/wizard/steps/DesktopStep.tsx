@@ -1,5 +1,5 @@
-import { RadioGroup } from "../ui/RadioGroup";
-import { DESKTOP_OPTIONS } from "./desktopOptions";
+import { RadioGroup } from "../../ui/RadioGroup";
+import { DESKTOP_OPTIONS } from "../wizardOptions";
 
 interface DesktopStepProps {
   value: string | null;

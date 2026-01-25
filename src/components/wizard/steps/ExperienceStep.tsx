@@ -1,5 +1,5 @@
-import type { WizardAnswers } from "../../utils/scoring";
-import { RadioGroup } from "../ui/RadioGroup";
+import type { WizardAnswers } from "../../../utils/scoring";
+import { RadioGroup } from "../../ui/RadioGroup";
 
 export default function ExperienceStep({
   value,

@@ -1,13 +1,13 @@
 import { useState } from "react";
 import "../../styles/wizard.css";
 import type { WizardAnswers } from "../../utils/scoring";
-import ExperienceStep from "./ExperienceStep";
-import HardwareStep from "./HardwareStep";
-import PrimaryUseStep from "./PrimaryUseStep";
-import PrioritiesStep from "./PrioritiesStep";
+import { DesktopStep } from "./steps/DesktopStep";
+import ExperienceStep from "./steps/ExperienceStep";
+import HardwareStep from "./steps/HardwareStep";
+import PrimaryUseStep from "./steps/PrimaryUseStep";
+import PrioritiesStep from "./steps/PrioritiesStep";
+import ResultsStep from "./steps/ResultsStep";
 import WizardProgress from "./WizardProgress";
-import ResultsStep from "./ResultsStep";
-import { DesktopStep } from "./DesktopStep";
 
 const INITIAL_ANSWERS: WizardAnswers = {
   experienceLevel: "beginner",

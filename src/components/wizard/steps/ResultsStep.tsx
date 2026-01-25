@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { useDistros } from "../../context/DistroContext";
-import type { WizardAnswers } from "../../utils/scoring";
-import { scoreDistros } from "../../utils/scoring";
+import { useDistros } from "../../../context/DistroContext";
+import type { WizardAnswers } from "../../../utils/scoring";
+import { scoreDistros } from "../../../utils/scoring";
 
 interface ResultsStepProps {
   answers: WizardAnswers;

@@ -1,4 +1,4 @@
-import { PRIMARY_USE_OPTIONS } from "./primaryUseOptions";
+import { PRIMARY_USE_OPTIONS } from "../wizardOptions";
 
 interface PrimaryUseStepProps {
   value: string[];

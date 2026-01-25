@@ -1,19 +1,25 @@
-import { PRIORITY_OPTIONS } from "./prioritiesOptions";
+import { HARDWARE_OPTIONS } from "../wizardOptions";
 
-interface PrioritiesStepProps {
+interface HardwareStepProps {
   value: string[];
   onChange: (categories: string[]) => void;
   onNext: () => void;
   onBack: () => void;
 }
 
-export default function PrioritiesStep({
+export default function HardwareStep({
   value,
   onChange,
   onNext,
   onBack,
-}: PrioritiesStepProps) {
+}: HardwareStepProps) {
   const toggleOption = (categories: string[]) => {
+    if (categories.length === 0) {
+      // Neutral option selected → clear hardware constraints
+      onChange([]);
+      return;
+    }
+
     const exists = categories.every((c) => value.includes(c));
 
     if (exists) {
@@ -25,12 +31,15 @@ export default function PrioritiesStep({
 
   return (
     <>
-      <h2>What matters most to you?</h2>
-      <p className="wizard-subtitle">This step is optional.</p>
+      <h2>What hardware will you use?</h2>
+      <p className="wizard-subtitle">Select all that apply.</p>
 
       <div className="wizard-options">
-        {PRIORITY_OPTIONS.map((option) => {
-          const selected = option.categories.some((c) => value.includes(c));
+        {HARDWARE_OPTIONS.map((option) => {
+          const selected =
+            option.categories.length === 0
+              ? value.length === 0
+              : option.categories.some((c) => value.includes(c));
 
           return (
             <button
@@ -54,7 +63,7 @@ export default function PrioritiesStep({
         </button>
 
         <button onClick={onNext} className="button-primary">
-          See results
+          Next
         </button>
       </div>
     </>
