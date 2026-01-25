@@ -6,9 +6,14 @@ import { scoreDistros } from "../../../utils/scoring";
 interface ResultsStepProps {
   answers: WizardAnswers;
   onRestart: () => void;
+  onExit: () => void;
 }
 
-export default function ResultsStep({ answers, onRestart }: ResultsStepProps) {
+export default function ResultsStep({
+  answers,
+  onRestart,
+  onExit,
+}: ResultsStepProps) {
   const { distros } = useDistros();
   const navigate = useNavigate();
 
@@ -24,7 +29,7 @@ export default function ResultsStep({ answers, onRestart }: ResultsStepProps) {
 
         <div className="wizard-actions">
           <button onClick={onRestart}>Start over</button>
-          <button onClick={() => navigate("/")}>Browse all distros</button>
+          <button onClick={onExit}>Browse all distros</button>
         </div>
       </>
     );
@@ -85,10 +90,7 @@ export default function ResultsStep({ answers, onRestart }: ResultsStepProps) {
                 View details
               </button>
 
-              <button
-                className="button-secondary"
-                onClick={() => navigate("/")}
-              >
+              <button className="button-secondary" onClick={onExit}>
                 Browse all
               </button>
             </div>
@@ -99,6 +101,9 @@ export default function ResultsStep({ answers, onRestart }: ResultsStepProps) {
       <div className="wizard-actions">
         <button className="button-secondary" onClick={onRestart}>
           Start over
+        </button>
+        <button className="button-secondary" onClick={onExit}>
+          Browse all distros
         </button>
       </div>
     </>

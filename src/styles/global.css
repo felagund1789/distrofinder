@@ -66,7 +66,6 @@ body {
   font-weight: 600;
   font-size: 2.5rem;
   text-align: center;
-  cursor: pointer;
 }
 
 /* Grid */
@@ -698,7 +697,7 @@ body {
   border-radius: var(--radius-sm);
   padding: var(--space-2) var(--space-3);
   font-size: var(--text-md);
-  border: 1px solid #ffffff;
+  border: 1px solid var(--color-accent);
   background-color: var(--color-accent);
   color: #ffffff;
   cursor: pointer;

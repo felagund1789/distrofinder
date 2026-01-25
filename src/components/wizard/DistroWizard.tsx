@@ -1,15 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../../styles/wizard.css";
 import type { WizardAnswers } from "../../utils/scoring";
+import {
+  clearWizardState,
+  loadWizardState,
+  saveWizardState,
+} from "../../utils/wizardStorage";
 import { DesktopStep } from "./steps/DesktopStep";
 import ExperienceStep from "./steps/ExperienceStep";
 import HardwareStep from "./steps/HardwareStep";
+import { InitSystemStep } from "./steps/InitSystemStep";
+import { PackageManagerStep } from "./steps/PackageManagerStep";
 import PrimaryUseStep from "./steps/PrimaryUseStep";
 import PrioritiesStep from "./steps/PrioritiesStep";
 import ResultsStep from "./steps/ResultsStep";
 import WizardProgress from "./WizardProgress";
-import { PackageManagerStep } from "./steps/PackageManagerStep";
-import { InitSystemStep } from "./steps/InitSystemStep";
+import { useNavigate } from "react-router-dom";
 
 const INITIAL_ANSWERS: WizardAnswers = {
   experienceLevel: "beginner",
@@ -23,8 +29,17 @@ const INITIAL_ANSWERS: WizardAnswers = {
 };
 
 export default function DistroWizard() {
-  const [step, setStep] = useState(0);
-  const [answers, setAnswers] = useState<WizardAnswers>(INITIAL_ANSWERS);
+  const navigate = useNavigate();
+  const persisted = loadWizardState();
+
+  const [step, setStep] = useState(persisted?.step ?? 0);
+  const [answers, setAnswers] = useState<WizardAnswers>(
+    persisted?.answers ?? INITIAL_ANSWERS
+  );
+
+  useEffect(() => {
+    saveWizardState({ step, answers });
+  }, [step, answers]);
 
   const WIZARD_STEPS = [
     "Experience",
@@ -113,8 +128,13 @@ export default function DistroWizard() {
         <ResultsStep
           answers={answers}
           onRestart={() => {
+            clearWizardState();
             setAnswers(INITIAL_ANSWERS);
             setStep(0);
+          }}
+          onExit={() => {
+            clearWizardState();
+            navigate("/");
           }}
         />
       )}
