@@ -18,6 +18,13 @@ const WEIGHTS = {
   EXPERIENCE_MISMATCH: -5,
 };
 
+const EXPERIENCE_BONUSES: Record<WizardAnswers["experienceLevel"], string[]> =
+  {
+    beginner: ["Beginners"],
+    intermediate: [],
+    advanced: ["Source-based", "Declarative"],
+  };
+
 const EXPERIENCE_PENALTIES: Record<WizardAnswers["experienceLevel"], string[]> =
   {
     beginner: ["Source-based", "Declarative"],
@@ -39,6 +46,14 @@ export function scoreDistro(
   const reasons: Set<string> = new Set();
 
   const distroCategories = distro.category.split(",").map((c) => c.trim());
+
+  // Experience bonuses
+  EXPERIENCE_BONUSES[answers.experienceLevel].forEach((cat) => {
+    if (distroCategories.includes(cat)) {
+      score += WEIGHTS.EXPERIENCE_MATCH;
+      reasons.add(getCategoryInfo(cat).explanation ?? getCategoryLabel(cat));
+    }
+  });
 
   // Primary use
   answers.primaryUse.forEach((cat) => {

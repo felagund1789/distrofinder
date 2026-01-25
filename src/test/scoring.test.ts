@@ -60,7 +60,6 @@ describe("scoreDistros", () => {
     };
 
     const [result] = scoreDistros(distros as Distro[], answers);
-    console.log(result.reasons);
 
     expect(result.reasons).toContain(getCategoryInfo("Privacy").explanation);
   });
@@ -77,5 +76,22 @@ describe("scoreDistros", () => {
     const results = scoreDistros(distros as Distro[], answers);
 
     expect(results[0].distro.slug).toBe("bazzite");
+  });
+
+  it("scores distros according to experience penalties", () => {
+    const answers: WizardAnswers = {
+      experienceLevel: "beginner",
+      primaryUse: ["Desktop"],
+      hardware: [],
+      priorities: [],
+      philosophy: [],
+    };
+
+    const results = scoreDistros(distros as Distro[], answers);
+
+    const arch = results.find((r) => r.distro.slug === "arch");
+    const mint = results.find((r) => r.distro.slug === "mint");
+
+    expect(arch?.score).toBeLessThan(mint?.score ?? 0);
   });
 });

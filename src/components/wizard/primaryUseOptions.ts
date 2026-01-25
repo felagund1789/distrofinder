@@ -8,7 +8,7 @@ export const PRIMARY_USE_OPTIONS: PrimaryUseOption[] = [
   {
     label: "Daily desktop use",
     description: "Web browsing, documents, everyday tasks",
-    categories: ["Desktop", "Beginners"],
+    categories: ["Desktop"],
   },
   {
     label: "Gaming",
