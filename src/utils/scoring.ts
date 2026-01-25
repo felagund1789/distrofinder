@@ -8,6 +8,7 @@ export interface WizardAnswers {
   priorities: string[];
   philosophy: string[];
   desktop?: string | null;
+  packageManager?: string | null;
 }
 
 const WEIGHTS = {
@@ -15,6 +16,7 @@ const WEIGHTS = {
   SECONDARY_USE: 2,
   HARDWARE: 3,
   DESKTOP_ENVIRONMENT: 20,
+  PACKAGE_MANAGEMENT: 15,
   EXPERIENCE_MATCH: 3,
   PHILOSOPHY: 1,
   EXPERIENCE_MISMATCH: -5,
@@ -77,6 +79,14 @@ export function scoreDistro(
     if (distro.defaultDesktop?.toLowerCase().includes(answers.desktop.toLowerCase())) {
       score += WEIGHTS.DESKTOP_ENVIRONMENT;
       reasons.add(`Comes with ${answers.desktop}`);
+    }
+  }
+
+  // Package management
+  if (answers.packageManager) {
+    if (distro.packageManagement?.toLowerCase().includes(answers.packageManager.toLowerCase())) {
+      score += WEIGHTS.PACKAGE_MANAGEMENT;
+      reasons.add(`Uses ${answers.packageManager} package manager`);
     }
   }
 

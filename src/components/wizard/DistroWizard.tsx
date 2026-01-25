@@ -8,6 +8,7 @@ import PrimaryUseStep from "./steps/PrimaryUseStep";
 import PrioritiesStep from "./steps/PrioritiesStep";
 import ResultsStep from "./steps/ResultsStep";
 import WizardProgress from "./WizardProgress";
+import { PackageManagerStep } from "./steps/PackageManagerStep";
 
 const INITIAL_ANSWERS: WizardAnswers = {
   experienceLevel: "beginner",
@@ -16,6 +17,7 @@ const INITIAL_ANSWERS: WizardAnswers = {
   priorities: [],
   philosophy: [],
   desktop: null,
+  packageManager: null,
 };
 
 export default function DistroWizard() {
@@ -27,6 +29,7 @@ export default function DistroWizard() {
     "Use",
     "Hardware",
     ...(answers.experienceLevel !== "beginner" ? ["Desktop Environment"] : []),
+    ...(answers.experienceLevel === "advanced" ? ["Package Manager"] : []),
     "Priorities",
     "Results",
   ];
@@ -65,6 +68,15 @@ export default function DistroWizard() {
         <DesktopStep
           value={answers.desktop ?? null}
           onChange={(v) => setAnswers((a) => ({ ...a, desktop: v }))}
+          onNext={() => setStep(step + 1)}
+          onBack={() => setStep(step - 1)}
+        />
+      )}
+
+      {WIZARD_STEPS[step] === "Package Manager" && (
+        <PackageManagerStep
+          value={answers.packageManager ?? null}
+          onChange={(v) => setAnswers((a) => ({ ...a, packageManager: v }))}
           onNext={() => setStep(step + 1)}
           onBack={() => setStep(step - 1)}
         />

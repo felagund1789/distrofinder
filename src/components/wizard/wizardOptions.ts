@@ -20,6 +20,45 @@ export const DESKTOP_OPTIONS = [
   "AwesomeWM",
 ];
 
+export const PACKAGE_MANAGER_OPTIONS = [
+  {
+    label: "Any",
+    packages: "Any",
+  },
+  {
+    label: "APT (Debian, Ubuntu, etc.)",
+    packages: "DEB",
+  },
+  {
+    label: "DNF/YUM (Fedora, RHEL, CentOS, etc.)",
+    packages: "RPM",
+  },
+  {
+    label: "Pacman (Arch, Manjaro, etc.)",
+    packages: "Pacman",
+  },
+  {
+    label: "Source-based (Gentoo, Source Mage, etc.)",
+    packages: "SRC",
+  },
+  {
+    label: "pkg (FreeBSD, TrueNAS, etc.)",
+    packages: "PKG",
+  },
+  {
+    label: "Snap (Canonical's package format)",
+    packages: "Snap",
+  },
+  {
+    label: "Flatpak (Universal Linux packages)",
+    packages: "Flatpak",
+  },
+  {
+    label: "Nix (NixOS and others)",
+    packages: "Nix",
+  },
+];
+
 export interface HardwareOption {
   label: string;
   description: string;
