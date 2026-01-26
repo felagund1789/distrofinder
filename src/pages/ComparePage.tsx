@@ -1,6 +1,7 @@
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import ComparisonTable from "../components/compare/ComparisonTable";
 import { getDistroBySlug } from "../data/distroService";
+import "../styles/compare-page.css";
 import type { Distro } from "../types/distro";
 
 export default function ComparePage() {

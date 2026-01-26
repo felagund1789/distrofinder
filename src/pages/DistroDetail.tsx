@@ -1,9 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom";
+import { CategoryTag } from "../components/tags/CategoryTag";
+import { DesktopTag } from "../components/tags/DesktopTag";
 import DefinitionRow from "../components/ui/DefinitionRow";
 import StatusBadge from "../components/ui/StatusBadge";
 import { useDistros } from "../context/DistroContext";
-import { DesktopTag } from "../components/tags/DesktopTag";
-import { CategoryTag } from "../components/tags/CategoryTag";
+import "../styles/distro-detail.css";
 
 const splitValues = (value?: string | null) =>
   value

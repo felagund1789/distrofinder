@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import "../../styles/distro-card.css";
 import type { Distro } from "../../types/distro";
 import StatusBadge from "../ui/StatusBadge";
 import Tag from "../ui/Tag";
