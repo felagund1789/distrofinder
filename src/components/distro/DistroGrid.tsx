@@ -26,7 +26,8 @@ const DEFAULT_FILTERS: DistroFilters = {
 
 export default function DistroGrid() {
   const [selected, setSelected] = useState<string[]>([]);
-  const { search, desktopFacets, categoryFacets } = useDistros();
+  const { search, desktopFacets, categoryFacets, baseDistroFacets } =
+    useDistros();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [filters, setFilters] = useState<DistroFilters>(() =>
@@ -72,11 +73,17 @@ export default function DistroGrid() {
     search: debouncedSearch,
   });
 
+  const baseDistroOptions = baseDistroFacets({
+    ...filters,
+    search: debouncedSearch,
+  });
+
   const hasActiveFilters =
     Boolean(filters.search) ||
     Boolean(filters.status) ||
     Boolean(filters.desktop) ||
-    Boolean(filters.category);
+    Boolean(filters.category) ||
+    Boolean(filters.basedOn);
 
   return (
     <>
@@ -91,7 +98,7 @@ export default function DistroGrid() {
             setFilters((f) => ({ ...f, search: e.target.value }))
           }
         />
-
+        {/* 
         <select
           value={filters.status ?? ""}
           onChange={(e) =>
@@ -105,7 +112,7 @@ export default function DistroGrid() {
           <option value="Active">Active</option>
           <option value="Dormant">Dormant</option>
           <option value="Discontinued">Discontinued</option>
-        </select>
+        </select> */}
 
         <select
           value={filters.desktop ?? ""}
@@ -135,6 +142,23 @@ export default function DistroGrid() {
         >
           <option value="">All categories</option>
           {categoryOptions.map(({ value, count }) => (
+            <option key={value} value={value}>
+              {value} ({count})
+            </option>
+          ))}
+        </select>
+
+        <select
+          value={filters.basedOn ?? ""}
+          onChange={(e) =>
+            setFilters((f) => ({
+              ...f,
+              basedOn: e.target.value || undefined,
+            }))
+          }
+        >
+          <option value="">All base distros</option>
+          {baseDistroOptions.map(({ value, count }) => (
             <option key={value} value={value}>
               {value} ({count})
             </option>

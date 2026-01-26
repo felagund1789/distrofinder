@@ -25,16 +25,6 @@
   margin-bottom: var(--space-6);
 }
 
-@media screen and (max-width: 600px) {
-  .filters {
-    flex-direction: column;
-  }
-  .filters input,
-  .filters select {
-    width: 100%;
-  }
-}
-
 .filter-separator {
   width: 1px;
   height: 2rem;
@@ -42,16 +32,9 @@
   margin: 0 var(--space-2);
 }
 
-@media screen and (max-width: 600px) {
-  .filter-separator {
-    width: 100%;
-    height: 1px;
-    margin: var(--space-1) 0;
-  }
-}
-
 .filters input,
 .filters select {
+  max-width: 200px;
   padding: var(--space-2) var(--space-3);
   font-size: var(--text-sm);
   border-radius: var(--radius-sm);
@@ -83,6 +66,24 @@
 .filter-clear:hover {
   color: var(--color-text-primary);
   border-color: var(--color-accent);
+}
+
+@media screen and (max-width: 640px) {
+  .filters {
+    flex-direction: column;
+  }
+
+  .filters input,
+  .filters select {
+    width: 100%;
+    max-width: none;
+  }
+
+  .filter-separator {
+    width: 100%;
+    height: 1px;
+    margin: var(--space-1) 0;
+  }
 }
 
 .compare-fab {
