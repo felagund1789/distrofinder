@@ -1,8 +1,8 @@
 // src/context/DistroContext.tsx
-import { createContext, useContext } from "react";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { createContext, useContext, useMemo, useState } from "react";
 import {
   filterDistros,
-  getAllDistros,
   getBaseDistroFacets,
   getCategoryFacets,
   getDesktopFacets,
@@ -12,10 +12,16 @@ import {
 } from "../data/distroService";
 import type { Distro } from "../types/distro";
 
+const PAGE_SIZE = 20;
+
 interface DistroContextValue {
   distros: readonly Distro[];
   getBySlug: (slug: string) => Distro | undefined;
-  search: (filters?: DistroFilters) => readonly Distro[];
+  loadMore: () => void;
+  hasMore: boolean;
+  isLoading: boolean;
+  isLoadingMore: boolean;
+  setQueryFilters: (filters: DistroFilters) => void;
   desktopFacets: (filters: DistroFilters) => readonly Facet[];
   categoryFacets: (filters: DistroFilters) => readonly Facet[];
   baseDistroFacets: (filters: DistroFilters) => readonly Facet[];
@@ -24,10 +30,27 @@ interface DistroContextValue {
 const DistroContext = createContext<DistroContextValue | null>(null);
 
 export function DistroProvider({ children }: { children: React.ReactNode }) {
+  const [filters, setFilters] = useState<DistroFilters | undefined>(undefined);
+
+  const filtered = useMemo(() => filterDistros({ ...filters }), [filters]);
+
+  const query = useInfiniteQuery({
+    queryKey: ["distros", filters],
+    queryFn: ({ pageParam = 0 }) => getPage(filtered, pageParam),
+    getNextPageParam: (lastPage) => lastPage.nextPage,
+    initialPageParam: 0,
+  });
+
+  const distros = query.data ? query.data.pages.flatMap((p) => p.items) : [];
+
   const value: DistroContextValue = {
-    distros: getAllDistros(),
+    distros,
     getBySlug: getDistroBySlug,
-    search: filterDistros,
+    loadMore: () => query.fetchNextPage(),
+    hasMore: !!query.hasNextPage,
+    isLoading: query.isFetching && !query.data,
+    isLoadingMore: query.isFetchingNextPage,
+    setQueryFilters: setFilters,
     desktopFacets: getDesktopFacets,
     categoryFacets: getCategoryFacets,
     baseDistroFacets: getBaseDistroFacets,
@@ -45,4 +68,14 @@ export function useDistros() {
     throw new Error("useDistros must be used within DistroProvider");
   }
   return context;
+}
+
+function getPage(all: readonly Distro[], page: number) {
+  const start = page * PAGE_SIZE;
+  const end = start + PAGE_SIZE;
+
+  return {
+    items: all.slice(start, end),
+    nextPage: end < all.length ? page + 1 : undefined,
+  };
 }

@@ -26,8 +26,16 @@ const DEFAULT_FILTERS: DistroFilters = {
 
 export default function DistroGrid() {
   const [selected, setSelected] = useState<string[]>([]);
-  const { search, desktopFacets, categoryFacets, baseDistroFacets } =
-    useDistros();
+  const {
+    distros,
+    loadMore,
+    hasMore,
+    isLoadingMore,
+    setQueryFilters,
+    desktopFacets,
+    categoryFacets,
+    baseDistroFacets,
+  } = useDistros();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [filters, setFilters] = useState<DistroFilters>(() =>
@@ -58,10 +66,12 @@ export default function DistroGrid() {
     );
   }, [filters, debouncedSearch, setSearchParams]);
 
-  const distros = search({
-    ...filters,
-    search: debouncedSearch.trim() || undefined,
-  });
+  useEffect(() => {
+    setQueryFilters({
+      ...filters,
+      search: debouncedSearch.trim() || undefined,
+    });
+  }, [filters, debouncedSearch, setQueryFilters]);
 
   const desktopOptions = desktopFacets({
     ...filters,
@@ -210,6 +220,14 @@ export default function DistroGrid() {
           />
         ))}
       </section>
+
+      {hasMore && (
+        <div className="grid-load-more">
+          <button onClick={loadMore} disabled={isLoadingMore}>
+            {isLoadingMore ? "Loading…" : "Load more"}
+          </button>
+        </div>
+      )}
 
       <CompareFAB selected={selected} />
     </>

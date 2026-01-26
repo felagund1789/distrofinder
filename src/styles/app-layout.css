@@ -12,6 +12,26 @@
   text-align: center;
 }
 
+button {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+button.button-primary {
+  background-color: var(--color-accent);
+  color: #ffffff;
+}
+
+button.button-primary:disabled {
+  opacity: 0.5;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -84,6 +104,12 @@
     height: 1px;
     margin: var(--space-1) 0;
   }
+}
+
+.grid-load-more {
+  display: flex;
+  justify-content: center;
+  margin: var(--space-8) 0;
 }
 
 .compare-fab {
