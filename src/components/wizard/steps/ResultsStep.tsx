@@ -103,7 +103,7 @@ export default function ResultsStep({
           Start over
         </button>
         <button className="button-secondary" onClick={onExit}>
-          Browse all distros
+          Exit wizard
         </button>
       </div>
     </>

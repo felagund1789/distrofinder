@@ -1,15 +1,19 @@
 import type { WizardAnswers } from "../../../utils/scoring";
 import { RadioGroup } from "../../ui/RadioGroup";
 
+interface ExperienceStepProps {
+  value: WizardAnswers["experienceLevel"];
+  onChange: (v: WizardAnswers["experienceLevel"]) => void;
+  onNext: () => void;
+  onExit: () => void;
+}
+
 export default function ExperienceStep({
   value,
   onChange,
   onNext,
-}: {
-  value: WizardAnswers["experienceLevel"];
-  onChange: (v: WizardAnswers["experienceLevel"]) => void;
-  onNext: () => void;
-}) {
+  onExit,
+}: ExperienceStepProps) {
   return (
     <>
       <h2>How familiar are you with Linux?</h2>
@@ -27,7 +31,9 @@ export default function ExperienceStep({
       </div>
 
       <div className="wizard-actions">
-        <div />
+        <button onClick={onExit} className="button-secondary">
+          Exit wizard
+        </button>
         <button onClick={onNext} className="button-primary">
           Next
         </button>

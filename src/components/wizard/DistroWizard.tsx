@@ -61,6 +61,10 @@ export default function DistroWizard() {
           value={answers.experienceLevel}
           onChange={(v) => setAnswers((a) => ({ ...a, experienceLevel: v }))}
           onNext={() => setStep(step + 1)}
+          onExit={() => {
+            clearWizardState();
+            navigate("/");
+          }}
         />
       )}
 

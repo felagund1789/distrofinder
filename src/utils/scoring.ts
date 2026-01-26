@@ -16,8 +16,9 @@ const WEIGHTS = {
   PRIMARY_USE: 4,
   SECONDARY_USE: 2,
   HARDWARE: 3,
-  DESKTOP_ENVIRONMENT: 20,
-  PACKAGE_MANAGEMENT: 15,
+  DESKTOP_ENVIRONMENT_EXACT_MATCH: 10,
+  DESKTOP_ENVIRONMENT_PARTIAL_MATCH: 7,
+  PACKAGE_MANAGEMENT: 10,
   EXPERIENCE_MATCH: 3,
   PHILOSOPHY: 1,
   EXPERIENCE_MISMATCH: -5,
@@ -78,9 +79,12 @@ export function scoreDistro(
 
   // Desktop environment
   if (answers.desktop) {
-    if (distro.defaultDesktop?.toLowerCase().includes(answers.desktop.toLowerCase())) {
-      score += WEIGHTS.DESKTOP_ENVIRONMENT;
+    if (distro.desktop?.toLowerCase() === answers.desktop.toLowerCase()) {
+      score += WEIGHTS.DESKTOP_ENVIRONMENT_EXACT_MATCH;
       reasons.add(`Comes with ${answers.desktop}`);
+    } else if (distro.defaultDesktop?.toLowerCase().includes(answers.desktop.toLowerCase())) {
+      score += WEIGHTS.DESKTOP_ENVIRONMENT_PARTIAL_MATCH;
+      reasons.add(`${answers.desktop} is available as default desktop`);
     }
   }
 

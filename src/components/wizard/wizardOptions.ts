@@ -15,9 +15,9 @@ export const DESKTOP_OPTIONS = [
   "i3",
   "Fluxbox",
   "Openbox",
-  "hyprland",
+  "Hyprland",
   "Sway",
-  "AwesomeWM",
+  "Awesome",
 ];
 
 export const PACKAGE_MANAGER_OPTIONS = [
@@ -127,7 +127,7 @@ export const PRIMARY_USE_OPTIONS: PrimaryUseOption[] = [
   },
   {
     label: "Server / homelab",
-    description: "Hosting services and self-hosted apps",
+    description: "Hosting services and self-hosted apps (NAS, web server, etc.)",
     categories: ["Server", "NAS"],
   },
   {
@@ -142,7 +142,7 @@ export const PRIMARY_USE_OPTIONS: PrimaryUseOption[] = [
   },
   {
     label: "Specialized tasks",
-    description: "Recovery, forensics, or niche use cases",
+    description: "Data recovery, forensics, or niche use cases where a live medium is useful",
     categories: ["Data Rescue", "Forensics", "Live Medium"],
   },
 ];
