@@ -19,6 +19,9 @@ The app focuses on **discoverability, clarity, and editorial-style presentation*
 ![Distro detail page on desktop](screens/distro-detail.png)
 ![Distro comparison selection on desktop](screens/compare-select.png)
 ![Distro comparison page on desktop](screens/compare-page.png)
+![Distro recommendation wizard on desktop](screens/wizard-1.png)
+![Distro recommendation wizard on desktop](screens/wizard-2.png)
+![Distro recommendation wizard on desktop](screens/wizard-results.png)
 | ![Home page on mobile](screens/homepage-mobile.png) | ![Distro detail page on mobile](screens/distro-detail-mobile-1.png) | ![Distro detail page on mobile](screens/distro-detail-mobile-2.png) |
 |---|---|---|
 
@@ -58,6 +61,21 @@ The app focuses on **discoverability, clarity, and editorial-style presentation*
 * Accessible via URL with query parameters (e.g. `/?compare=ubuntu,mint`)
 * Clickable links to remove distros from comparison
 
+### 🧭 Distro Recommendation Wizard
+
+* Interactive wizard that recommends distributions based on your needs (`/wizard`)
+* Accessible from the Home page via the recommendation callout/button
+* Steps collected by the wizard:
+  - Experience level (beginner, intermediate, advanced)
+  - Primary use cases (multiple selection)
+  - Hardware profile (older computer, Raspberry Pi, server, etc.)
+  - Priorities / philosophy (ease-of-use, privacy, stability, performance, free-software)
+  - Preferred desktop environment and other options for intermediate/advanced users
+* The wizard scores distros client-side against your answers and presents a ranked list with short reasons for each recommendation
+* State is persisted locally (so you can resume the wizard), and the logic is implemented in `src/utils/scoring.ts` and `src/utils/wizardStorage.ts`.
+* Use the result list to jump to distro detail pages.
+
+
 ### 🎨 Design System
 
 * Custom design system based on **CSS variables** (no Tailwind)
@@ -66,6 +84,7 @@ The app focuses on **discoverability, clarity, and editorial-style presentation*
   * Tag
   * StatusBadge
   * DefinitionRow
+  * RadioGroup
 * Consistent spacing, typography, and color tokens
 
 ---
@@ -76,26 +95,15 @@ The app focuses on **discoverability, clarity, and editorial-style presentation*
 src/
 ├── components/
 │   ├── compare/          # Comparison-specific components
-│   │   ├── CompareFAB.tsx
-│   │   └── ComparisonTable.tsx
 │   ├── distro/           # Distro-specific components
-│   │   ├── DistroCard.tsx
-│   │   └── DistroGrid.tsx
-│   ├── layout/           # Layout-level components (if any)
-│   │   └── AppLayout.tsx
-│   │── routing/          # Routing-related components (if any)
-│   │   └── ScrollToTop.tsx
+│   ├── layout/           # Layout-level components
+│   │── routing/          # Routing-related components
 │   ├── tags/             # Domain-aware clickable tags
-│   │   ├── CategoryTag.tsx
-│   │   └── DesktopTag.tsx
-│   └── ui/               # Reusable UI primitives
-│       ├── DefinitionRow.tsx
-│       ├── StatusBadge.tsx
-│       └── Tag.tsx
+│   ├── ui/               # Reusable UI primitives
+│   └── wizard/           # Recommendation wizard components
 ├── context/
 │   └── DistroContext.tsx # Global state & data access
 ├── data/
-│   ├── distros.json      # Static distro dataset
 │   └── distroServices.ts # Data fetching utilities
 ├── hooks/
 │   └── useDebouncedSearch.ts
@@ -106,6 +114,7 @@ src/
 ├── styles/
 │   ├── global.css        # Design tokens & global styles
 │   └── ...
+├── test/                 # Test utilities & mocks
 ├── types/
 │   └── distro.ts         # TypeScript types for distros
 ├── utils/
@@ -204,6 +213,7 @@ npm run build
 * `/` → Distro grid (home)
 * `/d/:slug` → Distro detail page
 * `/?compare=:slug1,:slug2` → Distro compare page
+* `/wizard` → Distro recommendation wizard
 
 React Router is used for client-side navigation.
 
