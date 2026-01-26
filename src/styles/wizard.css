@@ -1,0 +1,212 @@
+.wizard button {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.wizard button.button-primary {
+  background-color: var(--color-accent);
+  color: #ffffff;
+}
+
+.wizard button.button-primary:disabled {
+  opacity: 0.5;
+}
+
+.wizard-options {
+  display: grid;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.wizard-option {
+  text-align: left;
+  padding: var(--space-3);
+
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.wizard-option__label {
+  display: block;
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.wizard-option__description {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.wizard-option:hover {
+  border-color: var(--color-accent);
+}
+
+.wizard-option.is-selected {
+  border-color: var(--color-accent);
+  background-color: rgba(37, 99, 235, 0.06);
+}
+
+.wizard-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--space-6);
+}
+
+.wizard-subtitle {
+  margin-top: var(--space-1);
+  color: var(--color-text-secondary);
+}
+
+.wizard-progress {
+  margin-bottom: var(--space-6);
+}
+
+.wizard-progress__track {
+  height: 6px;
+  background-color: var(--color-border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.wizard-progress__bar {
+  height: 100%;
+  background-color: var(--color-accent);
+  transition: width 0.2s ease;
+}
+
+.wizard-progress__label {
+  display: block;
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.wizard-results {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.wizard-result-card {
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+}
+
+.wizard-result-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.wizard-result-logo {
+  width: 48px;
+  height: 48px;
+  padding: 6px;
+  object-fit: contain;
+  background-color: #ffffff;
+  color: #333333;
+  border-radius: 50%;
+}
+
+.wizard-result-about {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-2);
+}
+
+.wizard-result-about__content {
+  max-width: 640px;
+}
+
+.wizard-result-about__media {
+  width: 100%;
+}
+
+.wizard-result-about__media img {
+  width: 100%;
+  height: auto;
+
+  display: block;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+.wizard-result-why {
+  margin-top: var(--space-4);
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  background-color: color-mix(
+    in srgb,
+    var(--color-surface),
+    var(--color-accent) 20%
+  );
+}
+
+.wizard-result-why h4 {
+  margin: 0 0 var(--space-1);
+  font-size: var(--text-sm);
+}
+
+.wizard-result-why__intro {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.wizard-result-why__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.wizard-result-why__tag {
+  padding: 0.5rem 1rem;
+  font-size: var(--text-sm);
+  border-radius: 999px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.wizard-result-actions {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+@media (min-width: 1024px) {
+  .wizard-result-about {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .wizard-result-about__content {
+    flex: 1;
+  }
+
+  .wizard-result-about__media {
+    flex: 1;
+    max-width: 520px;
+  }
+  
+  .wizard-results ul li {
+    width: fit-content;
+  }
+}
