@@ -3,6 +3,7 @@ import { createContext, useContext } from "react";
 import {
   filterDistros,
   getAllDistros,
+  getBaseDistroFacets,
   getCategoryFacets,
   getDesktopFacets,
   getDistroBySlug,
@@ -17,6 +18,7 @@ interface DistroContextValue {
   search: (filters?: DistroFilters) => readonly Distro[];
   desktopFacets: (filters: DistroFilters) => readonly Facet[];
   categoryFacets: (filters: DistroFilters) => readonly Facet[];
+  baseDistroFacets: (filters: DistroFilters) => readonly Facet[];
 }
 
 const DistroContext = createContext<DistroContextValue | null>(null);
@@ -28,6 +30,7 @@ export function DistroProvider({ children }: { children: React.ReactNode }) {
     search: filterDistros,
     desktopFacets: getDesktopFacets,
     categoryFacets: getCategoryFacets,
+    baseDistroFacets: getBaseDistroFacets,
   };
 
   return (

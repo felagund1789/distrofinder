@@ -13,6 +13,7 @@ export function filtersFromSearchParams(
     status: (params.get("status") as DistroStatus) || undefined,
     desktop: params.get("desktop") || undefined,
     category: params.get("category") || undefined,
+    basedOn: params.get("basedOn") || undefined,
     sortBy: (params.get("sort")?.split(".")[0] as SortByType) || "popularity",
     sortDir: (params.get("sort")?.split(".")[1] as SortDirType) || "asc",
   };
@@ -25,6 +26,7 @@ export function filtersToSearchParams(filters: DistroFilters) {
   if (filters.status) params.set("status", filters.status);
   if (filters.desktop) params.set("desktop", filters.desktop);
   if (filters.category) params.set("category", filters.category);
+  if (filters.basedOn) params.set("basedOn", filters.basedOn);
   if (filters.sortBy) params.set("sort", `${filters.sortBy}.${filters.sortDir || "asc"}`);
 
   return params;
