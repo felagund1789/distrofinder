@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import "../../styles/distro-card.css";
 import type { Distro } from "../../types/distro";
+import { getCategoryLabel } from "../../utils/categories";
 import StatusBadge from "../ui/StatusBadge";
 import Tag from "../ui/Tag";
 
@@ -61,8 +62,8 @@ export default function DistroCard({
         {(distro.defaultDesktop || distro.desktop)?.split(",").map((d) => (
           <Tag key={d} label={d.trim()} />
         ))}
-        {distro.processorArchitecture?.split(",").map((a) => (
-          <Tag key={a} label={a.trim()} variant="subtle" />
+        {distro.category?.split(",").map((a) => (
+          <Tag key={a} label={getCategoryLabel(a.trim())} variant="subtle" />
         ))}
       </div>
 
