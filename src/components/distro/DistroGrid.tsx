@@ -44,6 +44,10 @@ export default function DistroGrid() {
     );
   };
 
+  useEffect(() => {
+    document.title = "DistroFinder - Find your perfect Linux distribution";
+  }, []);
+
   /* debounce only the search text */
   const debouncedSearch = useDebouncedValue(filters.search ?? "", 300);
 

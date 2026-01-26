@@ -38,6 +38,10 @@ export default function DistroWizard() {
   );
 
   useEffect(() => {
+    document.title = "Distro Wizard - DistroFinder";
+  }, []);
+
+  useEffect(() => {
     saveWizardState({ step, answers });
   }, [step, answers]);
 

@@ -3,6 +3,7 @@ import ComparisonTable from "../components/compare/ComparisonTable";
 import { getDistroBySlug } from "../data/distroService";
 import "../styles/compare-page.css";
 import type { Distro } from "../types/distro";
+import { useEffect } from "react";
 
 export default function ComparePage() {
   const [params, setParams] = useSearchParams();
@@ -18,6 +19,10 @@ export default function ComparePage() {
   const distros = slugs
     .map((slug) => getDistroBySlug(slug))
     .filter(Boolean) as Distro[];
+
+  useEffect(() => {
+    document.title = `Compare Distributions: ${distros.map(d => d.name).join(", ")} - DistroFinder`;
+  }, [distros]);
 
   const removeDistro = (slug: string) => {
     const next = slugs.filter((s) => s !== slug);

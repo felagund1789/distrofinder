@@ -5,6 +5,7 @@ import DefinitionRow from "../components/ui/DefinitionRow";
 import StatusBadge from "../components/ui/StatusBadge";
 import { useDistros } from "../context/DistroContext";
 import "../styles/distro-detail.css";
+import { useEffect } from "react";
 
 const splitValues = (value?: string | null) =>
   value
@@ -19,6 +20,10 @@ export default function DistroDetail() {
   const navigate = useNavigate();
   const { getBySlug } = useDistros();
   const distro = slug ? getBySlug(slug) : undefined;
+
+  useEffect(() => {
+    document.title = distro ? `${distro.name} - DistroFinder` : "DistroFinder - Distro not found";
+  }, [distro]);
 
   if (!distro) {
     return <p>Distro not found.</p>;
