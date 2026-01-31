@@ -4,6 +4,7 @@ import type { Distro } from "../../types/distro";
 import { getCategoryLabel } from "../../utils/categories";
 import StatusBadge from "../ui/StatusBadge";
 import Tag from "../ui/Tag";
+import { IMAGE_BASE_URL } from "../../congig";
 
 interface DistroCardProps {
   distro: Distro;
@@ -48,7 +49,7 @@ export default function DistroCard({
 
       {distro.localPaths?.thumbnail && (
         <img
-          src={distro.localPaths?.thumbnail}
+          src={`${IMAGE_BASE_URL}/${distro.localPaths?.thumbnail}`}
           alt={`${distro.name} thumbnail`}
           className="distro-card__thumbnail"
         />

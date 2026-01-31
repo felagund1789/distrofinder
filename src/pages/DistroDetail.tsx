@@ -6,6 +6,7 @@ import StatusBadge from "../components/ui/StatusBadge";
 import { useDistros } from "../context/DistroContext";
 import "../styles/distro-detail.css";
 import { useEffect } from "react";
+import { IMAGE_BASE_URL } from "../congig";
 
 const splitValues = (value?: string | null) =>
   value
@@ -32,17 +33,17 @@ export default function DistroDetail() {
   const logo = (() => {
     if (distro.localPaths?.logo) {
       const normalized = distro.localPaths?.logo.replace(/\\\\|\\/g, "/");
-      return normalized.startsWith("/") ? normalized : `/${normalized}`;
+      return normalized.startsWith("/") ? `${IMAGE_BASE_URL}${normalized}` : `${IMAGE_BASE_URL}/${normalized}`;
     }
     return distro.logo || "";
   })();
 
-  const screenshot = (() => {
-    if (distro.localPaths?.screenshot) {
-      const normalized = distro.localPaths?.screenshot.replace(/\\\\|\\/g, "/");
-      return normalized.startsWith("/") ? normalized : `/${normalized}`;
+  const thumbnail = (() => {
+    if (distro.localPaths?.thumbnail) {
+      const normalized = distro.localPaths?.thumbnail.replace(/\\\\|\\/g, "/");
+      return normalized.startsWith("/") ? `${IMAGE_BASE_URL}${normalized}` : `${IMAGE_BASE_URL}/${normalized}`;
     }
-    return distro.screenshot || "";
+    return distro.thumbnail || "";
   })();
 
   return (
@@ -125,10 +126,10 @@ export default function DistroDetail() {
         </div>
 
         <div className="distro-about__media">
-          {screenshot && (
+          {thumbnail && (
             <img
-              src={screenshot}
-              alt={`${distro.name} screenshot`}
+              src={thumbnail}
+              alt=""
               loading="lazy"
             />
           )}

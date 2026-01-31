@@ -1,0 +1,1 @@
+export const IMAGE_BASE_URL = "https://felagund1789.github.io/distrowatch-data/";

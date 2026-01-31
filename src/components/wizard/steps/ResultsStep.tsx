@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useDistros } from "../../../context/DistroContext";
 import type { WizardAnswers } from "../../../utils/scoring";
 import { scoreDistros } from "../../../utils/scoring";
+import { IMAGE_BASE_URL } from "../../../congig";
 
 interface ResultsStepProps {
   answers: WizardAnswers;
@@ -47,7 +48,7 @@ export default function ResultsStep({
           <div key={distro.slug} className="wizard-result-card">
             <div className="wizard-result-header">
               <img
-                src={distro.localPaths?.logo || ""}
+                src={`${IMAGE_BASE_URL}/${distro.localPaths?.logo || ""}`}
                 alt=""
                 className="wizard-result-logo"
               />
@@ -59,7 +60,7 @@ export default function ResultsStep({
                 <p>{distro.description}</p>
               </div>
               <div className="wizard-result-about__media">
-                <img src={distro.localPaths?.thumbnail || ""} alt="" />
+                <img src={`${IMAGE_BASE_URL}/${distro.localPaths?.thumbnail || ""}`} alt="" />
               </div>
             </div>
 
