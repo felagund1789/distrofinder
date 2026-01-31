@@ -38,12 +38,12 @@ export default function DistroDetail() {
     return distro.logo || "";
   })();
 
-  const thumbnail = (() => {
-    if (distro.localPaths?.thumbnail) {
-      const normalized = distro.localPaths?.thumbnail.replace(/\\\\|\\/g, "/");
+  const screenshot = (() => {
+    if (distro.localPaths?.screenshot) {
+      const normalized = distro.localPaths?.screenshot.replace(/\\\\|\\/g, "/");
       return normalized.startsWith("/") ? `${IMAGE_BASE_URL}${normalized}` : `${IMAGE_BASE_URL}/${normalized}`;
     }
-    return distro.thumbnail || "";
+    return distro.screenshot || "";
   })();
 
   return (
@@ -126,9 +126,9 @@ export default function DistroDetail() {
         </div>
 
         <div className="distro-about__media">
-          {thumbnail && (
+          {screenshot && (
             <img
-              src={thumbnail}
+              src={screenshot}
               alt=""
               loading="lazy"
             />
