@@ -60,7 +60,7 @@ export default function DistroCard({
       <p className="clamp">{distro.description}</p>
 
       <div className="meta">
-        {(distro.defaultDesktop || distro.desktop)?.split(",").map((d) => (
+        {(distro.desktop)?.split(",").map((d) => (
           <Tag key={d} label={d.trim()} />
         ))}
         {distro.category?.split(",").map((a) => (

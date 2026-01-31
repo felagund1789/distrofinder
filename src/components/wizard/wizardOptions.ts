@@ -1,6 +1,7 @@
 export const DESKTOP_OPTIONS = [
   "Any",
-  "KDE Plasma",
+  "No Desktop",
+  "KDE",
   "GNOME",
   "Xfce",
   "MATE",
@@ -13,9 +14,14 @@ export const DESKTOP_OPTIONS = [
   "LXQt",
   "LXDE",
   "i3",
+  "Enlightenment",
+  "Trinity",
   "Fluxbox",
   "Openbox",
+  "IceWM",
+  "JWM",
   "Hyprland",
+  "Niri",
   "Sway",
   "Awesome",
 ];

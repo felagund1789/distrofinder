@@ -58,7 +58,7 @@ export function filterDistros(filters: DistroFilters = {}): readonly Distro[] {
 
   const results = distros.filter((d) => {
     if (status && d.status !== status) return false;
-    if (desktop && !d.defaultDesktop?.split(",").map((v) => v.trim()).includes(desktop)) return false;
+    if (desktop && !d.desktop?.split(",").map((v) => v.trim()).includes(desktop)) return false;
     if (category && !d.category.split(",").map((v) => v.trim()).includes(category)) return false;
     if (basedOn && !d.basedOn.includes(basedOn)) return false;
 
@@ -67,7 +67,7 @@ export function filterDistros(filters: DistroFilters = {}): readonly Distro[] {
       return (
         d.name.toLowerCase().includes(q) ||
         d.description.toLowerCase().includes(q) ||
-        d.defaultDesktop?.toLowerCase().includes(q) ||
+        d.desktop?.toLowerCase().includes(q) ||
         d.basedOn.toLowerCase().includes(q)
       );
     }
@@ -118,8 +118,8 @@ export function getDesktopFacets(
   const counts = new Map<string, number>();
 
   filtered.forEach((distro) => {
-    if (!distro.defaultDesktop) return;
-    splitAndNormalize(distro.defaultDesktop).forEach((desktop) => {
+    if (!distro.desktop) return;
+    splitAndNormalize(distro.desktop).forEach((desktop) => {
       counts.set(desktop, (counts.get(desktop) ?? 0) + 1);
     });
   });

@@ -79,10 +79,13 @@ export function scoreDistro(
 
   // Desktop environment
   if (answers.desktop) {
-    if (distro.desktop?.toLowerCase() === answers.desktop.toLowerCase()) {
+    if (answers.desktop.toLowerCase() === "no desktop" && (!distro.desktop || distro.desktop.toLowerCase() === "no desktop")) {
+      score += WEIGHTS.DESKTOP_ENVIRONMENT_EXACT_MATCH;
+      reasons.add("No desktop environment by default");
+    } else if (distro.defaultDesktop?.toLowerCase().includes(answers.desktop.toLowerCase())) {
       score += WEIGHTS.DESKTOP_ENVIRONMENT_EXACT_MATCH;
       reasons.add(`Comes with ${answers.desktop}`);
-    } else if (distro.defaultDesktop?.toLowerCase().includes(answers.desktop.toLowerCase())) {
+    } else if (distro.desktop?.toLowerCase().includes(answers.desktop.toLowerCase())) {
       score += WEIGHTS.DESKTOP_ENVIRONMENT_PARTIAL_MATCH;
       reasons.add(`${answers.desktop} is available as default desktop`);
     }
