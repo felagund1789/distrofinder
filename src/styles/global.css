@@ -74,6 +74,25 @@ body {
   color: var(--color-text-primary);
 }
 
+/* Expandable tag button: keep button semantics but visually match tags */
+.expandable-tag-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  line-height: 1rem;
+  vertical-align: middle;
+  appearance: none;
+}
+
+.expandable-tag-btn:focus {
+  outline: 0px;
+  outline-offset: 0px;
+}
+
 /* Status badge */
 
 .status {

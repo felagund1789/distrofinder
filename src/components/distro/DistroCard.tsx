@@ -4,6 +4,7 @@ import type { Distro } from "../../types/distro";
 import { getCategoryLabel } from "../../utils/categories";
 import StatusBadge from "../ui/StatusBadge";
 import Tag from "../ui/Tag";
+import ExpandableTagList from "../ui/ExpandableTagList";
 import { IMAGE_BASE_URL } from "../../congig";
 
 interface DistroCardProps {
@@ -60,9 +61,13 @@ export default function DistroCard({
       <p className="clamp">{distro.description}</p>
 
       <div className="meta">
-        {(distro.desktop)?.split(",").map((d) => (
-          <Tag key={d} label={d.trim()} />
-        ))}
+        {distro.desktop && (
+          <ExpandableTagList
+            tags={distro.desktop.split(",").map((s) => s.trim())}
+            maxVisible={5}
+            tagName="desktop"
+          />
+        )}
         {distro.category?.split(",").map((a) => (
           <Tag key={a} label={getCategoryLabel(a.trim())} variant="subtle" />
         ))}
