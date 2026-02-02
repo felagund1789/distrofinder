@@ -18,6 +18,12 @@
   gap: var(--space-6);
 }
 
+.grid a {
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
+}
+
 .filters {
   display: flex;
   flex-wrap: wrap;

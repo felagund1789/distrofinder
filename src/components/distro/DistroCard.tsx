@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import "../../styles/distro-card.css";
 import type { Distro } from "../../types/distro";
 import { getCategoryLabel } from "../../utils/categories";
@@ -20,14 +19,8 @@ export default function DistroCard({
   selectionDisabled,
   onToggleSelect,
 }: DistroCardProps) {
-  const navigate = useNavigate();
-
   return (
-    <article
-      className="distro-card"
-      data-selected={selected}
-      onClick={() => navigate(`/d/${distro.slug}`)}
-    >
+    <article className="distro-card" data-selected={selected}>
       <div className="distro-card__select">
         <button
           type="button"

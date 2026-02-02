@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { NavLink, useSearchParams } from "react-router-dom";
 import { useDistros } from "../../context/DistroContext";
 import type {
   DistroFilters,
@@ -31,7 +31,7 @@ export default function DistroGrid() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [filters, setFilters] = useState<DistroFilters>(() =>
-    filtersFromSearchParams(searchParams)
+    filtersFromSearchParams(searchParams),
   );
 
   const toggleSelection = (slug: string) => {
@@ -40,7 +40,7 @@ export default function DistroGrid() {
         ? prev.filter((s) => s !== slug)
         : prev.length < 3
           ? [...prev, slug]
-          : prev
+          : prev,
     );
   };
 
@@ -58,7 +58,7 @@ export default function DistroGrid() {
         ...filters,
         search: debouncedSearch || undefined,
       }),
-      { replace: true }
+      { replace: true },
     );
   }, [filters, debouncedSearch, setSearchParams]);
 
@@ -203,15 +203,17 @@ export default function DistroGrid() {
 
       <section className="grid">
         {distros.map((distro) => (
-          <DistroCard
-            key={distro.slug}
-            distro={distro}
-            selected={selected.includes(distro.slug)}
-            selectionDisabled={
-              selected.length >= 3 && !selected.includes(distro.slug)
-            }
-            onToggleSelect={toggleSelection}
-          />
+          <NavLink to={`/d/${distro.slug}`}>
+            <DistroCard
+              key={distro.slug}
+              distro={distro}
+              selected={selected.includes(distro.slug)}
+              selectionDisabled={
+                selected.length >= 3 && !selected.includes(distro.slug)
+              }
+              onToggleSelect={toggleSelection}
+            />
+          </NavLink>
         ))}
       </section>
 

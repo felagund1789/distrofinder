@@ -8,7 +8,7 @@
   transition:
     transform 0.15s ease,
     box-shadow 0.15s ease;
-  cursor: pointer;
+  height: 100%;
 }
 
 .distro-card:hover {
