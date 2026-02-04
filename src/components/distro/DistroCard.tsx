@@ -1,10 +1,10 @@
-import "../../styles/distro-card.css";
+import Image from "next/image";
 import type { Distro } from "../../types/distro";
 import { getCategoryLabel } from "../../utils/categories";
+import ExpandableTagList from "../ui/ExpandableTagList";
 import StatusBadge from "../ui/StatusBadge";
 import Tag from "../ui/Tag";
-import ExpandableTagList from "../ui/ExpandableTagList";
-import { IMAGE_BASE_URL } from "../../congig";
+import "./distro-card.css";
 
 interface DistroCardProps {
   distro: Distro;
@@ -42,10 +42,14 @@ export default function DistroCard({
       </div>
 
       {distro.localPaths?.thumbnail && (
-        <img
-          src={`${IMAGE_BASE_URL}/${distro.localPaths?.thumbnail}`}
+        <Image
+          src={distro.localPaths?.thumbnail}
           alt={`${distro.name} thumbnail`}
           className="distro-card__thumbnail"
+          width={256}
+          height={160}
+          quality={75}
+          loading="lazy"
         />
       )}
 

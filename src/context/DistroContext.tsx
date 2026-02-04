@@ -1,3 +1,5 @@
+"use client";
+
 // src/context/DistroContext.tsx
 import { createContext, useContext } from "react";
 import {
@@ -38,7 +40,6 @@ export function DistroProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
 export function useDistros() {
   const context = useContext(DistroContext);
   if (!context) {

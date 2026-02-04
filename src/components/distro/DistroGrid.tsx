@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import { NavLink, useSearchParams } from "react-router-dom";
+"use client";
+
+import { useState } from "react";
 import { useDistros } from "../../context/DistroContext";
 import type {
   DistroFilters,
@@ -7,12 +8,10 @@ import type {
   SortDirType,
 } from "../../data/distroService";
 import { useDebouncedValue } from "../../hooks/useDebouncedSearch";
-import {
-  filtersFromSearchParams,
-  filtersToSearchParams,
-} from "../../utils/filters";
-import { CompareFAB } from "../compare/CompareFAB";
-import DistroWizardCallout from "../wizard/DistroWizardCallout";
+import { filtersFromSearchParams } from "../../utils/filters";
+// import { CompareFAB } from "../compare/CompareFAB";
+// import DistroWizardCallout from "../wizard/DistroWizardCallout";
+import { useSearchParams } from "next/navigation";
 import DistroCard from "./DistroCard";
 
 const DEFAULT_FILTERS: DistroFilters = {
@@ -28,10 +27,10 @@ export default function DistroGrid() {
   const [selected, setSelected] = useState<string[]>([]);
   const { search, desktopFacets, categoryFacets, baseDistroFacets } =
     useDistros();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const searchParams = useSearchParams();
 
   const [filters, setFilters] = useState<DistroFilters>(() =>
-    filtersFromSearchParams(searchParams),
+    filtersFromSearchParams(searchParams || new URLSearchParams())
   );
 
   const toggleSelection = (slug: string) => {
@@ -44,23 +43,19 @@ export default function DistroGrid() {
     );
   };
 
-  useEffect(() => {
-    document.title = "DistroFinder - Find your perfect Linux distribution";
-  }, []);
-
   /* debounce only the search text */
   const debouncedSearch = useDebouncedValue(filters.search ?? "", 300);
 
   /* Keep URL in sync when filters change */
-  useEffect(() => {
-    setSearchParams(
-      filtersToSearchParams({
-        ...filters,
-        search: debouncedSearch || undefined,
-      }),
-      { replace: true },
-    );
-  }, [filters, debouncedSearch, setSearchParams]);
+  // useEffect(() => {
+  //   setSearchParams(
+  //     filtersToSearchParams({
+  //       ...filters,
+  //       search: debouncedSearch || undefined,
+  //     }),
+  //     { replace: true },
+  //   );
+  // }, [filters, debouncedSearch, setSearchParams]);
 
   const distros = search({
     ...filters,
@@ -91,7 +86,7 @@ export default function DistroGrid() {
 
   return (
     <>
-      <DistroWizardCallout />
+      {/* <DistroWizardCallout /> */}
 
       <section className="filters">
         <input
@@ -203,21 +198,19 @@ export default function DistroGrid() {
 
       <section className="grid">
         {distros.map((distro) => (
-          <NavLink to={`/d/${distro.slug}`}>
-            <DistroCard
-              key={distro.slug}
-              distro={distro}
-              selected={selected.includes(distro.slug)}
-              selectionDisabled={
-                selected.length >= 3 && !selected.includes(distro.slug)
-              }
-              onToggleSelect={toggleSelection}
-            />
-          </NavLink>
+          <DistroCard
+            key={distro.slug}
+            distro={distro}
+            selected={selected.includes(distro.slug)}
+            selectionDisabled={
+              selected.length >= 3 && !selected.includes(distro.slug)
+            }
+            onToggleSelect={toggleSelection}
+          />
         ))}
       </section>
 
-      <CompareFAB selected={selected} />
+      {/* <CompareFAB selected={selected} /> */}
     </>
   );
 }
