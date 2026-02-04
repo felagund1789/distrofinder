@@ -1,17 +1,20 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
-import ComparisonTable from "../components/compare/ComparisonTable";
-import { getDistroBySlug } from "../data/distroService";
-import "../styles/compare-page.css";
-import type { Distro } from "../types/distro";
+"use client";
+
+import { useNavigate } from "@/hooks/useNavigate";
+import { useURLSearchParams } from "@/hooks/useURLSearchParams";
 import { useEffect } from "react";
+import ComparisonTable from "../../components/compare/ComparisonTable";
+import { getDistroBySlug } from "../../data/distroService";
+import type { Distro } from "../../types/distro";
+import "../../styles/compare-page.css";
 
 export default function ComparePage() {
-  const [params, setParams] = useSearchParams();
   const navigate = useNavigate();
+  const [params, setParams] = useURLSearchParams();
 
   const slugs =
     params
-      .get("distros")
+      ?.get("distros")
       ?.split(",")
       .map((s) => s.trim())
       .filter(Boolean) ?? [];
@@ -21,7 +24,7 @@ export default function ComparePage() {
     .filter(Boolean) as Distro[];
 
   useEffect(() => {
-    document.title = `Compare Distributions: ${distros.map(d => d.name).join(", ")} - DistroFinder`;
+    document.title = `Compare Distributions: ${distros.map((d) => d.name).join(", ")} - DistroFinder`;
   }, [distros]);
 
   const removeDistro = (slug: string) => {
@@ -32,7 +35,7 @@ export default function ComparePage() {
       return;
     }
 
-    setParams({ distros: next.join(",") });
+    setParams(new URLSearchParams({ distros: next.join(",") }));
   };
 
   if (distros.length < 2) {

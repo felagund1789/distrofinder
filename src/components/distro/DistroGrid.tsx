@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDistros } from "../../context/DistroContext";
 import type {
   DistroFilters,
@@ -8,11 +8,11 @@ import type {
   SortDirType,
 } from "../../data/distroService";
 import { useDebouncedValue } from "../../hooks/useDebouncedSearch";
-import { filtersFromSearchParams } from "../../utils/filters";
-// import { CompareFAB } from "../compare/CompareFAB";
+import { filtersFromSearchParams, filtersToSearchParams } from "../../utils/filters";
+import { CompareFAB } from "../compare/CompareFAB";
 // import DistroWizardCallout from "../wizard/DistroWizardCallout";
-import { useSearchParams } from "next/navigation";
-import DistroCard from "./DistroCard";
+import DistroCard from "./DistroCard";  
+import { useURLSearchParams } from "@/hooks/useURLSearchParams";
 
 const DEFAULT_FILTERS: DistroFilters = {
   search: "",
@@ -27,7 +27,7 @@ export default function DistroGrid() {
   const [selected, setSelected] = useState<string[]>([]);
   const { search, desktopFacets, categoryFacets, baseDistroFacets } =
     useDistros();
-  const searchParams = useSearchParams();
+  const [ searchParams, setParams ] = useURLSearchParams();
 
   const [filters, setFilters] = useState<DistroFilters>(() =>
     filtersFromSearchParams(searchParams || new URLSearchParams())
@@ -47,15 +47,15 @@ export default function DistroGrid() {
   const debouncedSearch = useDebouncedValue(filters.search ?? "", 300);
 
   /* Keep URL in sync when filters change */
-  // useEffect(() => {
-  //   setSearchParams(
-  //     filtersToSearchParams({
-  //       ...filters,
-  //       search: debouncedSearch || undefined,
-  //     }),
-  //     { replace: true },
-  //   );
-  // }, [filters, debouncedSearch, setSearchParams]);
+  useEffect(() => {
+    setParams(
+      filtersToSearchParams({
+        ...filters,
+        search: debouncedSearch || undefined,
+      }),
+      { replace: true },
+    );
+  }, [filters, debouncedSearch, setParams]);
 
   const distros = search({
     ...filters,
@@ -210,7 +210,7 @@ export default function DistroGrid() {
         ))}
       </section>
 
-      {/* <CompareFAB selected={selected} /> */}
+      <CompareFAB selected={selected} />
     </>
   );
 }
