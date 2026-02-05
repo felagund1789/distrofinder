@@ -56,6 +56,8 @@ export default function ComparisonTable({
                     src={distro.localPaths?.logo || ""}
                     alt=""
                     className="comparison-logo"
+                    width={64}
+                    height={64}
                   />
                   <span>{distro.name}</span>
 
@@ -80,6 +82,8 @@ export default function ComparisonTable({
                 className="comparison-thumbnail"
                 src={d.localPaths?.thumbnail || ""}
                 alt=""
+                width={256}
+                height={170}
               />
             ))}
           </ComparisonRow>

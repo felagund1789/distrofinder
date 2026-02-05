@@ -51,6 +51,8 @@ export default function ResultsStep({
                 src={distro.localPaths?.logo || ""}
                 alt=""
                 className="wizard-result-logo"
+                width={64}
+                height={64}
               />
               <h3>{distro.name}</h3>
             </div>
@@ -60,7 +62,7 @@ export default function ResultsStep({
                 <p>{distro.description}</p>
               </div>
               <div className="wizard-result-about__media">
-                <Image src={distro.localPaths?.thumbnail || ""} alt="" />
+                <Image src={distro.localPaths?.thumbnail || ""} alt="" width={640} height={480} />
               </div>
             </div>
 

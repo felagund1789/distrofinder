@@ -65,6 +65,8 @@ export default function DistroDetail() {
               src={logo}
               alt={`${distro.name} logo`}
               className="distro-hero__logo"
+              width={160}
+              height={160}
             />
           </div>
 
@@ -134,6 +136,8 @@ export default function DistroDetail() {
               src={screenshot}
               alt=""
               loading="lazy"
+              width={960}
+              height={640}
             />
           )}
         </div>
