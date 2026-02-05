@@ -1,21 +1,23 @@
-import { useEffect, useState } from "react";
-import "../../styles/wizard.css";
-import type { WizardAnswers } from "../../utils/scoring";
+"use client";
+
+import { DesktopStep } from "@/components/wizard/steps/DesktopStep";
+import ExperienceStep from "@/components/wizard/steps/ExperienceStep";
+import HardwareStep from "@/components/wizard/steps/HardwareStep";
+import { InitSystemStep } from "@/components/wizard/steps/InitSystemStep";
+import { PackageManagerStep } from "@/components/wizard/steps/PackageManagerStep";
+import PrimaryUseStep from "@/components/wizard/steps/PrimaryUseStep";
+import PrioritiesStep from "@/components/wizard/steps/PrioritiesStep";
+import ResultsStep from "@/components/wizard/steps/ResultsStep";
+import WizardProgress from "@/components/wizard/WizardProgress";
+import { useNavigate } from "@/hooks/useNavigate";
+import "@/styles/wizard.css";
+import type { WizardAnswers } from "@/utils/scoring";
 import {
   clearWizardState,
   loadWizardState,
   saveWizardState,
-} from "../../utils/wizardStorage";
-import { DesktopStep } from "./steps/DesktopStep";
-import ExperienceStep from "./steps/ExperienceStep";
-import HardwareStep from "./steps/HardwareStep";
-import { InitSystemStep } from "./steps/InitSystemStep";
-import { PackageManagerStep } from "./steps/PackageManagerStep";
-import PrimaryUseStep from "./steps/PrimaryUseStep";
-import PrioritiesStep from "./steps/PrioritiesStep";
-import ResultsStep from "./steps/ResultsStep";
-import WizardProgress from "./WizardProgress";
-import { useNavigate } from "react-router-dom";
+} from "@/utils/wizardStorage";
+import { useEffect, useState } from "react";
 
 const INITIAL_ANSWERS: WizardAnswers = {
   experienceLevel: "beginner",

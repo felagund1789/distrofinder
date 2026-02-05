@@ -13,6 +13,7 @@ import { CompareFAB } from "../compare/CompareFAB";
 // import DistroWizardCallout from "../wizard/DistroWizardCallout";
 import { useURLSearchParams } from "@/hooks/useURLSearchParams";
 import Link from "next/link";
+import DistroWizardCallout from "../wizard/DistroWizardCallout";
 import DistroCard from "./DistroCard";
 
 const DEFAULT_FILTERS: DistroFilters = {
@@ -87,7 +88,7 @@ export default function DistroGrid() {
 
   return (
     <>
-      {/* <DistroWizardCallout /> */}
+      <DistroWizardCallout />
 
       <section className="filters">
         <input

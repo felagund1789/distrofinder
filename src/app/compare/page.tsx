@@ -6,7 +6,7 @@ import { useNavigate } from "@/hooks/useNavigate";
 import { useURLSearchParams } from "@/hooks/useURLSearchParams";
 import type { Distro } from "@/types/distro";
 import { useEffect } from "react";
-import "./compare-page.css";
+import "@/styles/compare-page.css";
 
 export default function ComparePage() {
   const navigate = useNavigate();

@@ -1,7 +1,7 @@
+import Footer from "@/components/layout/Footer";
 import { DistroProvider } from "@/context/DistroContext";
-import "../styles/app-layout.css";
-import "../styles/global.css";
-import Footer from "./Footer";
+import "@/styles/app-layout.css";
+import "@/styles/global.css";
 
 export default function RootLayout({
   children,

@@ -1,8 +1,8 @@
-import { useNavigate } from "react-router-dom";
-import { useDistros } from "../../../context/DistroContext";
-import type { WizardAnswers } from "../../../utils/scoring";
-import { scoreDistros } from "../../../utils/scoring";
-import { IMAGE_BASE_URL } from "../../../congig";
+import { IMAGE_BASE_URL } from "@/congig";
+import { useDistros } from "@/context/DistroContext";
+import { useNavigate } from "@/hooks/useNavigate";
+import type { WizardAnswers } from "@/utils/scoring";
+import { scoreDistros } from "@/utils/scoring";
 
 interface ResultsStepProps {
   answers: WizardAnswers;

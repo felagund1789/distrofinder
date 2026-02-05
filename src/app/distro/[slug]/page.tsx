@@ -9,7 +9,7 @@ import { useDistros } from "@/context/DistroContext";
 import { useNavigate } from "@/hooks/useNavigate";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
-import "./distro-detail.css";
+import "@/styles/distro-detail.css";
 
 const splitValues = (value?: string | null) =>
   value

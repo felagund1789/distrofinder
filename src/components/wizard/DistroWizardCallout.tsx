@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "@/hooks/useNavigate";
 import "../../styles/wizard-callout.css";
 
 export default function DistroWizardCallout() {
