@@ -11,8 +11,9 @@ import { useDebouncedValue } from "../../hooks/useDebouncedSearch";
 import { filtersFromSearchParams, filtersToSearchParams } from "../../utils/filters";
 import { CompareFAB } from "../compare/CompareFAB";
 // import DistroWizardCallout from "../wizard/DistroWizardCallout";
-import DistroCard from "./DistroCard";  
 import { useURLSearchParams } from "@/hooks/useURLSearchParams";
+import Link from "next/link";
+import DistroCard from "./DistroCard";
 
 const DEFAULT_FILTERS: DistroFilters = {
   search: "",
@@ -198,15 +199,17 @@ export default function DistroGrid() {
 
       <section className="grid">
         {distros.map((distro) => (
-          <DistroCard
-            key={distro.slug}
-            distro={distro}
-            selected={selected.includes(distro.slug)}
-            selectionDisabled={
-              selected.length >= 3 && !selected.includes(distro.slug)
-            }
-            onToggleSelect={toggleSelection}
-          />
+          <Link key={distro.slug} href={`/distro/${distro.slug}`}>
+            <DistroCard
+              key={distro.slug}
+              distro={distro}
+              selected={selected.includes(distro.slug)}
+              selectionDisabled={
+                selected.length >= 3 && !selected.includes(distro.slug)
+              }
+              onToggleSelect={toggleSelection}
+            />
+          </Link>
         ))}
       </section>
 

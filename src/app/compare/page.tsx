@@ -1,12 +1,12 @@
 "use client";
 
+import ComparisonTable from "@/components/compare/ComparisonTable";
+import { getDistroBySlug } from "@/data/distroService";
 import { useNavigate } from "@/hooks/useNavigate";
 import { useURLSearchParams } from "@/hooks/useURLSearchParams";
+import type { Distro } from "@/types/distro";
 import { useEffect } from "react";
-import ComparisonTable from "../../components/compare/ComparisonTable";
-import { getDistroBySlug } from "../../data/distroService";
-import type { Distro } from "../../types/distro";
-import "../../styles/compare-page.css";
+import "./compare-page.css";
 
 export default function ComparePage() {
   const navigate = useNavigate();

@@ -1,12 +1,15 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { CategoryTag } from "../components/tags/CategoryTag";
-import { DesktopTag } from "../components/tags/DesktopTag";
-import DefinitionRow from "../components/ui/DefinitionRow";
-import StatusBadge from "../components/ui/StatusBadge";
-import { useDistros } from "../context/DistroContext";
-import "../styles/distro-detail.css";
+"use client";
+
+import { CategoryTag } from "@/components/tags/CategoryTag";
+import { DesktopTag } from "@/components/tags/DesktopTag";
+import DefinitionRow from "@/components/ui/DefinitionRow";
+import StatusBadge from "@/components/ui/StatusBadge";
+import { IMAGE_BASE_URL } from "@/congig";
+import { useDistros } from "@/context/DistroContext";
+import { useNavigate } from "@/hooks/useNavigate";
+import { useParams } from "next/navigation";
 import { useEffect } from "react";
-import { IMAGE_BASE_URL } from "../congig";
+import "./distro-detail.css";
 
 const splitValues = (value?: string | null) =>
   value
@@ -17,10 +20,10 @@ const splitValues = (value?: string | null) =>
     : [];
 
 export default function DistroDetail() {
-  const { slug } = useParams();
+  const params = useParams();
   const navigate = useNavigate();
   const { getBySlug } = useDistros();
-  const distro = slug ? getBySlug(slug) : undefined;
+  const distro = params?.slug ? getBySlug(params.slug.toString()) : undefined;
 
   useEffect(() => {
     document.title = distro ? `${distro.name} - DistroFinder` : "DistroFinder - Distro not found";

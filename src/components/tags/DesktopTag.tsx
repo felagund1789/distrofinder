@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@/hooks/useNavigate";
 import Tag from "../ui/Tag";
 
 interface DesktopTagProps {
