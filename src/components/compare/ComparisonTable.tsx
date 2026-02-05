@@ -1,7 +1,7 @@
-import type { Distro } from "../../types/distro";
-import StatusBadge from "../ui/StatusBadge";
-import Tag from "../ui/Tag";
-import { IMAGE_BASE_URL } from "../../congig";
+import StatusBadge from "@/components/ui/StatusBadge";
+import Tag from "@/components/ui/Tag";
+import type { Distro } from "@/types/distro";
+import Image from "next/image";
 
 interface ComparisonTableProps {
   distros: Distro[];
@@ -52,8 +52,8 @@ export default function ComparisonTable({
             {distros.map((distro) => (
               <th scope="col" key={distro.slug}>
                 <div className="comparison-header">
-                  <img
-                    src={`${IMAGE_BASE_URL}/${distro.localPaths?.logo || ""}`}
+                  <Image
+                    src={distro.localPaths?.logo || ""}
                     alt=""
                     className="comparison-logo"
                   />
@@ -75,10 +75,10 @@ export default function ComparisonTable({
         <tbody>
           <ComparisonRow label="">
             {distros.map((d) => (
-              <img
+              <Image
                 key={d.slug}
                 className="comparison-thumbnail"
-                src={`${IMAGE_BASE_URL}/${d.localPaths?.thumbnail || ""}`}
+                src={d.localPaths?.thumbnail || ""}
                 alt=""
               />
             ))}

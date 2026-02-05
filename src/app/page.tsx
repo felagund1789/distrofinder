@@ -1,7 +1,6 @@
 import DistroGrid from "@/components/distro/DistroGrid";
 import { Metadata } from "next";
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const metadata: Metadata = {
   title: "DistroFinder — Find Your Linux Distribution",
   description: "Discover and compare Linux distributions to find the one that fits your use case and experience level.",

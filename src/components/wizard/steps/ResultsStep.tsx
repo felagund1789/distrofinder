@@ -1,8 +1,8 @@
-import { IMAGE_BASE_URL } from "@/congig";
 import { useDistros } from "@/context/DistroContext";
 import { useNavigate } from "@/hooks/useNavigate";
 import type { WizardAnswers } from "@/utils/scoring";
 import { scoreDistros } from "@/utils/scoring";
+import Image from "next/image";
 
 interface ResultsStepProps {
   answers: WizardAnswers;
@@ -47,8 +47,8 @@ export default function ResultsStep({
         {scored.map(({ distro, reasons }) => (
           <div key={distro.slug} className="wizard-result-card">
             <div className="wizard-result-header">
-              <img
-                src={`${IMAGE_BASE_URL}/${distro.localPaths?.logo || ""}`}
+              <Image
+                src={distro.localPaths?.logo || ""}
                 alt=""
                 className="wizard-result-logo"
               />
@@ -60,7 +60,7 @@ export default function ResultsStep({
                 <p>{distro.description}</p>
               </div>
               <div className="wizard-result-about__media">
-                <img src={`${IMAGE_BASE_URL}/${distro.localPaths?.thumbnail || ""}`} alt="" />
+                <Image src={distro.localPaths?.thumbnail || ""} alt="" />
               </div>
             </div>
 

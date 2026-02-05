@@ -4,12 +4,12 @@ import { CategoryTag } from "@/components/tags/CategoryTag";
 import { DesktopTag } from "@/components/tags/DesktopTag";
 import DefinitionRow from "@/components/ui/DefinitionRow";
 import StatusBadge from "@/components/ui/StatusBadge";
-import { IMAGE_BASE_URL } from "@/congig";
 import { useDistros } from "@/context/DistroContext";
 import { useNavigate } from "@/hooks/useNavigate";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
 import "@/styles/distro-detail.css";
+import Image from "next/image";
 
 const splitValues = (value?: string | null) =>
   value
@@ -36,7 +36,7 @@ export default function DistroDetail() {
   const logo = (() => {
     if (distro.localPaths?.logo) {
       const normalized = distro.localPaths?.logo.replace(/\\\\|\\/g, "/");
-      return normalized.startsWith("/") ? `${IMAGE_BASE_URL}${normalized}` : `${IMAGE_BASE_URL}/${normalized}`;
+      return normalized.startsWith("/") ? normalized : `/${normalized}`;
     }
     return distro.logo || "";
   })();
@@ -44,7 +44,7 @@ export default function DistroDetail() {
   const screenshot = (() => {
     if (distro.localPaths?.screenshot) {
       const normalized = distro.localPaths?.screenshot.replace(/\\\\|\\/g, "/");
-      return normalized.startsWith("/") ? `${IMAGE_BASE_URL}${normalized}` : `${IMAGE_BASE_URL}/${normalized}`;
+      return normalized.startsWith("/") ? normalized : `/${normalized}`;
     }
     return distro.screenshot || "";
   })();
@@ -61,7 +61,7 @@ export default function DistroDetail() {
       <header className="distro-hero">
         <div className="distro-hero__identity">
           <div className="distro-hero__logo-wrap">
-            <img
+            <Image
               src={logo}
               alt={`${distro.name} logo`}
               className="distro-hero__logo"
@@ -130,7 +130,7 @@ export default function DistroDetail() {
 
         <div className="distro-about__media">
           {screenshot && (
-            <img
+            <Image
               src={screenshot}
               alt=""
               loading="lazy"
