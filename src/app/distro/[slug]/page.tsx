@@ -1,15 +1,11 @@
-"use client";
-
 import { CategoryTag } from "@/components/tags/CategoryTag";
 import { DesktopTag } from "@/components/tags/DesktopTag";
 import DefinitionRow from "@/components/ui/DefinitionRow";
 import StatusBadge from "@/components/ui/StatusBadge";
-import { useDistros } from "@/context/DistroContext";
-import { useNavigate } from "@/hooks/useNavigate";
-import { useParams } from "next/navigation";
-import { useEffect } from "react";
+import { getDistroBySlug } from "@/data/distroService";
 import "@/styles/distro-detail.css";
 import Image from "next/image";
+import Link from "next/link";
 
 const splitValues = (value?: string | null) =>
   value
@@ -19,15 +15,8 @@ const splitValues = (value?: string | null) =>
         .filter(Boolean)
     : [];
 
-export default function DistroDetail() {
-  const params = useParams();
-  const navigate = useNavigate();
-  const { getBySlug } = useDistros();
-  const distro = params?.slug ? getBySlug(params.slug.toString()) : undefined;
-
-  useEffect(() => {
-    document.title = distro ? `${distro.name} - DistroFinder` : "DistroFinder - Distro not found";
-  }, [distro]);
+export default function DistroDetail({ params }: { params: { slug?: string } }) {
+  const distro = params?.slug ? getDistroBySlug(params.slug) : undefined;
 
   if (!distro) {
     return <p>Distro not found.</p>;
@@ -52,9 +41,9 @@ export default function DistroDetail() {
   return (
     <article className="detail">
       <nav className="breadcrumbs" aria-label="Breadcrumb">
-        <button className="breadcrumbs__link" onClick={() => navigate("/")}>
+        <Link className="breadcrumbs__link" href="/">
           Home
-        </button>
+        </Link>
         <span className="breadcrumbs__separator">/</span>
         <span className="breadcrumbs__current">{distro.name}</span>
       </nav>
