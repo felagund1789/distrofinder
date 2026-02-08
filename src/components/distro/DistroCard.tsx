@@ -1,10 +1,10 @@
+import ExpandableTagList from "@/components/ui/ExpandableTagList";
+import StatusBadge from "@/components/ui/StatusBadge";
+import Tag from "@/components/ui/Tag";
+import type { Distro } from "@/types/distro";
+import { getCategoryLabel } from "@/utils/categories";
 import Image from "next/image";
-import type { Distro } from "../../types/distro";
-import { getCategoryLabel } from "../../utils/categories";
-import ExpandableTagList from "../ui/ExpandableTagList";
-import StatusBadge from "../ui/StatusBadge";
-import Tag from "../ui/Tag";
-import "./distro-card.css";
+import "@/styles/distro-card.css";
 
 interface DistroCardProps {
   distro: Distro;
