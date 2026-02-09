@@ -1,6 +1,6 @@
+import DistroComparisonView from "@/components/compare/DistroComparisonView";
 import { getDistroBySlug } from "@/data/distroService";
 import type { Distro } from "@/types/distro";
-import DistroComparisonView from "./DistroComparisonView";
 
 export default function ComparePage({ searchParams }: { searchParams?: { distros?: string } }) {
   const raw = searchParams?.distros ?? "";
