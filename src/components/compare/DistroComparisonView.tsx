@@ -5,13 +5,8 @@ import { useURLSearchParams } from "@/hooks/useURLSearchParams";
 import type { Distro } from "@/types/distro";
 import { useEffect } from "react";
 import "@/styles/compare-page.css";
-import Link from "next/link";
 
-export default function DistroComparisonView({
-  distros,
-}: {
-  distros: Distro[];
-}) {
+export default function DistroComparisonView({ distros }: { distros: Distro[] }) {
   const [params, setParams] = useURLSearchParams();
 
   useEffect(() => {
