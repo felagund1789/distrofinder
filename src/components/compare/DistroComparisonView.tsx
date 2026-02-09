@@ -1,52 +1,34 @@
 "use client";
 
 import ComparisonTable from "@/components/compare/ComparisonTable";
-import { useNavigate } from "@/hooks/useNavigate";
 import { useURLSearchParams } from "@/hooks/useURLSearchParams";
 import type { Distro } from "@/types/distro";
 import { useEffect } from "react";
 import "@/styles/compare-page.css";
+import Link from "next/link";
 
-export default function DistroComparisonView({ distros }: { distros: Distro[] }) {
-  const navigate = useNavigate();
+export default function DistroComparisonView({
+  distros,
+}: {
+  distros: Distro[];
+}) {
   const [params, setParams] = useURLSearchParams();
 
   useEffect(() => {
     document.title = `Compare Distributions: ${distros.map((d) => d.name).join(", ")} - DistroFinder`;
   }, [distros]);
 
-  const slugs =
-    params
-      ?.get("distros")
-      ?.split(",")
-      .map((s) => s.trim())
-      .filter(Boolean) ?? [];
-
   const removeDistro = (slug: string) => {
+    const slugs =
+      params
+        ?.get("distros")
+        ?.split(",")
+        .map((s) => s.trim())
+        .filter(Boolean) ?? [];
+
     const next = slugs.filter((s) => s !== slug);
-
-    if (next.length < 2) {
-      navigate("/");
-      return;
-    }
-
     setParams(new URLSearchParams({ distros: next.join(",") }));
   };
 
-  return (
-    <section className="compare-page">
-      <header className="compare-header">
-        <h1>Compare Distributions</h1>
-        <button
-          type="button"
-          className="back-btn"
-          onClick={() => navigate("/")}
-        >
-          Back to Distro list
-        </button>
-      </header>
-
-      <ComparisonTable distros={distros} onRemove={removeDistro} />
-    </section>
-  );
+  return <ComparisonTable distros={distros} onRemove={removeDistro} />;
 }

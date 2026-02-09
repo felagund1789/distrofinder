@@ -81,4 +81,5 @@
   font-size: var(--text-sm);
   color: var(--color-text-secondary);
   cursor: pointer;
+  text-decoration: none;
 }

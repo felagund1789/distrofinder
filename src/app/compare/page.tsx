@@ -1,12 +1,13 @@
 import DistroComparisonView from "@/components/compare/DistroComparisonView";
 import { getDistroBySlug } from "@/data/distroService";
 import type { Distro } from "@/types/distro";
+import Link from "next/link";
 
-export default function ComparePage({ searchParams }: { searchParams?: { distros?: string } }) {
-  const raw = searchParams?.distros ?? "";
+export default async function ComparePage({ searchParams}: { searchParams?: Promise<{ distros?: string }> }) {
+  const paramsResolved = await searchParams;
 
-  const slugs = raw
-    .split(",")
+  const slugs = paramsResolved?.distros
+    ?.split(",")
     .map((s) => s.trim())
     .filter(Boolean) as string[];
 
@@ -14,7 +15,15 @@ export default function ComparePage({ searchParams }: { searchParams?: { distros
     .map((slug) => getDistroBySlug(slug))
     .filter(Boolean) as Distro[];
 
-  if (distros.length < 2) return null;
-
-  return <DistroComparisonView distros={distros} />;
+  return (
+    <section className="compare-page">
+      <header className="compare-header">
+        <h1>Compare Distributions</h1>
+        <Link href="/" className="back-btn">
+          Back to Distro list
+        </Link>
+      </header>
+      {distros.length > 1 && <DistroComparisonView distros={distros} />}
+    </section>
+  );
 }

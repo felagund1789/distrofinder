@@ -1,12 +1,13 @@
 import DistroDetail from "@/components/distro/DistroDetail";
 import { getDistroBySlug } from "@/data/distroService";
 
-export default function DistroDetailPage({
+export default async function DistroDetailPage({
   params,
 }: {
-  params: { slug?: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const distro = params?.slug ? getDistroBySlug(params.slug) : undefined;
+  const paramsResolved = await params;
+  const distro = paramsResolved?.slug ? await getDistroBySlug(paramsResolved.slug) : undefined;
 
   return <DistroDetail distro={distro} />;
 }
