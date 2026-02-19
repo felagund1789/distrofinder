@@ -33,7 +33,7 @@ export default function DistroCard({
               : "Add to distros selected for comparison"
           }
           onClick={(e) => {
-            e.stopPropagation();
+            e.preventDefault();
             onToggleSelect?.(distro.slug);
           }}
         >
