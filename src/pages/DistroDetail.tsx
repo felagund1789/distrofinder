@@ -135,11 +135,13 @@ export default function DistroDetail() {
 
         <div className="distro-about__media">
           {screenshot && (
-            <img
-              src={screenshot}
-              alt=""
-              loading="lazy"
-            />
+            <a href={screenshot} target="_blank" rel="noopener noreferrer">
+              <img
+                src={screenshot}
+                alt=""
+                loading="lazy"
+              />
+            </a>
           )}
         </div>
       </section>
