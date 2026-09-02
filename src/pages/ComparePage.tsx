@@ -1,6 +1,6 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import ComparisonTable from "../components/compare/ComparisonTable";
-import { getDistroBySlug } from "../data/distroService";
+import { useDistros } from "../context/DistroContext";
 import "../styles/compare-page.css";
 import type { Distro } from "../types/distro";
 import { useEffect } from "react";
@@ -8,6 +8,7 @@ import { useEffect } from "react";
 export default function ComparePage() {
   const [params, setParams] = useSearchParams();
   const navigate = useNavigate();
+  const { getBySlug, isLoading, loadError } = useDistros();
 
   const slugs =
     params
@@ -17,7 +18,7 @@ export default function ComparePage() {
       .filter(Boolean) ?? [];
 
   const distros = slugs
-    .map((slug) => getDistroBySlug(slug))
+    .map((slug) => getBySlug(slug))
     .filter(Boolean) as Distro[];
 
   useEffect(() => {
@@ -34,6 +35,14 @@ export default function ComparePage() {
 
     setParams({ distros: next.join(",") });
   };
+
+  if (isLoading) {
+    return <p>Loading distributions...</p>;
+  }
+
+  if (loadError) {
+    return <p>Unable to load distributions: {loadError}</p>;
+  }
 
   if (distros.length < 2) {
     return null;

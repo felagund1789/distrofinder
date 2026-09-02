@@ -26,7 +26,14 @@ const DEFAULT_FILTERS: DistroFilters = {
 
 export default function DistroGrid() {
   const [selected, setSelected] = useState<string[]>([]);
-  const { search, desktopFacets, categoryFacets, baseDistroFacets } =
+  const {
+    search,
+    desktopFacets,
+    categoryFacets,
+    baseDistroFacets,
+    isLoading,
+    loadError,
+  } =
     useDistros();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -88,6 +95,24 @@ export default function DistroGrid() {
     Boolean(filters.desktop) ||
     Boolean(filters.category) ||
     Boolean(filters.basedOn);
+
+  if (loadError) {
+    return (
+      <>
+        <DistroWizardCallout />
+        <p>Unable to load distributions: {loadError}</p>
+      </>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <>
+        <DistroWizardCallout />
+        <p>Loading distributions...</p>
+      </>
+    );
+  }
 
   return (
     <>

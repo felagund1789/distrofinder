@@ -1,8 +1,34 @@
 // src/data/distros.ts
-import rawData from "./distros.json";
+import { DISTRO_DATA_URL } from "../congig";
 import type { Distro } from "../types/distro";
 
-const distros = rawData as Distro[];
+let distros: Distro[] = [];
+let loadPromise: Promise<readonly Distro[]> | null = null;
+
+export async function ensureDistrosLoaded(): Promise<readonly Distro[]> {
+  if (distros.length > 0) {
+    return distros;
+  }
+
+  if (!loadPromise) {
+    loadPromise = fetch(DISTRO_DATA_URL)
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error(`Failed to load distro data (${response.status})`);
+        }
+
+        const data = (await response.json()) as Distro[];
+        distros = data.map(normalizeDistro);
+        return distros;
+      })
+      .catch((error) => {
+        loadPromise = null;
+        throw error;
+      });
+  }
+
+  return loadPromise;
+}
 
 export function getAllDistros(): readonly Distro[] {
   return distros;
@@ -176,4 +202,29 @@ function splitAndNormalize(value: string): string[] {
     .split(",")
     .map((v) => v.trim())
     .filter(Boolean);
+}
+
+function normalizeDistro(distro: Distro): Distro {
+  return {
+    ...distro,
+    localPaths: {
+      logo: normalizeImagePath(distro.localPaths?.logo),
+      thumbnail: normalizeImagePath(distro.localPaths?.thumbnail),
+      screenshot: normalizeImagePath(distro.localPaths?.screenshot),
+    },
+  };
+}
+
+function normalizeImagePath(path: string | null | undefined): string | null {
+  if (!path) {
+    return null;
+  }
+
+  const normalized = path.replace(/\\\\|\\/g, "/").replace(/^\/+/, "");
+
+  if (normalized.startsWith("images/")) {
+    return normalized.slice("images/".length);
+  }
+
+  return normalized;
 }

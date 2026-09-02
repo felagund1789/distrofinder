@@ -15,12 +15,20 @@ export default function ResultsStep({
   onRestart,
   onExit,
 }: ResultsStepProps) {
-  const { distros } = useDistros();
+  const { distros, isLoading, loadError } = useDistros();
   const navigate = useNavigate();
 
   const scored = scoreDistros(distros, answers)
     .filter((r) => r.score > 0)
     .slice(0, 5);
+
+  if (loadError) {
+    return <p>Unable to load distributions: {loadError}</p>;
+  }
+
+  if (isLoading) {
+    return <p>Loading distributions...</p>;
+  }
 
   if (scored.length === 0) {
     return (

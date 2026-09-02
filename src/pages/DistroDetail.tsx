@@ -19,12 +19,20 @@ const splitValues = (value?: string | null) =>
 export default function DistroDetail() {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const { getBySlug } = useDistros();
+  const { getBySlug, isLoading, loadError } = useDistros();
   const distro = slug ? getBySlug(slug) : undefined;
 
   useEffect(() => {
     document.title = distro ? `${distro.name} - DistroFinder` : "DistroFinder - Distro not found";
   }, [distro]);
+
+  if (loadError) {
+    return <p>Unable to load distributions: {loadError}</p>;
+  }
+
+  if (isLoading) {
+    return <p>Loading distributions...</p>;
+  }
 
   if (!distro) {
     return <p>Distro not found.</p>;
