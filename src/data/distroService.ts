@@ -117,8 +117,8 @@ export function filterDistros(filters: DistroFilters = {}): readonly Distro[] {
       const tb = b.lastUpdate ? Date.parse(b.lastUpdate) : 0;
       cmp = ta === tb ? 0 : ta > tb ? 1 : -1;
     } else if (sortBy === 'popularity') {
-      const pa = a.popularity ?? Number.NEGATIVE_INFINITY;
-      const pb = b.popularity ?? Number.NEGATIVE_INFINITY;
+      const pa = a.popularity ?? Number.POSITIVE_INFINITY;
+      const pb = b.popularity ?? Number.POSITIVE_INFINITY;
       cmp = pa === pb ? 0 : pa > pb ? 1 : -1;
     }
 
