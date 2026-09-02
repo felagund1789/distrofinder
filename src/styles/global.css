@@ -13,6 +13,10 @@
   --color-status-dormant: #d97706;
   --color-status-discontinued: #dc2626;
 
+  /* Message colors */
+  --color-status-error: #dc2626;
+  --color-status-loading: #6b7280;
+
   /* Typography */
   --font-sans:
     system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -116,6 +120,22 @@ body {
 .status.discontinued {
   background: rgba(220, 38, 38, 0.25);
   color: var(--color-status-discontinued);
+}
+
+p.error {
+  width: 100%;
+  text-align: center;
+  font-weight: 600;
+  color: var(--color-status-error);
+}
+
+p.loading {
+  width: 100%;
+  text-align: center;
+  color: var(--color-status-loading);
+}
+p.loading::before {
+  content: "⏳ ";
 }
 
 /* Dark theme */

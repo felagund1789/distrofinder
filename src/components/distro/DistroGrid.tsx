@@ -100,7 +100,7 @@ export default function DistroGrid() {
     return (
       <>
         <DistroWizardCallout />
-        <p>Unable to load distributions: {loadError}</p>
+        <p className="error">Unable to load distributions: {loadError}</p>
       </>
     );
   }
@@ -109,7 +109,7 @@ export default function DistroGrid() {
     return (
       <>
         <DistroWizardCallout />
-        <p>Loading distributions...</p>
+        <p className="loading">Loading distributions...</p>
       </>
     );
   }

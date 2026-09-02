@@ -27,15 +27,15 @@ export default function DistroDetail() {
   }, [distro]);
 
   if (loadError) {
-    return <p>Unable to load distributions: {loadError}</p>;
+    return <p className="error">Unable to load distributions: {loadError}</p>;
   }
 
   if (isLoading) {
-    return <p>Loading distributions...</p>;
+    return <p className="loading">Loading distributions...</p>;
   }
 
   if (!distro) {
-    return <p>Distro not found.</p>;
+    return <p className="error">Distro not found.</p>;
   }
 
   const logo = (() => {

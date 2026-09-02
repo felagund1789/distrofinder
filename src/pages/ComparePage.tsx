@@ -37,11 +37,11 @@ export default function ComparePage() {
   };
 
   if (isLoading) {
-    return <p>Loading distributions...</p>;
+    return <p className="loading">Loading distributions...</p>;
   }
 
   if (loadError) {
-    return <p>Unable to load distributions: {loadError}</p>;
+    return <p className="error">Unable to load distributions: {loadError}</p>;
   }
 
   if (distros.length < 2) {

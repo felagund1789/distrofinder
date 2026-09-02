@@ -23,11 +23,11 @@ export default function ResultsStep({
     .slice(0, 5);
 
   if (loadError) {
-    return <p>Unable to load distributions: {loadError}</p>;
+    return <p className="error">Unable to load distributions: {loadError}</p>;
   }
 
   if (isLoading) {
-    return <p>Loading distributions...</p>;
+    return <p className="loading">Loading distributions...</p>;
   }
 
   if (scored.length === 0) {
