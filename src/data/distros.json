@@ -1958,7 +1958,7 @@
     "officeSuite": null,
     "processorArchitecture": "x86_64",
     "initSystem": "systemd",
-    "fileSystems": "Btrfs, ext4, JFS, XFS",
+    "fileSystems": "Btrfs, ext4, JFS, XFS, ZFS",
     "popularity": 1,
     "rating": 7.9,
     "reviewCount": 399,
